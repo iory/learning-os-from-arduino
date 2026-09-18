@@ -1,0 +1,9 @@
+[project]
+name = "os-on-arduino-code"
+version = "0.1.0"
+description = "PlatformIO build environment for Arduino UNO R4 WiFi OS book samples"
+requires-python = ">=3.10"
+dependencies = [
+    "platformio>=6.1",
+    "pyserial>=3.5",
+]

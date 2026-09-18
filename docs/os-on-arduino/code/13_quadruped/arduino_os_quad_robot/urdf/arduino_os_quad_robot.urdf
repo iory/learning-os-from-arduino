@@ -1,0 +1,479 @@
+<?xml version="1.0"?>
+<robot name="Assem1">
+  <link name="base_link">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/body_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/body_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0001707552852 0.0001537944699 0.01710821055" rpy="0 0 0" />
+      <mass value="0.246162" />
+      <inertia ixx="0.000455954" ixy="-2.85076e-06" ixz="2.86411e-06" iyy="0.00147966" iyz="-3.07623e-07" izz="0.00181363" />
+    </inertial>
+  </link>
+  <link name="Assem130_5__STS3215_03a_nopassivehorn_1">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_5__STS3215_03a_nopassivehorn_3">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_5__bracket_outline_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.03624907955 -0.0020000001 0.03195700869" rpy="0 0 0" />
+      <mass value="0.0194513" />
+      <inertia ixx="2.06906e-05" ixy="-5.86841e-14" ixz="8.6424e-06" iyy="2.50953e-05" iyz="2.34559e-14" izz="4.76109e-06" />
+    </inertial>
+  </link>
+  <link name="Assem130_5__leg_link1_2">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.02257422655 -0.0241378218 0.01614721676" rpy="0 0 0" />
+      <mass value="0.0402227" />
+      <inertia ixx="1.72613e-05" ixy="4.18449e-06" ixz="7.24714e-06" iyy="1.95824e-05" iyz="-2.98579e-06" izz="2.22023e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_6__STS3215_03a_nopassivehorn_1">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_6__STS3215_03a_nopassivehorn_3">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_6__bracket_outline_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.03624907955 -0.0020000001 0.03195700869" rpy="0 0 0" />
+      <mass value="0.0194513" />
+      <inertia ixx="2.06906e-05" ixy="-5.86841e-14" ixz="8.6424e-06" iyy="2.50953e-05" iyz="2.34559e-14" izz="4.76109e-06" />
+    </inertial>
+  </link>
+  <link name="Assem130_6__leg_link1_2">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.02257422655 -0.0241378218 0.01614721676" rpy="0 0 0" />
+      <mass value="0.0402227" />
+      <inertia ixx="1.72613e-05" ixy="4.18449e-06" ixz="7.24714e-06" iyy="1.95824e-05" iyz="-2.98579e-06" izz="2.22023e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_5__STS3215_03a_nopassivehorn_1">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_5__STS3215_03a_nopassivehorn_3">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_5__bracket_outline_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1_2.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1_2.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.03624907955 0.0019999999 0.03195700869" rpy="0 0 0" />
+      <mass value="0.0194513" />
+      <inertia ixx="2.06906e-05" ixy="-5.86841e-14" ixz="8.6424e-06" iyy="2.50953e-05" iyz="2.34559e-14" izz="4.76109e-06" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_5__leg_link1_2">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2_2.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2_2.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.02258892327 0.0241378218 0.01612665058" rpy="0 0 0" />
+      <mass value="0.0402227" />
+      <inertia ixx="1.7242e-05" ixy="-4.18025e-06" ixz="7.24053e-06" iyy="1.95824e-05" iyz="2.99171e-06" izz="2.22216e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_6__STS3215_03a_nopassivehorn_1">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_6__STS3215_03a_nopassivehorn_3">
+    <!-- sw2robot density="1000" inertia="solidworks->mass" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__STS3215_03a_nopassivehorn_1.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001116299353 -2.524992037e-08 -0.0008875489146" rpy="0 0 0" />
+      <mass value="0.055" />
+      <inertia ixx="7.53506e-06" ixy="-3.44416e-13" ixz="2.97551e-07" iyy="1.40256e-05" iyz="-1.82894e-13" izz="1.19005e-05" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_6__bracket_outline_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1_2.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__bracket_outline_1_2.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.03624907955 0.0019999999 0.03195700869" rpy="0 0 0" />
+      <mass value="0.0194513" />
+      <inertia ixx="2.06906e-05" ixy="-5.86841e-14" ixz="8.6424e-06" iyy="2.50953e-05" iyz="2.34559e-14" izz="4.76109e-06" />
+    </inertial>
+  </link>
+  <link name="Assem130_right_6__leg_link1_2">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2_2.glb" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/Assem130__leg_link1_2_2.glb" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.02258892327 0.0241378218 0.01612665058" rpy="0 0 0" />
+      <mass value="0.0402227" />
+      <inertia ixx="1.7242e-05" ixy="-4.18025e-06" ixz="7.24053e-06" iyy="1.95824e-05" iyz="2.99171e-06" izz="2.22216e-05" />
+    </inertial>
+  </link>
+  <joint name="body_1__Assem130_5__STS3215_03a_nopassivehorn_1" type="fixed">
+    <origin xyz="0.07811461361 0.03537769645 0.01642997462" rpy="-1.570796327 0 0" />
+    <parent link="base_link" />
+    <child link="Assem130_5__STS3215_03a_nopassivehorn_1" />
+    <axis xyz="0 0 -1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_1__Assem130_6__STS3215_03a_nopassivehorn_1" type="fixed">
+    <origin xyz="-0.07188538639 0.03537769645 0.01642997462" rpy="-1.570796327 0 0" />
+    <parent link="base_link" />
+    <child link="Assem130_6__STS3215_03a_nopassivehorn_1" />
+    <axis xyz="0 0 -1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_1__Assem130_right_5__STS3215_03a_nopassivehorn_1" type="fixed">
+    <origin xyz="-0.07188538639 -0.03537769645 0.01643002538" rpy="1.570796327 0 0" />
+    <parent link="base_link" />
+    <child link="Assem130_right_5__STS3215_03a_nopassivehorn_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_1__Assem130_right_6__STS3215_03a_nopassivehorn_1" type="fixed">
+    <origin xyz="0.07811461361 -0.03537769645 0.01643002538" rpy="1.570796327 0 0" />
+    <parent link="base_link" />
+    <child link="Assem130_right_6__STS3215_03a_nopassivehorn_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="Assem130_5__STS3215_03a_nopassivehorn_1__Assem130_5__leg_link1_2" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="-1.570796327 0 -0.9503346526" />
+    <parent link="Assem130_5__STS3215_03a_nopassivehorn_1" />
+    <child link="Assem130_5__leg_link1_2" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+  <joint name="Assem130_6__STS3215_03a_nopassivehorn_1__Assem130_6__leg_link1_2" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="-1.570796327 0 -0.9503346526" />
+    <parent link="Assem130_6__STS3215_03a_nopassivehorn_1" />
+    <child link="Assem130_6__leg_link1_2" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+  <joint name="Assem130_right_5__STS3215_03a_nopassivehorn_1__Assem130_right_5__leg_link1_2" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="1.570796327 0 0.9503346526" />
+    <parent link="Assem130_right_5__STS3215_03a_nopassivehorn_1" />
+    <child link="Assem130_right_5__leg_link1_2" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+  <joint name="Assem130_right_6__STS3215_03a_nopassivehorn_1__Assem130_right_6__leg_link1_2" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="1.570796327 0 0.9503346526" />
+    <parent link="Assem130_right_6__STS3215_03a_nopassivehorn_1" />
+    <child link="Assem130_right_6__leg_link1_2" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+  <joint name="Assem130_5__leg_link1_2__Assem130_5__STS3215_03a_nopassivehorn_3" type="fixed">
+    <origin xyz="-0.06223680659 -0.03027769645 0.04447477731" rpy="-1.570796327 -0.6204616742 -3.141592653" />
+    <parent link="Assem130_5__leg_link1_2" />
+    <child link="Assem130_5__STS3215_03a_nopassivehorn_3" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="Assem130_6__leg_link1_2__Assem130_6__STS3215_03a_nopassivehorn_3" type="fixed">
+    <origin xyz="-0.06223680659 -0.03027769645 0.04447477731" rpy="-1.570796327 -0.6204616742 -3.141592653" />
+    <parent link="Assem130_6__leg_link1_2" />
+    <child link="Assem130_6__STS3215_03a_nopassivehorn_3" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="Assem130_right_5__leg_link1_2__Assem130_right_5__STS3215_03a_nopassivehorn_3" type="fixed">
+    <origin xyz="-0.06223677708 0.03027769645 0.04447481861" rpy="1.570796327 -0.6204616742 3.141592653" />
+    <parent link="Assem130_right_5__leg_link1_2" />
+    <child link="Assem130_right_5__STS3215_03a_nopassivehorn_3" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="Assem130_right_6__leg_link1_2__Assem130_right_6__STS3215_03a_nopassivehorn_3" type="fixed">
+    <origin xyz="-0.06223677708 0.03027769645 0.04447481861" rpy="1.570796327 -0.6204616742 3.141592653" />
+    <parent link="Assem130_right_6__leg_link1_2" />
+    <child link="Assem130_right_6__STS3215_03a_nopassivehorn_3" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="Assem130_5__STS3215_03a_nopassivehorn_3__Assem130_5__bracket_outline_1" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="-1.570796327 0 -2.521130979" />
+    <parent link="Assem130_5__STS3215_03a_nopassivehorn_3" />
+    <child link="Assem130_5__bracket_outline_1" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+  <joint name="Assem130_6__STS3215_03a_nopassivehorn_3__Assem130_6__bracket_outline_1" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="-1.570796327 0 -2.521130979" />
+    <parent link="Assem130_6__STS3215_03a_nopassivehorn_3" />
+    <child link="Assem130_6__bracket_outline_1" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+  <joint name="Assem130_right_5__STS3215_03a_nopassivehorn_3__Assem130_right_5__bracket_outline_1" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="1.570796327 0 2.521130979" />
+    <parent link="Assem130_right_5__STS3215_03a_nopassivehorn_3" />
+    <child link="Assem130_right_5__bracket_outline_1" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+  <joint name="Assem130_right_6__STS3215_03a_nopassivehorn_3__Assem130_right_6__bracket_outline_1" type="revolute">
+    <origin xyz="0.01188538639 -2.538415101e-08 0.01742230355" rpy="1.570796327 0 2.521130979" />
+    <parent link="Assem130_right_6__STS3215_03a_nopassivehorn_3" />
+    <child link="Assem130_right_6__bracket_outline_1" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
+    <!-- mates: CONCENTRIC, COINCIDENT, PARALLEL, CONCENTRIC, COINCIDENT, PARALLEL -->
+    <!-- sw2robot-note: geo: fully constrained; config sets revolute (inference said fixed) -->
+  </joint>
+</robot>

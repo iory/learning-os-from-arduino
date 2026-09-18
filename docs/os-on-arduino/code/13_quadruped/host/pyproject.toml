@@ -1,0 +1,14 @@
+[project]
+name = "quadruped-rl"
+version = "0.1.0"
+description = "PPO training + C export for the ch13 quadruped policy"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.2",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+sim = [
+    "genesis-world>=0.2",
+]

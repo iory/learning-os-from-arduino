@@ -1,0 +1,13 @@
+491e81b57233574a     219471  arduino_quad_policy.h
+a046498e27649fd4       2673  arduino_quad_policy.json
+3a61ebf84692dbd4      64170  arduino_quad_policy.npz
+a79d25e61aaf6783       8006  quad_control.h
+d1c68b9f43cd5cd9      12625  arduino/arduino_quad/arduino_quad.ino
+a79d25e61aaf6783       8006  arduino/arduino_quad/quad_control.h
+491e81b57233574a     219471  arduino/arduino_quad/arduino_quad_policy.h
+d2a7cc4c796d0ca2      18141  arduino/calibrate/calibrate.ino
+40586399b9750202       6339  host/quad_policy.py
+1d410417f2dc4fed      20534  host/quad_host.py
+fc3e39c7a87c6ba3      37221  reference/robot_and_sim2real.md
+0a7f605a30343eb2      18945  reference/arduino_os_quad_robot.xml
+59107a96f57c2338      16848  reference/arduino_os_quad_robot_rl.urdf

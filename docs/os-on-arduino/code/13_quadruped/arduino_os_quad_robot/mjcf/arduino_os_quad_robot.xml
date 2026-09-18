@@ -1,0 +1,170 @@
+<mujoco model="arduino_os_quad_robot">
+  <compiler angle="radian" autolimits="true" meshdir="assets" />
+  <option gravity="0 0 -9.81" />
+  <default>
+    <joint armature="0.002" damping="0.623701505" />
+    <geom contype="2" conaffinity="1" />
+  </default>
+  <asset>
+    <mesh name="body_1_0" file="body_1_0.stl" />
+    <mesh name="body_1_1" file="body_1_1.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_2" file="Assem130__STS3215_03a_nopassivehorn_1_2.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_3" file="Assem130__STS3215_03a_nopassivehorn_1_3.stl" />
+    <mesh name="Assem130__leg_link1_2_4" file="Assem130__leg_link1_2_4.stl" />
+    <mesh name="Assem130__leg_link1_2_5" file="Assem130__leg_link1_2_5.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_6" file="Assem130__STS3215_03a_nopassivehorn_1_6.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_7" file="Assem130__STS3215_03a_nopassivehorn_1_7.stl" />
+    <mesh name="Assem130__bracket_outline_1_8" file="Assem130__bracket_outline_1_8.stl" />
+    <mesh name="Assem130__bracket_outline_1_9" file="Assem130__bracket_outline_1_9.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_10" file="Assem130__STS3215_03a_nopassivehorn_1_10.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_11" file="Assem130__STS3215_03a_nopassivehorn_1_11.stl" />
+    <mesh name="Assem130__leg_link1_2_12" file="Assem130__leg_link1_2_12.stl" />
+    <mesh name="Assem130__leg_link1_2_13" file="Assem130__leg_link1_2_13.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_14" file="Assem130__STS3215_03a_nopassivehorn_1_14.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_15" file="Assem130__STS3215_03a_nopassivehorn_1_15.stl" />
+    <mesh name="Assem130__bracket_outline_1_16" file="Assem130__bracket_outline_1_16.stl" />
+    <mesh name="Assem130__bracket_outline_1_17" file="Assem130__bracket_outline_1_17.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_18" file="Assem130__STS3215_03a_nopassivehorn_1_18.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_19" file="Assem130__STS3215_03a_nopassivehorn_1_19.stl" />
+    <mesh name="Assem130__leg_link1_2_2_20" file="Assem130__leg_link1_2_2_20.stl" />
+    <mesh name="Assem130__leg_link1_2_2_21" file="Assem130__leg_link1_2_2_21.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_22" file="Assem130__STS3215_03a_nopassivehorn_1_22.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_23" file="Assem130__STS3215_03a_nopassivehorn_1_23.stl" />
+    <mesh name="Assem130__bracket_outline_1_2_24" file="Assem130__bracket_outline_1_2_24.stl" />
+    <mesh name="Assem130__bracket_outline_1_2_25" file="Assem130__bracket_outline_1_2_25.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_26" file="Assem130__STS3215_03a_nopassivehorn_1_26.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_27" file="Assem130__STS3215_03a_nopassivehorn_1_27.stl" />
+    <mesh name="Assem130__leg_link1_2_2_28" file="Assem130__leg_link1_2_2_28.stl" />
+    <mesh name="Assem130__leg_link1_2_2_29" file="Assem130__leg_link1_2_2_29.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_30" file="Assem130__STS3215_03a_nopassivehorn_1_30.stl" />
+    <mesh name="Assem130__STS3215_03a_nopassivehorn_1_31" file="Assem130__STS3215_03a_nopassivehorn_1_31.stl" />
+    <mesh name="Assem130__bracket_outline_1_2_32" file="Assem130__bracket_outline_1_2_32.stl" />
+    <mesh name="Assem130__bracket_outline_1_2_33" file="Assem130__bracket_outline_1_2_33.stl" />
+  </asset>
+  <worldbody>
+    <light pos="0 0 3" dir="0 0 -1" directional="true" />
+    <geom name="ground" type="plane" size="5 5 0.1" contype="1" conaffinity="1" rgba="0.8 0.8 0.8 1" />
+    <body name="base_link" pos="0 0 0">
+      <freejoint name="floating_base" />
+      <inertial pos="0.000170755285 0.00015379447 0.0171082105" mass="0.246162" diaginertia="0.000455940023 0.00147966764 0.00181363634" quat="0.999998364 0.000471025652 0.00105510854 0.00139153335" />
+      <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_1_0" rgba="1 1 1 1" name="base_link_visual0" />
+      <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="body_1_1" rgba="1 1 1 1" name="base_link_collision0" />
+      <body name="FL_hip_servo" pos="0.0781146136 0.0353776965 0.0164299746" quat="0.707106781 -0.707106781 0 0">
+        <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_2" rgba="0.654901961 0.670588235 0.705882353 1" name="FL_hip_servo_visual0" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_3" rgba="0.654901961 0.670588235 0.705882353 1" name="FL_hip_servo_collision0" />
+        <body name="FL_thigh" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.628770794 -0.628770794 0.323492332 -0.323492332">
+          <joint name="FL_hip_joint" pos="0 0 0" axis="-0 -1 -0" type="hinge" range="-2 2" />
+          <inertial pos="-0.0225742265 -0.0241378218 0.0161472168" mass="0.0402227" diaginertia="9.46366422e-06 2.21938698e-05 2.7388466e-05" quat="0.925968967 -0.0717436419 0.297246778 -0.221537075" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__leg_link1_2_4" rgba="1 1 1 1" name="FL_thigh_visual0" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__leg_link1_2_5" rgba="1 1 1 1" name="FL_thigh_collision0" />
+          <body name="FL_knee_servo" pos="-0.0622368066 -0.0302776964 0.0444747773" quat="-0.215864471 -0.215864471 0.673351714 -0.673351714">
+            <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_6" rgba="0.654901961 0.670588235 0.705882353 1" name="FL_knee_servo_visual0" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_7" rgba="0.654901961 0.670588235 0.705882353 1" name="FL_knee_servo_collision0" />
+            <body name="FL_foot" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.215864471 -0.215864471 0.673351714 -0.673351714">
+              <joint name="FL_knee_joint" pos="0 0 0" axis="-0 -1 -0" type="hinge" range="-2 2" />
+              <inertial pos="-0.0362490796 -0.0020000001 0.0319570087" mass="0.0194513" diaginertia="9.73041081e-07 2.44786489e-05 2.50953e-05" quat="-0.386832893 0.386832864 0.59191245 0.591912408" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__bracket_outline_1_8" rgba="1 1 1 1" name="FL_foot_visual0" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__bracket_outline_1_9" rgba="1 1 1 1" name="FL_foot_collision0" />
+              <geom name="FL_toe" type="sphere" size="0.008" pos="-0.0833911 0.002 0.0697487" contype="2" conaffinity="1" rgba="0.1 0.1 0.1 1" />
+              <site name="FL" pos="-0.0899 0.002 0.0744" size="0.005" group="4" rgba="1 0 0 1" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="RL_hip_servo" pos="-0.0718853864 0.0353776965 0.0164299746" quat="0.707106781 -0.707106781 0 0">
+        <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_10" rgba="0.654901961 0.670588235 0.705882353 1" name="RL_hip_servo_visual0" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_11" rgba="0.654901961 0.670588235 0.705882353 1" name="RL_hip_servo_collision0" />
+        <body name="RL_thigh" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.628770794 -0.628770794 0.323492332 -0.323492332">
+          <joint name="RL_hip_joint" pos="0 0 0" axis="-0 -1 -0" type="hinge" range="-2 2" />
+          <inertial pos="-0.0225742265 -0.0241378218 0.0161472168" mass="0.0402227" diaginertia="9.46366422e-06 2.21938698e-05 2.7388466e-05" quat="0.925968967 -0.0717436419 0.297246778 -0.221537075" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__leg_link1_2_12" rgba="1 1 1 1" name="RL_thigh_visual0" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__leg_link1_2_13" rgba="1 1 1 1" name="RL_thigh_collision0" />
+          <body name="RL_knee_servo" pos="-0.0622368066 -0.0302776964 0.0444747773" quat="-0.215864471 -0.215864471 0.673351714 -0.673351714">
+            <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_14" rgba="0.654901961 0.670588235 0.705882353 1" name="RL_knee_servo_visual0" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_15" rgba="0.654901961 0.670588235 0.705882353 1" name="RL_knee_servo_collision0" />
+            <body name="RL_foot" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.215864471 -0.215864471 0.673351714 -0.673351714">
+              <joint name="RL_knee_joint" pos="0 0 0" axis="-0 -1 -0" type="hinge" range="-2 2" />
+              <inertial pos="-0.0362490796 -0.0020000001 0.0319570087" mass="0.0194513" diaginertia="9.73041081e-07 2.44786489e-05 2.50953e-05" quat="-0.386832893 0.386832864 0.59191245 0.591912408" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__bracket_outline_1_16" rgba="1 1 1 1" name="RL_foot_visual0" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__bracket_outline_1_17" rgba="1 1 1 1" name="RL_foot_collision0" />
+              <geom name="RL_toe" type="sphere" size="0.008" pos="-0.0833911 0.002 0.0697487" contype="2" conaffinity="1" rgba="0.1 0.1 0.1 1" />
+              <site name="RL" pos="-0.0899 0.002 0.0744" size="0.005" group="4" rgba="1 0 0 1" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="RR_hip_servo" pos="-0.0718853864 -0.0353776965 0.0164300254" quat="0.707106781 0.707106781 0 0">
+        <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_18" rgba="0.654901961 0.670588235 0.705882353 1" name="RR_hip_servo_visual0" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_19" rgba="0.654901961 0.670588235 0.705882353 1" name="RR_hip_servo_collision0" />
+        <body name="RR_thigh" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.628770794 0.628770794 0.323492332 0.323492332">
+          <joint name="RR_hip_joint" pos="0 0 0" axis="0 -1 0" type="hinge" range="-2 2" />
+          <inertial pos="-0.0225889233 0.0241378218 0.0161266506" mass="0.0402227" diaginertia="9.46367202e-06 2.21938639e-05 2.7388464e-05" quat="0.926199957 0.0704333655 0.296526359 0.221956975" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__leg_link1_2_2_20" rgba="1 1 1 1" name="RR_thigh_visual0" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__leg_link1_2_2_21" rgba="1 1 1 1" name="RR_thigh_collision0" />
+          <body name="RR_knee_servo" pos="-0.0622367771 0.0302776964 0.0444748186" quat="-0.215864471 0.215864471 0.673351714 0.673351714">
+            <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_22" rgba="0.654901961 0.670588235 0.705882353 1" name="RR_knee_servo_visual0" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_23" rgba="0.654901961 0.670588235 0.705882353 1" name="RR_knee_servo_collision0" />
+            <body name="RR_foot" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.215864471 0.215864471 0.673351714 0.673351714">
+              <joint name="RR_knee_joint" pos="0 0 0" axis="0 -1 0" type="hinge" range="-2 2" />
+              <inertial pos="-0.0362490796 0.0019999999 0.0319570087" mass="0.0194513" diaginertia="9.73041081e-07 2.44786489e-05 2.50953e-05" quat="-0.386832893 0.386832864 0.59191245 0.591912408" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__bracket_outline_1_2_24" rgba="1 1 1 1" name="RR_foot_visual0" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__bracket_outline_1_2_25" rgba="1 1 1 1" name="RR_foot_collision0" />
+              <geom name="RR_toe" type="sphere" size="0.008" pos="-0.0833911 0.002 0.0697487" contype="2" conaffinity="1" rgba="0.1 0.1 0.1 1" />
+              <site name="RR" pos="-0.0899 0.002 0.0744" size="0.005" group="4" rgba="1 0 0 1" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="FR_hip_servo" pos="0.0781146136 -0.0353776965 0.0164300254" quat="0.707106781 0.707106781 0 0">
+        <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_26" rgba="0.654901961 0.670588235 0.705882353 1" name="FR_hip_servo_visual0" />
+        <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_27" rgba="0.654901961 0.670588235 0.705882353 1" name="FR_hip_servo_collision0" />
+        <body name="FR_thigh" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.628770794 0.628770794 0.323492332 0.323492332">
+          <joint name="FR_hip_joint" pos="0 0 0" axis="0 -1 0" type="hinge" range="-2 2" />
+          <inertial pos="-0.0225889233 0.0241378218 0.0161266506" mass="0.0402227" diaginertia="9.46367202e-06 2.21938639e-05 2.7388464e-05" quat="0.926199957 0.0704333655 0.296526359 0.221956975" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__leg_link1_2_2_28" rgba="1 1 1 1" name="FR_thigh_visual0" />
+          <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__leg_link1_2_2_29" rgba="1 1 1 1" name="FR_thigh_collision0" />
+          <body name="FR_knee_servo" pos="-0.0622367771 0.0302776964 0.0444748186" quat="-0.215864471 0.215864471 0.673351714 0.673351714">
+            <inertial pos="-0.00111629935 -2.52499204e-08 -0.000887548915" mass="0.055" diaginertia="7.5148721e-06 1.19206879e-05 1.40256e-05" quat="0.706701162 -0.706701229 0.0239461772 0.0239462155" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_30" rgba="0.654901961 0.670588235 0.705882353 1" name="FR_knee_servo_visual0" />
+            <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__STS3215_03a_nopassivehorn_1_31" rgba="0.654901961 0.670588235 0.705882353 1" name="FR_knee_servo_collision0" />
+            <body name="FR_foot" pos="0.0118853864 -2.5384151e-08 0.0174223036" quat="0.215864471 0.215864471 0.673351714 0.673351714">
+              <joint name="FR_knee_joint" pos="0 0 0" axis="0 -1 0" type="hinge" range="-2 2" />
+              <inertial pos="-0.0362490796 0.0019999999 0.0319570087" mass="0.0194513" diaginertia="9.73041081e-07 2.44786489e-05 2.50953e-05" quat="-0.386832893 0.386832864 0.59191245 0.591912408" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="2" contype="0" conaffinity="0" type="mesh" mesh="Assem130__bracket_outline_1_2_32" rgba="1 1 1 1" name="FR_foot_visual0" />
+              <geom pos="0 0 0" quat="1 0 0 0" group="3" type="mesh" mesh="Assem130__bracket_outline_1_2_33" rgba="1 1 1 1" name="FR_foot_collision0" />
+              <geom name="FR_toe" type="sphere" size="0.008" pos="-0.0833911 0.002 0.0697487" contype="2" conaffinity="1" rgba="0.1 0.1 0.1 1" />
+              <site name="FR" pos="-0.0899 0.002 0.0744" size="0.005" group="4" rgba="1 0 0 1" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <site name="imu_in_body" pos="0 0 0" size="0.005" group="4" rgba="0 1 0 1" />
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="FL_hip_joint_act" joint="FL_hip_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+    <position name="FL_knee_joint_act" joint="FL_knee_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+    <position name="RL_hip_joint_act" joint="RL_hip_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+    <position name="RL_knee_joint_act" joint="RL_knee_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+    <position name="RR_hip_joint_act" joint="RR_hip_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+    <position name="RR_knee_joint_act" joint="RR_knee_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+    <position name="FR_hip_joint_act" joint="FR_hip_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+    <position name="FR_knee_joint_act" joint="FR_knee_joint" kp="20" ctrlrange="-2 2" forcerange="-2.942 2.942" />
+  </actuator>
+  <keyframe>
+    <key name="home" qpos="0 0 0.14 1 0 0 0 0.7748 -1.3474 0.7748 -1.3474 0.7748 -1.3474 0.7748 -1.3474" />
+  </keyframe>
+  <sensor>
+    <gyro name="imu_ang_vel" site="imu_in_body" />
+    <velocimeter name="imu_lin_vel" site="imu_in_body" />
+    <accelerometer name="imu_lin_acc" site="imu_in_body" />
+    <subtreeangmom name="root_angmom" body="base_link" />
+  </sensor>
+</mujoco>

@@ -1,0 +1,13 @@
+[project]
+name = "tinypython-shell"
+version = "0.1.0"
+description = "IPython-like shell for TinyPython on Arduino"
+requires-python = ">=3.8"
+dependencies = [
+    "pyserial>=3.5",
+    "prompt-toolkit>=3.0",
+    "pygments>=2.0",
+]
+
+[project.scripts]
+tinypython-shell = "tinypython_shell:main"
