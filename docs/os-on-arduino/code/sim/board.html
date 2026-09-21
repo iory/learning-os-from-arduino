@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>仮想 UNO R4 WiFi — {{TITLE}}</title>
+<style>
+  :root {
+    --bg: #0e1218; --panel: #1b2230; --edge: #2c3648;
+    --text: #e6edf3; --muted: #8b98ab; --accent: #1a7f8e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px 16px; background: var(--bg); color: var(--text);
+    font-family: "Helvetica Neue", "Hiragino Sans", system-ui, sans-serif;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 18px; }
+  header { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  h1 { font-size: 18px; margin: 0; font-weight: 600; }
+  .chip {
+    font-size: 12px; color: var(--muted); border: 1px solid var(--edge);
+    border-radius: 999px; padding: 3px 10px; white-space: nowrap;
+  }
+
+  /* ---- 基板写真とその上に重ねる LED ---- */
+  .board { position: relative; line-height: 0; border-radius: 12px; overflow: hidden; }
+  .board img { width: 100%; height: auto; display: block; }
+
+  .led {
+    position: absolute; transform: translate(-50%, -50%);
+    border-radius: 50%; pointer-events: none;
+    opacity: 0; transition: opacity 45ms linear;
+  }
+  .led.on { opacity: 1; }
+
+  /* マトリクスの 1 ドット: LED 本体が琥珀色に光り、まわりに赤い光が広がる */
+  .px {
+    width: 2.2%; aspect-ratio: 1;
+    background:
+      radial-gradient(circle,
+        rgba(255,252,238,1)   0%,
+        rgba(255,218,130,1)  28%,
+        rgba(255,132,28,.9)  52%,
+        rgba(255,80,12,.45)  76%,
+        rgba(255,60,0,0)    100%);
+  }
+  .px::before, .d13::before {          /* 基板ににじむ光 */
+    content: ""; position: absolute; inset: -140%; border-radius: 50%;
+    background:
+      radial-gradient(circle,
+        rgba(255,70,24,.50)  0%,
+        rgba(255,45,12,.20) 38%,
+        rgba(255,30,0,0)    70%);
+    mix-blend-mode: screen;
+  }
+  /* 基板上の "L" LED (D13) はオレンジ寄り */
+  .d13 {
+    width: 1.9%; aspect-ratio: 1;
+    background:
+      radial-gradient(circle,
+        rgba(255,255,240,1)   0%,
+        rgba(255,206,96,1)   30%,
+        rgba(255,146,20,.85) 55%,
+        rgba(255,120,0,.35)  78%,
+        rgba(255,110,0,0)   100%);
+  }
+  .d13::before {
+    background:
+      radial-gradient(circle,
+        rgba(255,150,30,.45) 0%,
+        rgba(255,120,10,.18) 38%,
+        rgba(255,110,0,0)    70%);
+  }
+
+  .legend {
+    display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+    font-size: 12px; color: var(--muted);
+  }
+  .legend b { color: var(--text); font-weight: 600; }
+
+  .panel { background: var(--panel); border: 1px solid var(--edge); border-radius: 10px; }
+  .panel h2 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin: 0; padding: 10px 14px;
+    border-bottom: 1px solid var(--edge);
+  }
+  pre {
+    margin: 0; padding: 14px; height: 230px; overflow-y: auto; font-size: 12.5px;
+    line-height: 1.5; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    white-space: pre-wrap; word-break: break-all;
+  }
+  form { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--edge); }
+  input {
+    flex: 1; background: #0d1117; border: 1px solid var(--edge); border-radius: 6px;
+    color: var(--text); padding: 8px 10px; font-family: ui-monospace, Menlo, monospace;
+  }
+  button {
+    background: var(--accent); color: #fff; border: 0; border-radius: 6px;
+    padding: 8px 16px; cursor: pointer; font-size: 13px;
+  }
+  footer { color: var(--muted); font-size: 12px; text-align: center; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>仮想 Arduino UNO R4 WiFi</h1>
+    <span class="chip">{{TITLE}}</span>
+    <span class="chip">{{EMULATOR}}</span>
+    <span class="chip" id="status">接続中…</span>
+  </header>
+
+  <div class="board" id="board">
+    <img id="photo" src="/board.jpg" alt="Arduino UNO R4 WiFi">
+  </div>
+
+  <div class="legend">
+    <span><b>12×8 LED マトリクス</b> と <b>L (D13)</b> は、エミュレータ上の実機
+      ファームウェアが書いた値をそのまま光らせています。</span>
+  </div>
+
+  <div class="panel">
+    <h2>Serial monitor — 115200 baud</h2>
+    <pre id="console"></pre>
+    <form id="form">
+      <input id="line" placeholder="コマンドを入力して Enter（例: help）" autocomplete="off">
+      <button type="submit">送信</button>
+    </form>
+  </div>
+
+  <footer>実機と同じ PlatformIO ビルドのファームウェアが動いています。</footer>
+</div>
+
+<script>
+  const board = document.getElementById('board');
+  const statusEl = document.getElementById('status');
+  const consoleEl = document.getElementById('console');
+  let pixels = [];
+  let d13El = null;
+
+  function place(el, cell) {
+    el.style.left = cell.x + '%';
+    el.style.top = cell.y + '%';
+  }
+
+  // LED の位置は写真から実測した座標（パーセント）をサーバから取る
+  fetch('/cells.json').then(r => r.json()).then(cells => {
+    pixels = cells.matrix.map(cell => {
+      const el = document.createElement('div');
+      el.className = 'led px';
+      place(el, cell);
+      board.appendChild(el);
+      return el;
+    });
+    d13El = document.createElement('div');
+    d13El.className = 'led d13';
+    place(d13El, cells.d13);
+    board.appendChild(d13El);
+    connect();
+  });
+
+  function connect() {
+    const es = new EventSource('/events');
+    es.onopen = () => { statusEl.textContent = '動作中'; };
+    es.onerror = () => { statusEl.textContent = '切断'; };
+    es.onmessage = (ev) => {
+      const msg = JSON.parse(ev.data);
+      if (msg.matrix && pixels.length) {
+        for (let i = 0; i < pixels.length; i++) {
+          pixels[i].classList.toggle('on', msg.matrix[i] === 1);
+        }
+      }
+      if (msg.led !== undefined && d13El) d13El.classList.toggle('on', msg.led === 1);
+      if (msg.serial) {
+        const atBottom = consoleEl.scrollTop + consoleEl.clientHeight
+                         >= consoleEl.scrollHeight - 20;
+        consoleEl.textContent += msg.serial;
+        if (consoleEl.textContent.length > 40000) {
+          consoleEl.textContent = consoleEl.textContent.slice(-30000);
+        }
+        if (atBottom) consoleEl.scrollTop = consoleEl.scrollHeight;
+      }
+    };
+  }
+
+  document.getElementById('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('line');
+    fetch('/input', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: input.value + '\n' })
+    });
+    input.value = '';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+// 仮想 UNO R4 ボード: Renode 同梱の RA4M1 (Arduino Uno R4 Minima) をそのまま使う。
+// LED と LED マトリクスはレジスタ／メモリを直接読むので、追加の周辺機器は要らない。
+using "platforms/boards/arduino_uno_r4_minima.repl"

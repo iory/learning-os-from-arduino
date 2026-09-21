@@ -21,10 +21,13 @@ import json
 import os
 import platform
 import re
+import shutil
+import socket
 import subprocess
 import sys
+import tempfile
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 try:
@@ -55,6 +58,9 @@ class Check:
     pattern: str
     why: str = ""
     absent: bool = False  # True なら「出てはいけない」
+    # この期待値を確かめられないエミュレータ（"renode" / "qemu"）。実機では常に確かめる
+    unsupported_on: tuple[str, ...] = ()
+    sim_note: str = ""    # なぜ確かめないか（エミュレータの制約）
 
 
 @dataclass
@@ -192,8 +198,12 @@ CHAPTERS: list[Chapter] = [
         send=["p", "d", "sleep:5", "p"],
         checks=[
             Check(r"ID\s+NAME\s+STATE"),
-            Check(r"FAULT DETECTED", "フォールトが検出される"),
-            Check(r"Reason: Divide by zero", "原因が特定できている"),
+            Check(r"FAULT DETECTED", "フォールトが検出される",
+                  unsupported_on=("renode",),
+                  sim_note="Renode は未マップ領域への書き込みでも BusFault を上げない"),
+            Check(r"Reason: Divide by zero", "原因が特定できている",
+                  unsupported_on=("renode",),
+                  sim_note="Renode の Armv7-M は CCR.DIV_0_TRP を実装していない"),
             Check(r"Crash_Div\s+TERMINATED", "クラッシュしたタスクだけが終了する"),
             Check(r"\[Heartbeat\] \d+", "他のタスクは動き続ける ← 第6章の主張"),
         ],
@@ -504,6 +514,46 @@ def run_pio(chapter: str, target: str | None, port: str | None,
 # 捕捉
 # --------------------------------------------------------------------------
 
+def drive(ch: Chapter, rd, wr) -> str:
+    """章の手順どおりに入力を送り、出力を捕捉する.
+
+    実機（シリアルポート）でもシミュレータ（ソケット）でも同じ手順を踏めるよう、
+    読み書きの関数だけを受け取る。``rd()`` は bytes を返し、``wr(bytes)`` は送る。
+    """
+    buf: list[str] = []
+    deadline = time.time() + ch.capture
+
+    # setup() でしか出さない章は、出力が始まるまでハンドシェイク文字を送り続ける
+    if ch.handshake:
+        hs_deadline = time.time() + 6.0
+        while time.time() < hs_deadline and not buf:
+            wr(ch.handshake.encode())
+            time.sleep(0.25)
+            chunk = rd()
+            if chunk:
+                buf.append(chunk.decode("utf-8", errors="replace"))
+
+    for line in ch.send:
+        # "sleep:5" と書くと、そこで 5 秒待つ（クラッシュが起きるまで待つ等）
+        m = re.fullmatch(r"sleep:([\d.]+)", line)
+        if m:
+            deadline = max(deadline, time.time() + float(m.group(1)))
+            end = time.time() + float(m.group(1))
+            while time.time() < end:
+                chunk = rd()
+                if chunk:
+                    buf.append(chunk.decode("utf-8", errors="replace"))
+            continue
+        time.sleep(0.8)
+        wr((line + "\n").encode())
+
+    while time.time() < deadline:
+        chunk = rd()
+        if chunk:
+            buf.append(chunk.decode("utf-8", errors="replace"))
+    return "".join(buf)
+
+
 def capture(ch: Chapter, port: str) -> str:
     """出力を捕捉する。
 
@@ -555,32 +605,7 @@ def capture(ch: Chapter, port: str) -> str:
             ser.reset_input_buffer()
         except Exception:  # noqa: BLE001
             pass
-        # setup() でしか出さない章は、出力が始まるまでハンドシェイク文字を送り続ける
-        if ch.handshake:
-            hs_deadline = time.time() + 6.0
-            while time.time() < hs_deadline and not buf:
-                wr(ch.handshake.encode())
-                time.sleep(0.25)
-                chunk = rd()
-                if chunk:
-                    buf.append(chunk.decode("utf-8", errors="replace"))
-        for line in ch.send:
-            # "sleep:5" と書くと、そこで 5 秒待つ（クラッシュが起きるまで待つ等）
-            m = re.fullmatch(r"sleep:([\d.]+)", line)
-            if m:
-                deadline = max(deadline, time.time() + float(m.group(1)))
-                end = time.time() + float(m.group(1))
-                while time.time() < end:
-                    chunk = rd()
-                    if chunk:
-                        buf.append(chunk.decode("utf-8", errors="replace"))
-                continue
-            time.sleep(0.8)
-            wr((line + "\n").encode())
-        while time.time() < deadline:
-            chunk = rd()
-            if chunk:
-                buf.append(chunk.decode("utf-8", errors="replace"))
+        buf.append(drive(ch, rd, wr))
     finally:
         if ser is not None:
             try:
@@ -590,6 +615,129 @@ def capture(ch: Chapter, port: str) -> str:
     return "".join(buf)
 
 
+
+# --------------------------------------------------------------------------
+# シミュレータ（RA4M1 のエミュレータ）で走らせる
+# --------------------------------------------------------------------------
+
+SIM_DIR = CODE_ROOT / "sim"
+SIM_UART = "sci9"          # -D NO_USB の Serial（_UART1_ = P109/P110）は SCI9
+
+
+def sim_process():
+    """sim/emulator_process.py を読み込む（エミュレータを孤児にしない起動・停止）。"""
+    if str(SIM_DIR) not in sys.path:
+        sys.path.insert(0, str(SIM_DIR))
+    import emulator_process
+    return emulator_process
+
+
+def has_sim_env(chapter: str) -> bool:
+    """その章に [env:sim] があるか（実機専用の章には無い）。"""
+    ini = CODE_ROOT / chapter / "platformio.ini"
+    return ini.exists() and "[env:sim]" in ini.read_text(encoding="utf-8")
+
+
+def find_renode(explicit: str | None = None) -> str | None:
+    """renode の実行ファイルを探す。--renode > $RENODE > PATH > 既定の場所。"""
+    for cand in (explicit, os.environ.get("RENODE")):
+        if cand and Path(cand).exists():
+            return cand
+    found = shutil.which("renode")
+    if found:
+        return found
+    default = Path("/Applications/Renode.app/Contents/MacOS/renode")
+    return str(default) if default.exists() else None
+
+
+def find_qemu(explicit: str | None = None) -> tuple[str | None, str]:
+    """arduino-uno-r4 マシン入りの qemu-system-arm を探す（sim/emulator_process.py と共通）。"""
+    return sim_process().find_qemu(explicit)
+
+
+def free_port() -> int:
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
+def capture_emulator(ch: Chapter, cmd: list[str], uart_port: int, name: str,
+                     capture_scale: float = 1.0) -> str:
+    """エミュレータを起動し、UART（TCP）につないで章の手順どおりに捕捉する。
+
+    ``capture_scale`` は捕捉時間の倍率。CI の遅いランナーではエミュレータの
+    進みが実時間より遅くなるので、2.0 などに伸ばして取りこぼしを防ぐ。
+    """
+    if capture_scale != 1.0:
+        ch = replace(ch, capture=ch.capture * capture_scale)
+    rp = sim_process()
+    proc = rp.start(cmd)
+    sock = None
+    try:
+        deadline = time.time() + 60
+        while time.time() < deadline and sock is None:
+            try:
+                sock = socket.create_connection(("127.0.0.1", uart_port), 2.0)
+            except OSError:
+                if proc.poll() is not None:
+                    return f"[sim] {name} が起動直後に終了しました\n"
+                time.sleep(0.3)
+        if sock is None:
+            return f"[sim] {name} の UART につながりません\n"
+        sock.settimeout(0.2)
+
+        def rd(n: int = 4096) -> bytes:
+            try:
+                return sock.recv(n)
+            except (socket.timeout, OSError):
+                return b""
+
+        def wr(data: bytes) -> None:
+            try:
+                sock.sendall(data)
+            except OSError:
+                pass
+
+        return drive(ch, rd, wr)
+    finally:
+        if sock is not None:
+            sock.close()
+        rp.stop(proc)           # 子プロセスまでグループごと止める
+
+
+def capture_renode(ch: Chapter, elf: Path, renode: str,
+                   capture_scale: float = 1.0) -> str:
+    uart_port = free_port()
+    with tempfile.TemporaryDirectory(prefix="verify-sim-") as tmp:
+        resc = Path(tmp) / "run.resc"
+        resc.write_text(
+            "using sysbus\n"
+            'mach create "unor4"\n'
+            f"machine LoadPlatformDescription @{(SIM_DIR / 'unor4_board.repl').as_posix()}\n"
+            f"sysbus LoadELF @{elf.as_posix()}\n"
+            f'emulation CreateServerSocketTerminal {uart_port} "uart" false\n'
+            f"connector Connect {SIM_UART} uart\n"
+            "start\n",
+            encoding="utf-8",
+        )
+        cmd = [renode, "--disable-xwt", "--plain", "--hide-log",
+               "--port", str(free_port()), str(resc)]
+        return capture_emulator(ch, cmd, uart_port, "Renode", capture_scale)
+
+
+def capture_qemu(ch: Chapter, elf: Path, qemu: str, icount: str,
+                 capture_scale: float = 1.0) -> str:
+    uart_port = free_port()
+    cmd = [qemu, "-M", sim_process().QEMU_MACHINE, "-kernel", str(elf),
+           "-display", "none", "-monitor", "none",
+           # wait=on: つなぐまで起動を待つので、最初の出力を取りこぼさない
+           "-serial", f"tcp:127.0.0.1:{uart_port},server=on,wait=on"]
+    if icount:
+        # 1 命令あたりの時間を固定して、48 MHz の実機に近い速さで走らせる
+        cmd += ["-icount", icount]
+    return capture_emulator(ch, cmd, uart_port, "QEMU", capture_scale)
+
+
 # --------------------------------------------------------------------------
 # 本体
 # --------------------------------------------------------------------------
@@ -597,6 +745,29 @@ def capture(ch: Chapter, port: str) -> str:
 def verify(ch: Chapter, args) -> dict:
     result = {"chapter": ch.name, "build": None, "upload": None,
               "checks": [], "status": "", "log": ""}
+
+    if getattr(args, "sim", False):
+        if not has_sim_env(ch.name):
+            result["status"] = "SIM-SKIP"     # 実機の部品が要る章
+            return result
+        ok, out = run_pio(ch.name, None, None, "sim")
+        result["build"] = "OK" if ok else "FAIL"
+        if not ok:
+            result["status"] = "BUILD-FAIL"
+            result["log"] = out[-4000:]
+            return result
+        if args.build_only:
+            result["status"] = "BUILD-OK"
+            return result
+        elf = CODE_ROOT / ch.name / ".pio/build/sim/firmware.elf"
+        if args.emulator == "qemu":
+            log = capture_qemu(ch, elf, args.qemu_path, args.icount,
+                               args.capture_scale)
+        else:
+            log = capture_renode(ch, elf, args.renode_path, args.capture_scale)
+        result["log"] = log
+        result["status"] = judge(ch, log, result, emulator=args.emulator)
+        return result
 
     ok, out = run_pio(ch.name, None, None, ch.env)
     result["build"] = "OK" if ok else "FAIL"
@@ -625,9 +796,25 @@ def verify(ch: Chapter, args) -> dict:
     port = args.port or wait_for_port(20) or port
     log = capture(ch, port)
     result["log"] = log
+    result["status"] = judge(ch, log, result)
+    return result
 
+
+def judge(ch: Chapter, log: str, result: dict, emulator: str | None = None) -> str:
+    """捕捉したログを期待値と突き合わせ、PASS / FAIL を返す。
+
+    ``emulator`` はエミュレータで採ったログのときにその名前（実機なら None）。
+    """
     failed = []
     for c in ch.checks:
+        if emulator and emulator in c.unsupported_on:
+            # エミュレータでは再現しない項目。黙って飛ばすと嘘になるので、
+            # 結果には「飛ばした」と理由を残す。
+            result["checks"].append(
+                {"pattern": c.pattern, "why": c.why, "absent": c.absent,
+                 "ok": True, "skipped": True, "sim_note": c.sim_note}
+            )
+            continue
         hit = re.search(c.pattern, log, re.M) is not None
         good = (not hit) if c.absent else hit
         result["checks"].append(
@@ -642,9 +829,7 @@ def verify(ch: Chapter, args) -> dict:
         )
         if not cok:
             failed.append(Check(f"<{ch.custom}>", msg))
-
-    result["status"] = "PASS" if not failed else "FAIL"
-    return result
+    return "PASS" if not failed else "FAIL"
 
 
 
@@ -792,11 +977,27 @@ def main() -> int:
     ap.add_argument("--skip", nargs="+", default=[], help="この章を飛ばす")
     ap.add_argument("--port", help="シリアルポートを明示する（COM5, /dev/ttyACM0, /dev/cu.usbmodem...）")
     ap.add_argument("--build-only", action="store_true", help="ボード無しでビルドだけ検証する")
+    ap.add_argument("--sim", action="store_true",
+                    help="実機の代わりにエミュレータで検証する（付録のシミュレータ）")
+    ap.add_argument("--emulator", choices=["qemu", "renode"],
+                    help="--sim で使うエミュレータ（既定: qemu）。指定すれば --sim も付く")
+    ap.add_argument("--renode", dest="renode_path",
+                    help="renode の実行ファイル（既定: $RENODE か PATH から探す）")
+    ap.add_argument("--qemu", dest="qemu_path",
+                    help="arduino-uno-r4 マシン入りの qemu-system-arm"
+                         "（既定: $QEMU → ~/qemu-unor4 → PATH の順に探す）")
+    ap.add_argument("--icount", default="shift=4,sleep=on",
+                    help="QEMU の -icount（既定: 48 MHz 相当の shift=4。空でホストの速さ）")
+    ap.add_argument("--capture-scale", type=float, default=1.0,
+                    help="--sim のとき捕捉時間を何倍にするか（遅い CI 向け）")
     ap.add_argument("--list", action="store_true", help="章と期待値を一覧表示する")
     ap.add_argument("--json", help="結果を JSON で書き出す")
     ap.add_argument("-i", "--interactive", action="store_true",
                     help="1 章ずつ焼いて、実機を見ながら Enter で進む")
     args = ap.parse_args()
+    if args.emulator:
+        args.sim = True               # エミュレータを選んだならシミュレータで検証する
+    args.emulator = args.emulator or "qemu"
 
     if args.list:
         for ch in CHAPTERS:
@@ -807,13 +1008,33 @@ def main() -> int:
                 print(f"    - <{ch.custom}>")
         return 0
 
-    if serial is None and not args.build_only:
+    if args.sim:
+        sim_process().install_signal_handlers()
+        if args.emulator == "qemu":
+            args.qemu_path, why = find_qemu(args.qemu_path)
+            if args.qemu_path is None and not args.build_only:
+                print(why)
+                return 2
+        else:
+            args.renode_path = find_renode(args.renode_path)
+            if args.renode_path is None and not args.build_only:
+                print("renode が見つかりません。--renode か環境変数 RENODE で場所を渡してください。")
+                return 2
+    elif serial is None and not args.build_only:
         print("pyserial がありません。`uv sync` を実行するか --build-only を付けてください。")
         return 2
 
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    # 実機のログとシミュレータのログを混ぜない（どちらで採ったか分からなくなる）
+    log_dir = RESULTS_DIR
+    if args.sim:
+        log_dir = RESULTS_DIR / ("sim" if args.emulator == "renode" else f"sim-{args.emulator}")
+    log_dir.mkdir(parents=True, exist_ok=True)
     print(f"OS: {platform.system()} {platform.release()}  Python: {sys.version.split()[0]}")
-    if not args.build_only:
+    if args.sim and args.emulator == "qemu":
+        print(f"シミュレータ: QEMU {args.qemu_path}  (-icount {args.icount or 'なし'})")
+    elif args.sim:
+        print(f"シミュレータ: Renode {args.renode_path}")
+    elif not args.build_only:
         port = args.port or find_board_port()
         print(f"ボード: {port or '見つかりません'}")
 
@@ -835,15 +1056,18 @@ def main() -> int:
         r["seconds"] = round(time.time() - t0, 1)
         results.append(r)
         if r["log"]:
-            (RESULTS_DIR / f"{ch.name}.log").write_text(r["log"], encoding="utf-8")
+            (log_dir / f"{ch.name}.log").write_text(r["log"], encoding="utf-8")
         print(f"  -> {r['status']}  ({r['seconds']}s)", flush=True)
         for c in r["checks"]:
-            mark = "OK  " if c["ok"] else "NG  "
+            mark = "SKIP" if c.get("skipped") else ("OK  " if c["ok"] else "NG  ")
             # 読者が見たいのは「何を確かめたか」なので、説明があればそれを出す。
             # 正規表現そのものは、落ちたときだけ添える（直す手がかりになる）。
             label = c["why"] or c["pattern"]
-            detail = "" if (c["ok"] or not c["why"]) else f"   [{c['pattern']}]"
-            print(f"     {mark}{label}{detail}")
+            if c.get("skipped"):
+                detail = f"   ← {c['sim_note']}" if c.get("sim_note") else ""
+            else:
+                detail = "" if (c["ok"] or not c["why"]) else f"   [{c['pattern']}]"
+            print(f"     {mark} {label}{detail}")
 
     print("\n" + "=" * 72)
     print(f"{'章':24s} {'結果':12s} 秒")
@@ -851,10 +1075,12 @@ def main() -> int:
     bad = 0
     for r in results:
         print(f"{r['chapter']:24s} {r['status']:12s} {r['seconds']}")
-        if r["status"] not in ("PASS", "BUILD-OK"):
+        if r["status"] not in ("PASS", "BUILD-OK", "SIM-SKIP"):
             bad += 1
     print("=" * 72)
-    print(f"{len(results) - bad} / {len(results)} 章が成功")
+    skipped = sum(1 for r in results if r["status"] == "SIM-SKIP")
+    print(f"{len(results) - bad - skipped} / {len(results) - skipped} 章が成功"
+          + (f"（実機が要る {skipped} 章は対象外）" if skipped else ""))
 
     if args.json:
         Path(args.json).write_text(json.dumps(results, ensure_ascii=False, indent=2),
