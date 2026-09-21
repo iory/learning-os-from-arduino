@@ -283,9 +283,12 @@ class QemuBackend:
 
 
 class Board:
-    def __init__(self, elf: Path, backend):
+    def __init__(self, elf: Path, backend, poll_interval: float = 0.05):
         self.elf = elf
         self.backend = backend
+        # LED とマトリクスを読む間隔。ブラウザには 50ms で十分だが、GIF に録るときは
+        # 1 コマより細かく読まないと速い点滅を取りこぼす（record.py が短くする）
+        self.poll_interval = poll_interval
         self.fb_addr = find_symbol(elf, FRAMEBUFFER_SYMBOL)
         self.state = {"matrix": [0] * 96, "led": 0, "ticks": 0}
         self.serial_log: list[str] = []
@@ -361,7 +364,7 @@ class Board:
                 print(f"[poll] {type(exc).__name__}: {exc}", file=sys.stderr)
                 return
             self._publish({"matrix": self.state["matrix"], "led": self.state["led"]})
-            time.sleep(0.05)
+            time.sleep(self.poll_interval)
 
     # ---- SSE ----
     def _publish(self, payload: dict) -> None:
@@ -401,8 +404,9 @@ def add_emulator_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--qemu", type=Path,
                         help="(qemu) arduino-uno-r4 マシン入りの qemu-system-arm"
                              "（既定: $QEMU → ~/qemu-unor4 → PATH の順に探す）")
-    parser.add_argument("--icount", default="shift=4,sleep=on",
-                        help="(qemu) -icount の値。空にするとホストの速さで走る")
+    parser.add_argument("--icount", default=emulator_process.QEMU_ICOUNT,
+                        help="(qemu) -icount の値（既定: 実機と同じ 48 MHz 相当で、実時間に"
+                             "合わせる）。空にするとホストの速さで走る")
 
 
 def make_backend(args, elf: Path, monitor_port: int, uart_port: int):

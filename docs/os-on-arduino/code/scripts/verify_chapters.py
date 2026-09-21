@@ -230,9 +230,10 @@ CHAPTERS: list[Chapter] = [
         title="本編 第8章 簡易インタプリタ",
         watch=[
             "L LED が 500ms ごとに点滅",
-            "run LED 13 1 で LED が点灯したままになる",
+            "LED タスクが L を 500ms ごとに反転し続けるので、run LED 13 1 だけでは次の反転で消える。",
+            "kill 1 で LED タスクを止めてから run LED 13 1 を送ると点灯したままになる",
         ],
-        try_cmds=["run FORWARD 10", "run PRINT hello", "run LED 13 1", "run LED 13 0"],
+        try_cmds=["run FORWARD 10", "run PRINT hello", "kill 1", "run LED 13 1", "run LED 13 0"],
         send=["run FORWARD 10", "run PRINT hello"],
         checks=[
             Check(r"\[Motor\] Forward 10", "インタプリタが FORWARD を実行する"),
@@ -986,8 +987,8 @@ def main() -> int:
     ap.add_argument("--qemu", dest="qemu_path",
                     help="arduino-uno-r4 マシン入りの qemu-system-arm"
                          "（既定: $QEMU → ~/qemu-unor4 → PATH の順に探す）")
-    ap.add_argument("--icount", default="shift=4,sleep=on",
-                    help="QEMU の -icount（既定: 48 MHz 相当の shift=4。空でホストの速さ）")
+    ap.add_argument("--icount", default=sim_process().QEMU_ICOUNT,
+                    help="QEMU の -icount（既定: 48 MHz 相当で実時間に合わせる。空でホストの速さ）")
     ap.add_argument("--capture-scale", type=float, default=1.0,
                     help="--sim のとき捕捉時間を何倍にするか（遅い CI 向け）")
     ap.add_argument("--list", action="store_true", help="章と期待値を一覧表示する")

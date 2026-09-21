@@ -31,6 +31,10 @@ QEMU_MACHINE = "arduino-uno-r4"
 # サポートサイトの付録「実機がなくても試せる」の、QEMU のインストール手順
 QEMU_INSTALL_GUIDE = ("https://iory.github.io/build-your-own-arduino-rtos/"
                       "getting-started/simulator.html#install-qemu")
+# QEMU の -icount。1 命令 16ns（shift=4）≈ 48 MHz の実機と同じ速さで命令を数える。
+# align=on が無いと、ゲストの時計は正しくても実行は壁時計より先へ進むので、空ループで
+# 待つ点滅（第3章）が実機の 10 倍以上速く見える。sleep=on はアイドル中に実時間で待つ。
+QEMU_ICOUNT = "shift=4,sleep=on,align=on"
 # 付録で案内している展開先。ここに置けば --qemu を書かなくて済む
 QEMU_HOME = Path.home() / "qemu-unor4"
 

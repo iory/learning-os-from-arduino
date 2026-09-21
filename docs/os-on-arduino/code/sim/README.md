@@ -41,9 +41,10 @@ QEMU は `--qemu` → 環境変数 `QEMU` → `~/qemu-unor4`（Windows の zip �
 あるものを使います（`emulator_process.find_qemu()`）。見つからないときは、探した
 場所とダメだった理由を出して止まります。
 
-- `-icount shift=4,sleep=on`（1 命令 16ns ≈ 48 MHz 相当）で走らせます。付けないと
-  CPU がホストの速さで回り、タスクの印字が実機よりずっと頻繁に混ざります
-  （`--icount ""` で外せる）
+- `-icount shift=4,sleep=on,align=on`（1 命令 16ns ≈ 48 MHz 相当で、実時間に合わせる）で
+  走らせます。付けないと CPU がホストの速さで回り、タスクの印字が実機よりずっと頻繁に
+  混ざります。`align=on` が無いと、空ループで待つ点滅（第3章）が実機の 10 倍以上速く
+  見えます（`--icount ""` で外せる）
 - `Serial` は SCI9 に出ます。実機でも `-D NO_USB` の `Serial`（`_UART1_`）は
   P109/P110 = SCI9 です
 
@@ -120,7 +121,40 @@ uv run --no-project --with pillow python record.py \
 
 ブラウザを使わず、エミュレータから読んだ LED の状態を基板写真に合成します
 （CI に Chrome を入れずに済みます）。`--width` `--fps` `--colors` で
-大きさと滑らかさを調整できます。
+大きさと滑らかさを調整できます。各コマの表示時間は実際に撮った時刻から決めるので、
+描画が間に合わず fps を下回っても GIF は実時間の速さで再生されます。
+
+| オプション | 用途 |
+| --- | --- |
+| `--send-at "5:kill 1"` | 録っている途中でコマンドを送る。基板の左下に `> kill 1` と出す |
+| `--serial` | 基板の下にシリアル画面を並べる（`--serial-lines` で行数）。等幅フォントを探し、無ければ `--font` で渡す |
+| `--crop x0,y0,x1,y1` | 基板写真の一部だけを切り出す（D13 を大きく見せる等） |
+| `--meta demo.json` | GIF の上の LED の位置、送ったコマンド、各コマの本当の LED の状態を書く |
+
+### 見せたいことが GIF に写っているか確かめる
+
+`check_gif.py` は、`--meta` の JSON と GIF を読み、**GIF の画素から** LED の点灯を
+読み取って確かめます（読者に見えるのは画素だけなので）。
+
+```bash
+uv run --no-project --with pillow python check_gif.py demo.json \
+    --expect "before:kill 1:d13=blink" --expect "after:kill 1:d13=steady"
+```
+
+いつも確かめること: 画素から読んだ点灯と本当の状態の一致、点灯と消灯の色の差、
+80ms 未満で終わる点灯・消灯の割合（多いとチラつきにしか見えない）、コマンドの前後の
+長さ、ページに載せたときの文字の大きさ、再生の速さ、長さとファイルサイズ。
+`--expect` の書き方は `check_gif.py` の先頭にあります。
+
+### 章ページの GIF
+
+サポートサイトの章ページに載せている GIF は `chapter_gifs.sh` で録り、そのまま
+`check_gif.py` にかけています。各章の `--expect` がその GIF で見せたいことです。
+
+```bash
+sim/chapter_gifs.sh /tmp/gifs          # 全部
+sim/chapter_gifs.sh /tmp/gifs ch05     # 章を絞る
+```
 
 ## 実機との違い
 
@@ -189,4 +223,6 @@ LED の位置は写真から自動検出します（96 個見つかれば成功�
 | `matrix_cells.json` | LED 96 個 + D13 の位置（パーセント） |
 | `make_board_image.py` | 写真から上の 2 つを作り直すスクリプト |
 | `record.py` | 動きを GIF に録るスクリプト（Pillow が要る） |
+| `check_gif.py` | 録った GIF が見せたいことを見せているかを、画素から確かめる |
+| `chapter_gifs.sh` | サポートサイトの章ページの GIF を録って確かめる |
 | `emulator_process.py` | エミュレータを孤児にしない起動・停止（上の 3 つと検証スクリプトが使う） |
