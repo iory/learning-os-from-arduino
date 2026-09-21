@@ -28,7 +28,9 @@ import time
 from pathlib import Path
 
 QEMU_MACHINE = "arduino-uno-r4"
-QEMU_RELEASES = "https://github.com/iory/qemu-arduino-uno-r4/releases"
+# サポートサイトの付録「実機がなくても試せる」の、QEMU のインストール手順
+QEMU_INSTALL_GUIDE = ("https://iory.github.io/build-your-own-arduino-rtos/"
+                      "getting-started/simulator.html#install-qemu")
 # 付録で案内している展開先。ここに置けば --qemu を書かなくて済む
 QEMU_HOME = Path.home() / "qemu-unor4"
 
@@ -75,8 +77,11 @@ def find_qemu(explicit: str | os.PathLike | None = None) -> tuple[str | None, st
     why = "\n".join([
         f"{QEMU_MACHINE} マシン入りの qemu-system-arm が見つかりません。",
         *tried,
-        f"{QEMU_RELEASES} から OS に合ったものを {QEMU_HOME} に展開するか、",
-        "--qemu か環境変数 QEMU で場所を渡してください。",
+        "",
+        "インストール手順（サポートサイト）:",
+        f"  {QEMU_INSTALL_GUIDE}",
+        f"{QEMU_HOME} に展開すれば自動で見つかります。別の場所に置いたときは",
+        "--qemu か環境変数 QEMU で指定してください。",
         "Renode を使う場合は --emulator renode を付けてください。",
     ])
     return None, why
