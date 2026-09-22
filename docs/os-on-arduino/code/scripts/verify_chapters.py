@@ -226,6 +226,23 @@ CHAPTERS: list[Chapter] = [
         capture=10.0,
     ),
     Chapter(
+        "07_led_matrix_v2",
+        title="第7章 LEDマトリクス可視化 v2（書籍未掲載の改良版）",
+        watch=[
+            "行 0-1: CPU 全体の負荷が左から伸びる横棒（12 個で 100%）",
+            "行 3-7: LED / Light / Heavy / Shell / Display の CPU 使用率",
+            "kill 3 で Heavy の棒が消え、そのぶん CPU 全体の棒が縮む",
+        ],
+        try_cmds=["top", "kill 3", "kill 2", "exec 2", "exec 3", "top"],
+        # top の表も ps と同じ形の行を出すので、cpu_sum（ps の合計）は使わない
+        send=["ps", "top", "sleep:1.5", "top"],
+        checks=[
+            Check(r"ID\s+NAME\s+STATE"),
+            Check(r"CPU \[[# ]{12}\] \d+%", "top がマトリクスと同じ横棒を出す"),
+        ],
+        capture=10.0,
+    ),
+    Chapter(
         "08_interpreter",
         title="本編 第8章 簡易インタプリタ",
         watch=[
