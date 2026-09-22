@@ -26,9 +26,17 @@ source rl/scripts/env.sh                 # 機体の MJCF の場所を教える
 画面の無い環境（サーバや Colab）では、ビューアを開かずに mp4 を書く
 `./rl/scripts/record_video.py` を使ってください。
 
-**GPU が手元に無い場合は Google Colab（無料枠の T4）で通せます。**
-`colab/arduino_quad_colab.ipynb` が、環境構築から Arduino 用ヘッダの
-書き出しまでのノートブックです。
+**GPU が手元に無い場合は、[`cpu/`](cpu/) の CPU 版で学習できます。**
+同じタスクを素の MuJoCo で回すもので、6 コアのノート PC で mjlab 版を
+RTX 4090 で回すのと同じくらいの速さが出ます。チェックポイントの形式も同じで、
+同じエクスポータでヘッダに書き出せます。
+
+```bash
+cd rl/cpu && uv sync && uv run train.py   # 詳しくは cpu/README.md
+```
+
+Google Colab（無料枠の T4）でも通せます。`colab/arduino_quad_colab.ipynb` が、
+環境構築から Arduino 用ヘッダの書き出しまでのノートブックです。
 
 | タスク ID | 用途 |
 |---|---|
@@ -81,6 +89,7 @@ T4 でも書籍と同じ 4,500 iteration が約 1.8 時間です。
 | `rl_cfg.py` | PPO ハイパーパラメータとネットワーク構成 [96, 64] |
 | `runner.py` | 学習・再生・エクスポートの入り口 |
 | `_compat.py` | mjlab のバージョン差の吸収 |
+| `cpu/` | 同じタスクを mjlab なしで学習する CPU 版（`task.py` に数値を一か所にまとめてある。mjlab 版との一致は `cpu/parity_check.py` で検査） |
 
 ロボット記述一式（URDF・MJCF・メッシュ・RViz 設定・MJCF を SolidWorks
 エクスポートから再現するスクリプト）は

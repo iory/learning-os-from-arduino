@@ -1,0 +1,20 @@
+[project]
+name = "arduino-quad-cpu-trainer"
+version = "0.1.0"
+description = "ArduinoQuad-Walk / -Robust on plain MuJoCo: the same task as the mjlab overlay, trainable without a GPU"
+# mujoco 3.7.0 ships wheels up to CPython 3.13.
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    # mujoco 3.7.0 is the version the mjlab overlay pins (rl/scripts/setup.sh);
+    # the same physics release keeps the two trainers comparable.
+    "mujoco==3.7.0",
+    # mjlab 1.3.0 requires exactly this rsl_rl, so checkpoints from either
+    # trainer load in the other and go through the same exporter.
+    "rsl-rl-lib==5.0.1",
+    "torch>=2.2",
+    "numpy>=1.26",
+    "tensorboard>=2.14",
+]
+
+[tool.uv]
+package = false

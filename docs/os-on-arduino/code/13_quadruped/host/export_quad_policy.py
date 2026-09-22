@@ -10,9 +10,18 @@ restating them, writes them into the header next to the weights, and then
 **verifies** the exported network by re-running it in numpy and comparing
 against the PyTorch actor.
 
-Usage (via scripts/play.sh's environment; needs a GPU to build the env):
+Usage, for a checkpoint from the mjlab trainer (via scripts/play.sh's
+environment; needs a GPU to build the env):
 
     ./scripts/export_quad_policy.sh <ckpt.pt> [outdir] [task]
+
+and for one from the plain-MuJoCo trainer (rl/cpu; no GPU, no mjlab):
+
+    cd rl/cpu && uv run ../../host/export_quad_policy.py <ckpt.pt> [outdir] --backend cpu
+
+Both read the same constants -- the CPU trainer's env is checked against mjlab
+by rl/cpu/parity_check.py -- so both produce the same header for the same
+weights.
 
 Outputs into <outdir> (default deploy/arduino_quad/):
     arduino_quad_policy.h    weights + forward pass + layout constants
@@ -30,10 +39,7 @@ warnings.simplefilter("ignore")
 import numpy as np
 import torch
 
-import src.tasks  # noqa: F401  (registers tasks)
-from mjlab.envs import ManagerBasedRlEnv
-from mjlab.rl import MjlabOnPolicyRunner, RslRlVecEnvWrapper
-from mjlab.tasks.registry import load_env_cfg, load_rl_cfg, load_runner_cls
+import argparse
 
 
 def _yaml_block(text, key):
@@ -225,13 +231,17 @@ def _term_defines(layout):
   return "".join(out)
 
 
-CKPT = sys.argv[1]
-OUTDIR = sys.argv[2] if len(sys.argv) > 2 else "deploy/arduino_quad"
-TASK = sys.argv[3] if len(sys.argv) > 3 else "ArduinoQuad-Walk"
-DEV = "cuda:0"
+# Set by main() from the command line.
+CKPT = OUTDIR = TASK = DEV = ""
 
 
-def main() -> int:
+def _read_env_mjlab():
+  """Layout constants from a live mjlab env, and the runner holding the actor."""
+  import src.tasks  # noqa: F401  (registers tasks)
+  from mjlab.envs import ManagerBasedRlEnv
+  from mjlab.rl import MjlabOnPolicyRunner, RslRlVecEnvWrapper
+  from mjlab.tasks.registry import load_env_cfg, load_rl_cfg, load_runner_cls
+
   env_cfg = load_env_cfg(TASK, play=True)
   env_cfg.scene.num_envs = 1
   agent_cfg = load_rl_cfg(TASK)
@@ -279,6 +289,67 @@ def main() -> int:
       "order": "oldest_to_newest",
     })
     cursor += total
+  period = float(actor_group[actor_terms.index("phase")].params["period"])
+  return runner, {
+    "joint_names": joint_names, "act_joint_names": act_joint_names,
+    "default_joint_pos": default_joint_pos, "act_scale": act_scale,
+    "act_offset": act_offset, "layout": layout, "clip_actions": agent_cfg.clip_actions,
+    "control_dt": float(base.step_dt), "gait_period": period,
+  }
+
+
+def _read_env_cpu():
+  """The same constants from the plain-MuJoCo trainer (rl/cpu)."""
+  sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  os.pardir, "rl", "cpu"))
+  import task as T
+  from quad_env import QuadEnv
+  from rsl_rl.runners import OnPolicyRunner
+
+  env = QuadEnv(1, play=True, domain_rand=False)
+  agent_cfg = T.ppo_runner_cfg()
+  runner = OnPolicyRunner(env, agent_cfg, None, DEV)
+  runner.load(CKPT)
+  n = len(T.JOINT_NAMES)
+  per_step = {"command": 3, "phase": 2, "joint_pos": n, "joint_vel": n, "actions": n}
+  layout, cursor = [], 0
+  for name in T.ACTOR_TERMS:
+    total = per_step[name] * T.ACTOR_HISTORY
+    layout.append({"term": name, "offset": cursor, "size": total,
+                   "history": T.ACTOR_HISTORY, "size_per_step": per_step[name],
+                   "order": "oldest_to_newest"})
+    cursor += total
+  assert cursor == env.actor_dim, (cursor, env.actor_dim)
+  default = np.asarray(T.DEFAULT_JOINT_POS, dtype=np.float64)
+  return runner, {
+    "joint_names": list(T.JOINT_NAMES), "act_joint_names": list(T.JOINT_NAMES),
+    "default_joint_pos": default, "act_scale": np.full(n, T.ACTION_SCALE),
+    "act_offset": default, "layout": layout, "clip_actions": agent_cfg["clip_actions"],
+    "control_dt": T.STEP_DT, "gait_period": T.GAIT_PERIOD,
+  }
+
+
+def main() -> int:
+  global CKPT, OUTDIR, TASK, DEV
+  ap = argparse.ArgumentParser(description=__doc__,
+                               formatter_class=argparse.RawDescriptionHelpFormatter)
+  ap.add_argument("ckpt")
+  ap.add_argument("outdir", nargs="?", default="deploy/arduino_quad")
+  ap.add_argument("task", nargs="?", default="ArduinoQuad-Walk")
+  ap.add_argument("--backend", choices=("mjlab", "cpu"), default="mjlab",
+                  help="which trainer's env to read the layout from")
+  args = ap.parse_args()
+  CKPT, OUTDIR, TASK = args.ckpt, args.outdir, args.task
+  DEV = "cuda:0" if args.backend == "mjlab" else "cpu"
+  runner, live = (_read_env_mjlab if args.backend == "mjlab" else _read_env_cpu)()
+  if args.backend == "cpu":
+    TASK = TASK + " (plain MuJoCo)"
+  joint_names = live["joint_names"]
+  act_joint_names = live["act_joint_names"]
+  default_joint_pos = live["default_joint_pos"]
+  act_scale, act_offset = live["act_scale"], live["act_offset"]
+  layout = live["layout"]
+  cursor = sum(e["size"] for e in layout)
 
   sd = torch.load(CKPT, map_location="cpu", weights_only=False)["actor_state_dict"]
   mean = sd["obs_normalizer._mean"].flatten().numpy().astype(np.float32)
@@ -351,11 +422,9 @@ def main() -> int:
     "action_offset_default_joint_pos": act_offset.tolist(),
     "all_joint_order": joint_names,
     "default_joint_pos": default_joint_pos.tolist(),
-    "clip_actions": agent_cfg.clip_actions,
-    "control_dt": float(base.step_dt),
-    "gait_period_s": float(
-      base.observation_manager._group_obs_term_cfgs["actor"][
-        actor_terms.index("phase")].params["period"]),
+    "clip_actions": live["clip_actions"],
+    "control_dt": live["control_dt"],
+    "gait_period_s": live["gait_period"],
     "obs_normalizer_eps": eps,
     "verify_max_abs_err": err,
   }
