@@ -51,6 +51,7 @@ import src.tasks.velocity.mdp as vmdp
 from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
 
 from . import rewards as local_mdp
+from . import slow_robot
 from .robot_cfg import (
   ARDUINO_QUAD_ACTION_SCALE,
   BASE_BODY,
@@ -147,6 +148,12 @@ _POSE_STD = float(os.environ.get("ARDUINO_QUAD_POSE_STD", "1.0"))
 _STD_WALKING = {r"(FL|FR|RL|RR)_hip_joint": 0.25 * _POSE_STD,
                 r"(FL|FR|RL|RR)_knee_joint": 0.40 * _POSE_STD}
 _STD_RUNNING = _STD_WALKING
+
+# "Is the robot being asked to move?" threshold [m/s, rad/s]. The upstream recipe
+# uses 0.1 for the phase clock, the gait rewards and the standing/walking pose
+# switch -- above this robot's whole forward range (see slow_robot.py).
+# $ARDUINO_QUAD_CMD_THRESHOLD; the default keeps the upstream value.
+CMD_THRESHOLD = float(os.environ.get("ARDUINO_QUAD_CMD_THRESHOLD", "0.1"))
 
 
 def arduino_quad_flat_env_cfg(play: bool = False,
@@ -245,8 +252,11 @@ def arduino_quad_flat_env_cfg(play: bool = False,
   cfg.observations["actor"].terms["joint_pos"].noise.n_min = -0.02
   cfg.observations["actor"].terms["joint_pos"].noise.n_max = 0.02
 
-  cfg.observations["actor"].terms["phase"].params["period"] = GAIT_PERIOD
-  cfg.observations["critic"].terms["phase"].params["period"] = GAIT_PERIOD
+  for group in ("actor", "critic"):
+    term = cfg.observations[group].terms["phase"]
+    term.func = slow_robot.phase
+    term.params["period"] = GAIT_PERIOD
+    term.params["command_threshold"] = CMD_THRESHOLD
   cfg.observations["critic"].terms["foot_height"].params[
     "asset_cfg"].site_names = TOE_SITES
 
@@ -414,6 +424,9 @@ def arduino_quad_flat_env_cfg(play: bool = False,
   cfg.rewards["foot_clearance"].params["target_height"] = SWING_HEIGHT
   cfg.rewards["foot_clearance"].params["asset_cfg"].site_names = TOE_SITES
   cfg.rewards["foot_slip"].params["asset_cfg"].site_names = TOE_SITES
+  for term in ("foot_gait", "foot_clearance", "foot_slip", "soft_landing", "stand_still"):
+    cfg.rewards[term].params["command_threshold"] = CMD_THRESHOLD
+  cfg.rewards["pose"].params["walking_threshold"] = CMD_THRESHOLD
 
   # --- terminations -------------------------------------------------------
   # 35 deg, not the 60 the upstream recipe uses. Six of eight training seeds in
@@ -451,7 +464,9 @@ def arduino_quad_walk_env_cfg(play: bool = False,
   cfg = arduino_quad_flat_env_cfg(play=play, full_collision=full_collision)
 
   cfg.rewards["alive"] = RewardTermCfg(func=envs_mdp.is_alive, weight=0.5)
-  cfg.rewards["foot_slip"].weight = -1.0        # was -0.25: point feet slide easily
+  # was -0.25: point feet slide easily. It prices |v|^2, so a 5 cm/s stance slide
+  # costs 0.0025 per foot -- $ARDUINO_QUAD_SLIP_W to make it bite.
+  cfg.rewards["foot_slip"].weight = float(os.environ.get("ARDUINO_QUAD_SLIP_W", "-1.0"))
   # 0.75, not the 3.0 a previous attempt used. foot_gait scores "is this foot in
   # contact when the clock says it should be", which a robot standing still and
   # shivering can satisfy; at 3.0 it out-earned velocity tracking and that is
@@ -473,7 +488,7 @@ def arduino_quad_walk_env_cfg(play: bool = False,
     # a GAIT_PERIOD trot with duty 0.5 spends GAIT_PERIOD/2 in each mode.
     weight=2.5,
     params={"sensor_name": "feet_ground_contact", "threshold": GAIT_PERIOD / 2.0,
-            "command_name": "twist", "command_threshold": 0.05},
+            "command_name": "twist", "command_threshold": 0.5 * CMD_THRESHOLD},
   )
   # Peak swing height, scored when the foot lands. foot_clearance alone bought a
   # 2 mm scuffing trot: it costs |z - target| * foot_speed, which a foot that
@@ -483,7 +498,7 @@ def arduino_quad_walk_env_cfg(play: bool = False,
     func=vmdp.feet_swing_height,
     weight=float(os.environ.get("ARDUINO_QUAD_SWING_W", "-3.0")),
     params={"sensor_name": "feet_ground_contact", "target_height": SWING_HEIGHT,
-            "command_name": "twist", "command_threshold": 0.05,
+            "command_name": "twist", "command_threshold": 0.5 * CMD_THRESHOLD,
             "asset_cfg": SceneEntityCfg("robot", site_names=TOE_SITES)},
   )
 
@@ -556,6 +571,14 @@ def arduino_quad_walk_env_cfg(play: bool = False,
     weight=-1.0,
     params={"sensor_name": "feet_ground_contact", "limit": 2.0 * GAIT_PERIOD},
   )
+
+  # All four feet down when told to stand. Off by default ($ARDUINO_QUAD_STAND_FEET_W).
+  _stand_feet_w = float(os.environ.get("ARDUINO_QUAD_STAND_FEET_W", "0.0"))
+  if _stand_feet_w != 0.0:
+    cfg.rewards["stand_feet_down"] = RewardTermCfg(
+      func=slow_robot.feet_down_when_standing, weight=_stand_feet_w,
+      params={"sensor_name": "feet_ground_contact", "command_name": "twist",
+              "command_threshold": CMD_THRESHOLD})
 
   # Standing still must not be comfortable: with the rocking exploit closed,
   # the fallback failure mode is to freeze and collect posture/alive income.

@@ -114,12 +114,17 @@ static inline void quad__flat(const float *ring, int n, int head, int stride,
   }
 }
 
-// The gait clock. Must match src/tasks/velocity/mdp/observations.py::phase:
-// a global sin/cos ramp of period QUAD_GAIT_PERIOD, forced to zero whenever the
-// command is small (that is how the policy is told "stand still").
+// The gait clock. Must match rl/slow_robot.py::phase: a global sin/cos ramp of
+// period QUAD_GAIT_PERIOD, forced to zero whenever |command| is below
+// QUAD_PHASE_CMD_MIN (that is how the policy is told "stand still"). The
+// exporter writes the threshold the policy was trained with; headers from
+// before it did were all trained with 0.1.
+#ifndef QUAD_PHASE_CMD_MIN
+#define QUAD_PHASE_CMD_MIN 0.1f
+#endif
 static inline void quad_phase(float t, const float cmd[3], float out[2]) {
   float norm = sqrtf(cmd[0] * cmd[0] + cmd[1] * cmd[1] + cmd[2] * cmd[2]);
-  if (norm < 0.1f) {
+  if (norm < QUAD_PHASE_CMD_MIN) {
     out[0] = 0.0f;
     out[1] = 0.0f;
     return;

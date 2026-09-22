@@ -84,6 +84,9 @@ def check_config() -> None:
     check("joint_vel noise", (-T.JOINT_VEL_NOISE, T.JOINT_VEL_NOISE),
           (actor.terms["joint_vel"].noise.n_min, actor.terms["joint_vel"].noise.n_max))
     check("gait period", T.GAIT_PERIOD, actor.terms["phase"].params["period"])
+    for group in ("actor", "critic"):
+        check(group + " phase threshold", T.PHASE_ZERO_BELOW,
+              walk.observations[group].terms["phase"].params.get("command_threshold", 0.1))
     if actor.terms["joint_pos"].params.get("biased", False):
         FAILS.append("mjlab joint_pos is biased=True; the CPU env observes the unbiased angle")
 
@@ -138,6 +141,8 @@ def check_config() -> None:
     check("speed_excess", T.SPEED_EXCESS_LIMIT, r["speed_excess"].params["limit"])
     check("base_height", T.HOME_BASE_HEIGHT, r["base_height"].params["target_height"])
     check("air_time_excess", T.FOOT_AIR_TIME_EXCESS_LIMIT, r["foot_air_time_excess"].params["limit"])
+    if "stand_feet_down" in r:
+        check("stand_feet_down thr", T.STAND_FEET_CMD_THRESHOLD, r["stand_feet_down"].params["command_threshold"])
 
     tm = walk.terminations
     if set(tm) != {"time_out", "fell_over", "low_base"}:

@@ -602,6 +602,8 @@ class QuadEnv(VecEnv):
             "foot_air_time_excess": np.sum(np.clip(self.cur_air - T.FOOT_AIR_TIME_EXCESS_LIMIT, 0.0, None),
                                            axis=1),
         }
+        if "stand_feet_down" in T.REWARD_WEIGHTS:
+            terms["stand_feet_down"] = np.sum(~in_contact, axis=1) * (total_cmd <= T.STAND_FEET_CMD_THRESHOLD)
         # Per-term value x weight, before the dt scaling (mjlab's _step_reward).
         self.step_reward = {name: value * T.REWARD_WEIGHTS[name] for name, value in terms.items()}
         reward = np.zeros(N)

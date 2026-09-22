@@ -289,8 +289,10 @@ def _read_env_mjlab():
       "order": "oldest_to_newest",
     })
     cursor += total
-  period = float(actor_group[actor_terms.index("phase")].params["period"])
+  phase_params = actor_group[actor_terms.index("phase")].params
+  period = float(phase_params["period"])
   return runner, {
+    "phase_threshold": float(phase_params.get("command_threshold", 0.1)),
     "joint_names": joint_names, "act_joint_names": act_joint_names,
     "default_joint_pos": default_joint_pos, "act_scale": act_scale,
     "act_offset": act_offset, "layout": layout, "clip_actions": agent_cfg.clip_actions,
@@ -322,6 +324,7 @@ def _read_env_cpu():
   assert cursor == env.actor_dim, (cursor, env.actor_dim)
   default = np.asarray(T.DEFAULT_JOINT_POS, dtype=np.float64)
   return runner, {
+    "phase_threshold": T.PHASE_ZERO_BELOW,
     "joint_names": list(T.JOINT_NAMES), "act_joint_names": list(T.JOINT_NAMES),
     "default_joint_pos": default, "act_scale": np.full(n, T.ACTION_SCALE),
     "act_offset": default, "layout": layout, "clip_actions": agent_cfg["clip_actions"],
@@ -425,6 +428,8 @@ def main() -> int:
     "clip_actions": live["clip_actions"],
     "control_dt": live["control_dt"],
     "gait_period_s": live["gait_period"],
+    # |command| below this -> the phase observation is zero ("stand still").
+    "phase_command_threshold": live["phase_threshold"],
     "obs_normalizer_eps": eps,
     "verify_max_abs_err": err,
   }
@@ -487,6 +492,7 @@ def main() -> int:
     "#define QUAD_HISTORY {}\n".format(layout[0]["history"]),
     "#define QUAD_CONTROL_DT {:.6f}f\n".format(meta["control_dt"]),
     "#define QUAD_GAIT_PERIOD {:.6f}f\n".format(meta["gait_period_s"]),
+    "#define QUAD_PHASE_CMD_MIN {:.6f}f\n".format(meta["phase_command_threshold"]),
     _term_defines(layout),
     "#define QUAD_ACTION_CLIP {:.6f}f\n\n".format(
       float(meta["clip_actions"]) if meta["clip_actions"] else 0.0),

@@ -105,11 +105,14 @@ CMD_CURRICULUM = (
     (600 * 24, CMD_LIN_X, CMD_ANG_Z),
 )
 
+# "Is the robot being asked to move?" (env_cfgs.CMD_THRESHOLD, see slow_robot.py).
+CMD_THRESHOLD = _f("ARDUINO_QUAD_CMD_THRESHOLD", "0.1")
+
 # --- observations -----------------------------------------------------------
 ACTOR_HISTORY = 3
 JOINT_POS_NOISE = 0.02
 JOINT_VEL_NOISE = 0.3
-PHASE_ZERO_BELOW = 0.1   # |command| below this -> phase observation is zero
+PHASE_ZERO_BELOW = CMD_THRESHOLD   # |command| below this -> phase observation is zero
 ACTOR_TERMS = ("command", "phase", "joint_pos", "joint_vel", "actions")
 CRITIC_TERMS = (
     "base_ang_vel", "projected_gravity", "command", "phase", "joint_pos",
@@ -122,7 +125,7 @@ _POSE_STD = _f("ARDUINO_QUAD_POSE_STD", "1.0")
 STD_STANDING = {"hip": 0.05, "knee": 0.08}
 STD_WALKING = {"hip": 0.25 * _POSE_STD, "knee": 0.40 * _POSE_STD}
 STD_RUNNING = STD_WALKING
-POSE_WALKING_THRESHOLD = 0.1
+POSE_WALKING_THRESHOLD = CMD_THRESHOLD
 POSE_RUNNING_THRESHOLD = 1.5
 TRACK_LIN_STD = 0.25 * CMD_LIN_X[1]
 TRACK_ANG_STD = _f("ARDUINO_QUAD_ANG_STD_FRAC", "0.7") * CMD_ANG_Z[1]
@@ -140,7 +143,7 @@ REWARD_WEIGHTS = {
     "action_rate_l2": -0.3,
     "foot_gait": 0.75,
     "foot_clearance": _f("ARDUINO_QUAD_CLEARANCE_W", "-6.0"),
-    "foot_slip": -1.0,
+    "foot_slip": _f("ARDUINO_QUAD_SLIP_W", "-1.0"),
     "soft_landing": -1e-3,
     "stand_still": -1.0,
     "alive": 0.1,
@@ -155,15 +158,19 @@ REWARD_WEIGHTS = {
     "base_vel_oscillation": -2.0,
     "foot_air_time_excess": -1.0,
 }
+# All four feet down when told to stand (off by default, as in env_cfgs.py).
+if _f("ARDUINO_QUAD_STAND_FEET_W", "0.0") != 0.0:
+    REWARD_WEIGHTS["stand_feet_down"] = _f("ARDUINO_QUAD_STAND_FEET_W", "0.0")
 FOOT_GAIT_THRESHOLD = 0.56
-FOOT_GAIT_CMD_THRESHOLD = 0.1
-FOOT_CLEARANCE_CMD_THRESHOLD = 0.1
-FOOT_SLIP_CMD_THRESHOLD = 0.1
-SOFT_LANDING_CMD_THRESHOLD = 0.1
-STAND_STILL_CMD_THRESHOLD = 0.1
+FOOT_GAIT_CMD_THRESHOLD = CMD_THRESHOLD
+FOOT_CLEARANCE_CMD_THRESHOLD = CMD_THRESHOLD
+FOOT_SLIP_CMD_THRESHOLD = CMD_THRESHOLD
+SOFT_LANDING_CMD_THRESHOLD = CMD_THRESHOLD
+STAND_STILL_CMD_THRESHOLD = CMD_THRESHOLD
+STAND_FEET_CMD_THRESHOLD = CMD_THRESHOLD
 FEET_AIR_TIME_THRESHOLD = GAIT_PERIOD / 2.0
-FEET_AIR_TIME_CMD_THRESHOLD = 0.05
-FEET_SWING_CMD_THRESHOLD = 0.05
+FEET_AIR_TIME_CMD_THRESHOLD = 0.5 * CMD_THRESHOLD
+FEET_SWING_CMD_THRESHOLD = 0.5 * CMD_THRESHOLD
 TORQUE_EXCESS_LIMIT = RATED_TORQUE
 SPEED_EXCESS_LIMIT = 0.7 * NO_LOAD_SPEED
 VEL_FILTER_TIME = GAIT_PERIOD

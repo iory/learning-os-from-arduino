@@ -43,6 +43,8 @@ class QuadPolicy:
     self.obs_dim = int(self.meta["obs_dim"])
     self.dt = float(self.meta["control_dt"])
     self.gait_period = float(self.meta["gait_period_s"])
+    # Exports from before the threshold was recorded were all trained with 0.1.
+    self.phase_threshold = float(self.meta.get("phase_command_threshold", 0.1))
     self.joint_names = list(self.meta["action_joint_order"])
     layout = {e["term"]: e for e in self.meta["obs_layout"]}
     self.hist = int(layout["joint_pos"]["history"])
@@ -94,7 +96,7 @@ class QuadPolicy:
 
   # -- the gait clock ------------------------------------------------------
   def phase(self, t: float, cmd) -> np.ndarray:
-    if float(np.linalg.norm(cmd)) < 0.1:
+    if float(np.linalg.norm(cmd)) < self.phase_threshold:
       return np.zeros(2, np.float32)
     ph = (t % self.gait_period) / self.gait_period
     return np.array([np.sin(ph * 2 * np.pi), np.cos(ph * 2 * np.pi)], np.float32)
