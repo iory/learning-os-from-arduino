@@ -1,12 +1,12 @@
 {
-  "export_env_task": "ArduinoQuad-Walk",
+  "export_env_task": "ArduinoQuad-Robust",
   "training": {
-    "run_dir": "2026-08-22_11-50-31_turnA_rb_s203",
+    "run_dir": "2026-09-23_01-24-04_gait_best_robust",
     "experiment_name": "arduino_quad_velocity",
-    "run_name": "turnA_rb_s203",
-    "load_run": "2026-08-22_01-39-29_turn_A_s203",
-    "load_checkpoint": "model_1999.pt",
-    "seed": "203",
+    "run_name": "gait_best_robust",
+    "load_run": "2026-09-23_00-17-58_gait_thr_stand_slip",
+    "load_checkpoint": "model_2999.pt",
+    "seed": "42",
     "reset_randomization": {
       "base_roll_pitch": 0.15,
       "base_z": 0.02,
@@ -16,7 +16,7 @@
     },
     "robustified": true
   },
-  "checkpoint": "logs/rsl_rl/arduino_quad_velocity/2026-08-22_11-50-31_turnA_rb_s203/model_3498.pt",
+  "checkpoint": "logs/rsl_rl/arduino_quad_velocity/2026-09-23_01-24-04_gait_best_robust/model_3998.pt",
   "obs_dim": 87,
   "act_dim": 8,
   "hidden_dims": [
@@ -119,6 +119,7 @@
   "clip_actions": null,
   "control_dt": 0.02,
   "gait_period_s": 0.32,
+  "phase_command_threshold": 0.02,
   "obs_normalizer_eps": 0.01,
-  "verify_max_abs_err": 5.7220458984375e-06
+  "verify_max_abs_err": 2.384185791015625e-06
 }
