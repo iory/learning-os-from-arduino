@@ -259,6 +259,25 @@ CHAPTERS: list[Chapter] = [
         capture=10.0,
     ),
     Chapter(
+        "08_interpreter_v2",
+        title="第8章 簡易インタプリタ v2（書籍未掲載。07_led_matrix_v2 の表示と top）",
+        watch=[
+            "L LED が 500ms ごとに点滅",
+            "LED タスクが L を 500ms ごとに反転し続けるので、run LED 13 1 だけでは次の反転で消える。",
+            "kill 1 で LED タスクを止めてから run LED 13 1 を送ると点灯したままになる",
+            "マトリクス行 0-1 は CPU 全体、行 3-7 は LED / Shell / Display / Light / Heavy の CPU 使用率（12 個で 100%）",
+            "kill 5 で Heavy の棒が消え、そのぶん CPU 全体の棒が縮む",
+        ],
+        try_cmds=["top", "kill 5", "kill 4", "exec 4", "exec 5", "top", "kill 1", "run LED 13 1"],
+        send=["run FORWARD 10", "run PRINT hello", "top", "sleep:1.5", "top"],
+        checks=[
+            Check(r"CPU \[[# ]{12}\] \d+%", "top がマトリクスと同じ横棒を出す"),
+            Check(r"\[Motor\] Forward 10", "インタプリタが FORWARD を実行する"),
+            Check(r"\[Print\] hello", "インタプリタが PRINT を実行する"),
+        ],
+        capture=10.0,
+    ),
+    Chapter(
         "09_integration",
         title="本編 第9章 統合とロボット制御",
         watch=[
