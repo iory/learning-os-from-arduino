@@ -1,7 +1,7 @@
 """Walk a policy in the plain-MuJoCo env at fixed commands and report numbers.
 
     uv run evaluate.py --checkpoint logs/rsl_rl/arduino_quad_velocity/<run>/model_1499.pt
-    uv run evaluate.py --npz ../../walk/arduino_quad_policy.npz      # an exported policy
+    uv run evaluate.py --npz ../../arduino_quad_policy.npz           # an exported policy
     uv run evaluate.py --checkpoint <ckpt> --video walk.mp4          # also film env 0
 
 Each command runs ``--envs`` robots for ``--seconds`` in mjlab's play mode (no

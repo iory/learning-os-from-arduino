@@ -98,3 +98,5 @@ uv run python host/quad_host.py teleop        # キーボードで walk
 | `include/quad_calib.h` | ID / sign / zero。**自分の機体で測り直すこと** |
 | `host/export_quad_policy.py` | 学習結果から上の 2 つを書き出す |
 | `arduino_quad_policy.json` / `.npz` | ホスト側が読む同じポリシー。C ヘッダと同じ重み |
+| `rl/` | 方策の学習コード（mjlab に被せる overlay と、GPU なしで回す `rl/cpu/`） |
+| `reference/robot_and_sim2real.md` | 機体仕様と sim2real の設計メモ（実測値の出どころ） |

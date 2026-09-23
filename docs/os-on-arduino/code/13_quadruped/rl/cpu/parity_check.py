@@ -5,7 +5,7 @@ installs), from this directory. It does not need a GPU: mjlab runs on warp's
 CPU backend here.
 
     source ../scripts/env.sh
-    python parity_check.py [--npz ../../walk/arduino_quad_policy.npz]
+    python parity_check.py [--npz ../../arduino_quad_policy.npz]
 
 1. Configuration: every number in task.py against the live mjlab config of
    ArduinoQuad-Walk / -Robust (reward weights and parameters, observation

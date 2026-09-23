@@ -9,10 +9,10 @@ Colab や表示の無いサーバではそれが使えないので、オフス�
   # 学習したチェックポイント(自分で学習したもの)
   python rl/scripts/record_video.py --ckpt logs/rsl_rl/arduino_quad_velocity/<run>/model_1500.pt
 
-  # 配布済みの学習済み方策(walk/ の npz + json。実機に載っているものと同じ)
-  python rl/scripts/record_video.py --bundle ../walk
+  # 配布済みの学習済み方策(13_quadruped/ の npz + json。実機に載っているものと同じ)
+  python rl/scripts/record_video.py --bundle ..
 
-`--bundle` は PyTorch ではなく walk/host/quad_policy.py の numpy 実装で回す。
+`--bundle` は PyTorch ではなく host/quad_policy.py の numpy 実装で回す。
 実機(PC 直結版・Arduino 版)と同じコードなので、ここで歩いていれば
 「エクスポートまで含めて壊れていない」ことの確認になる。
 
@@ -20,7 +20,7 @@ Colab や表示の無いサーバではそれが使えないので、オフス�
 
     source rl/scripts/env.sh
     cd "$ARDUINO_QUAD_UPSTREAM"
-    python "$ARDUINO_QUAD_ROOT/rl/scripts/record_video.py" --bundle "$ARDUINO_QUAD_ROOT/walk"
+    python "$ARDUINO_QUAD_ROOT/rl/scripts/record_video.py" --bundle "$ARDUINO_QUAD_ROOT"
 """
 import argparse
 import json
@@ -218,12 +218,13 @@ def main() -> int:
 
 def _find_host_dir(bundle: Path) -> Path:
   """quad_policy.py(実機と同じ numpy 実装)の場所を探す。"""
-  for cand in (bundle / "host", bundle.parent / "host", bundle.parent / "walk" / "host"):
+  for cand in (bundle / "host", bundle.parent / "host"):
     if (cand / "quad_policy.py").exists():
       return cand
   raise SystemExit(
     f"quad_policy.py が見つかりません({bundle}/host などを探しました)。"
-    "--bundle には walk/ のような、host/quad_policy.py を持つ場所を渡してください")
+    "--bundle には 13_quadruped/ のような、host/quad_policy.py を持つ場所を"
+    "渡してください")
 
 
 def _home_height_for(hip_home: float) -> str:

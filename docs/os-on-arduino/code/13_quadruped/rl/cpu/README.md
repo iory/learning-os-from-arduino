@@ -41,7 +41,7 @@ mjlab 版（`../scripts/train.sh`）はそのまま残っています。両者�
 source ../scripts/env.sh
 cd "$ARDUINO_QUAD_UPSTREAM"
 PYTHONPATH="$ARDUINO_QUAD_ROOT/rl/cpu" python "$ARDUINO_QUAD_ROOT/rl/cpu/parity_check.py" \
-    --npz "$ARDUINO_QUAD_ROOT/walk/arduino_quad_policy.npz"
+    --npz "$ARDUINO_QUAD_ROOT/arduino_quad_policy.npz"
 ```
 
 1. **設定**: `task.py` の数値を、mjlab 側の `ArduinoQuad-Walk` / `-Robust` の
