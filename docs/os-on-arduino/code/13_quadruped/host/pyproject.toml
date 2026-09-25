@@ -1,14 +1,21 @@
 [project]
-name = "quadruped-rl"
+name = "quadruped-host"
 version = "0.1.0"
-description = "PPO training + C export for the ch13 quadruped policy"
+description = "Drive the ch13 quadruped from a laptop: zero the servos, stand, walk, teleop"
 requires-python = ">=3.10"
+# quad_host.py needs only these. feetech-cli talks to the servo bus and brings
+# pyserial with it, which quad_link.py also uses for the Arduino's USB port.
 dependencies = [
-    "torch>=2.2",
     "numpy>=1.26",
+    "feetech-cli>=0.1.1",
 ]
 
 [project.optional-dependencies]
+# export_quad_policy.py, which turns a training checkpoint into the C header.
+# Kept out of the default install so driving the robot does not pull torch.
+export = [
+    "torch>=2.2",
+]
 sim = [
     "genesis-world>=0.2",
 ]

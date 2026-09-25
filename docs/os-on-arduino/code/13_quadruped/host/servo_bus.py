@@ -182,8 +182,24 @@ class DirectBus(ServoBus):
           pass
 
   def torque(self, ids, on):
+    # Every servo gets the command even if one of them does not answer.
+    # set_torque writes and then reads the register back; on the floor the
+    # read-back of one servo was lost at the end of a walk, the exception
+    # left the loop, and the servos after it were never told to let go.
+    # One retry, then the ids that never confirmed are reported.
+    from feetech_cli.protocol import FeetechError
+    failed = []
     for sid in ids:
-      self.c.set_torque(sid, bool(on))
+      for attempt in (1, 2):
+        try:
+          self.c.set_torque(sid, bool(on))
+          break
+        except FeetechError:
+          if attempt == 2:
+            failed.append(sid)
+    if failed:
+      raise FeetechError(
+        f"torque {'on' if on else 'off'} was not confirmed by ids {failed}")
 
   def close(self):
     self.c.close()

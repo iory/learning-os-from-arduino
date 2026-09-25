@@ -9,8 +9,9 @@
 #define INST_WRITE   0x03
 #define INST_SYNC    0x83
 #define ADDR_TORQUE  40
+#define ADDR_ACC     41             // 加速度 (1) の直後に目標位置 (2)・時間 (2)・速度 (2)
 #define ADDR_POS     56
-#define SYNC_LEN     7
+#define SYNC_LEN     7              // ADDR_ACC から 7 バイト = 41..47
 
 // データシートに無い SRAM の速度上限。出荷値は 50 と 1 で、無負荷速度の 21%
 // しか出ない (実測 1.00 rad/s に対しポリシーが要求するのは 5.34 rad/s)。SRAM な
@@ -155,7 +156,11 @@ void servo_bus_write(const float *q_rad)
     pkt[k++] = 0xFE;                                   // broadcast
     pkt[k++] = (uint8_t)((SYNC_LEN + 1) * NJ + 4);
     pkt[k++] = INST_SYNC;
-    pkt[k++] = 42;                                     // goal position
+    // 加速度 (41) から書き始める。以前は 42 (目標位置) から 7 バイト書き、最後の
+    // 「加速度」の 0 が実際には 48 番地 = トルク上限の下位バイトに入っていた。
+    // 出荷値 1000 (0x03E8) が 768 (0x0300) に落ち、荷重のかかる脚が沈んで転ぶ。
+    // 加速度は一度も書かれず、サーボに残っていた値のまま動いていた。
+    pkt[k++] = ADDR_ACC;
     pkt[k++] = SYNC_LEN;
     for (int i = 0; i < NJ; ++i) {
         float counts = q_rad[i] / RAD_PER_COUNT * QUAD_SERVO_SIGN[i]
@@ -164,11 +169,11 @@ void servo_bus_write(const float *q_rad)
         if (counts > 4095.0f) counts = 4095.0f;
         int c = (int)(counts + 0.5f);
         pkt[k++] = QUAD_SERVO_ID[i];
-        pkt[k++] = (uint8_t)(c & 0xFF);
+        pkt[k++] = 0;                                  // 加速度 0 = 上限なし
+        pkt[k++] = (uint8_t)(c & 0xFF);                // 目標位置
         pkt[k++] = (uint8_t)((c >> 8) & 0xFF);
-        pkt[k++] = 0; pkt[k++] = 0;                    // goal time
-        pkt[k++] = 0; pkt[k++] = 0;                    // goal speed
-        pkt[k++] = 0;                                  // acceleration
+        pkt[k++] = 0; pkt[k++] = 0;                    // 時間
+        pkt[k++] = 0; pkt[k++] = 0;                    // 速度 0 = 上限なし
     }
     pkt[k] = checksum(pkt + 2, k - 2); k++;
     BUS.write(pkt, k);

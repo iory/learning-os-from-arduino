@@ -6,11 +6,11 @@ needs no MCU flashing, prints every intermediate value, and turns a fix-and-retr
 cycle into a keystroke. arduino_quad.ino is the eventual embedded target, not the
 thing to debug against first.
 
-    macOS:   pip install feetech-servo-sdk pyserial numpy
-             ls /dev/tty.usb*       # the adapter shows up as tty.usbserial-* or tty.usbmodem*
-    Windows: uv run pio device list # the adapter shows up as COM3, COM4, ...
+    The servo bus is driven through feetech-cli (PyPI), which also finds the
+    adapter by itself, so --port can usually be left out.
 
-    python quad_host.py --port /dev/tty.usbserial-XXXX scan
+    python quad_host.py scan
+    python quad_host.py zero                      # legs straight -> 2048 in EEPROM
     python quad_host.py --port ... calibrate      # writes calib.json
     python quad_host.py --port ... stand          # hold the home stance
     python quad_host.py --port ... run --vx 0.05  # walk
@@ -48,7 +48,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from quad_policy import QuadPolicy  # noqa: E402
-from quad_link import MODE_HOLD_HOME, MODE_HOLD_ZERO, MODE_WALK, RobotLink  # noqa: E402
+from quad_link import MODE_HOLD_HOME, MODE_HOLD_ZERO, MODE_WALK, RobotLink, SerialLink  # noqa: E402
 from quad_recorder import Recording, list_cameras  # noqa: E402
 from servo_bus import apply_runtime_limits, open_bus  # noqa: E402
 
@@ -80,9 +80,9 @@ JOINT_SPAN_RAD = 1.2           # home +- this must stay inside 0..4095 counts
 # これが理由で、今回はどちらも対称な範囲で学習し直されている。
 VX_STEP, VX_MIN, VX_MAX = 0.02, -0.25, 0.25
 WZ_STEP, WZ_MAX = 0.05, 1.0
-# quad_policy.phase() は ||cmd|| がこれ未満だと歩容クロックを 0 に固定する。
-# つまりこれを下回る指令では歩かず、その場で立つ。
-GAIT_DEADBAND = 0.1
+# quad_policy.phase() が歩容クロックを 0 に固定する ||cmd|| の閾値は、定数では
+# なく方策の phase_command_threshold (arduino_quad_policy.json) から読む。以前
+# ここに 0.1 と書いてあったが、配布している方策は 0.02 で、表示がずれていた。
 # space を押してから home を保持しきるまでの最短ステップ数 (0.02 s 刻み)。
 HOLD_RAMP_STEPS = 20
 # 保持姿勢へ移るときの関節速度の上限 [rad/s]。home と 0 度姿勢は股 1.03 rad /
@@ -150,13 +150,15 @@ class Bus:
   def torque(self, sid: int, on: bool) -> None:
     self.c.set_torque(sid, bool(on))
 
-  def write_middle(self, sid: int) -> None:
-    # Vendor calibration command: 128 into Torque_Enable makes the servo
-    # store its current position as the 2048 middle. feetech_cli's set_zero
-    # computes homing_offset directly and lands in the same place.
-    from feetech_cli.registers import CONTROL_TABLE
-    self.c._write_raw(sid, CONTROL_TABLE["torque_enable"], 128,
-                      expect_status=False)
+  def set_zero(self, sid: int) -> int:
+    """Make the pose the servo is in right now read 2048, and return the new reading.
+
+    Writes homing_offset to the servo's EEPROM, so the zero survives a power
+    cycle and lives in the servo rather than in calib.json. The servo does
+    not move. This replaces the vendor trick of writing 128 to Torque_Enable,
+    which lands in the same place but goes through a private call.
+    """
+    return self.c.set_zero(sid)
 
   def close(self) -> None:
     self.c.close()
@@ -239,6 +241,86 @@ def cmd_scan(args) -> int:
   if bus.baud != 1000000:
     print(f"\n  !! 1 Mbps ではありません({bus.baud})。50 Hz 制御には 500 kbps 以上が要ります")
   bus.close()
+  return 0
+
+
+def cmd_zero(args) -> int:
+  """Make the straight-leg pose read 2048 on all eight servos.
+
+  The CAD is drawn so that q = 0 is every leg hanging straight down, thigh
+  and shank in one line. With the ids assigned as in the assembly guide
+  (calib.json's "id") and the signs fixed by how the legs are mounted, the
+  zero is the only number that differs between builds. Writing it into the
+  servos' EEPROM (homing_offset) leaves calib.json and quad_calib.h at 2048,
+  so neither has to be edited per robot.
+  """
+  if args.bus == "bridge":
+    print("  zero は直結のみ対応です。USB アダプタを挿して --bus direct で")
+    return 1
+  if not os.path.exists(CALIB):
+    raise SystemExit(f"{CALIB} がありません")
+  with open(CALIB) as f:
+    calib = json.load(f)
+  names, want = calib["joint_names"], calib["id"]
+
+  bus, ids = find_bus(args.port, args.baud)
+  missing = [sid for sid in want if sid not in ids]
+  if missing:
+    print(f"  !! ID {missing} が応答しません(見つかったのは {ids})")
+    _scan_hints()
+    bus.close()
+    return 1
+
+  print("\n=== ゼロ点 (q = 0) を EEPROM に書く ===")
+  print("  トルクを切ります。**機体を手で支えるか吊るしてください**(床に立たせて")
+  print("  いると崩れます)。")
+  input("  支えたら Enter > ")
+  for sid in want:
+    bus.torque(sid, False)
+  print("  4 本すべてを、股から足先までまっすぐ真下に伸ばした姿勢にしてください。")
+  print("  CAD の 0 度の姿勢で、大腿と下腿が一直線になります。")
+  input("  姿勢を作ったら Enter > ")
+
+  from feetech_cli.protocol import FeetechError
+  failed = []
+  print(f"\n  {'関節':<14} {'ID':>3} {'前':>6} {'後':>6}")
+  for name, sid in zip(names, want):
+    before = bus.read_pos(sid)
+    after = None
+    # One retry for a status packet that never arrived. Measured: a run
+    # lost the reply on the fifth servo, and 120 identical writes afterwards
+    # all answered, so it is a dropped packet rather than a servo that
+    # refuses. set_zero works from the pose each time, so a second attempt
+    # lands in the same place.
+    for attempt in (1, 2):
+      try:
+        after = bus.set_zero(sid)
+        break
+      except FeetechError as exc:
+        print(f"  {name:<14} {sid:>3}  !! 応答なし ({exc})"
+              + ("、もう一度" if attempt == 1 else ""))
+    if after is None:
+      failed.append(sid)
+      continue
+    good = abs(after - 2048) <= 5
+    if not good:
+      failed.append(sid)
+    print(f"  {name:<14} {sid:>3} {before:>6} {after:>6} {'ok' if good else '!! 2048 でない'}")
+  bus.close()
+
+  if failed:
+    print(f"\n  !! ID {failed} は 2048 になっていません。姿勢を保ったまま zero をやり直して"
+          "ください(できたサーボは同じ姿勢なら同じ値になります)")
+    return 1
+  if any(z != 2048 for z in calib["zero"]):
+    # The servos now carry the zero, so the software offset has to go back
+    # to the middle or it would be applied twice.
+    calib["zero"] = [2048] * len(want)
+    with open(CALIB, "w") as f:
+      json.dump(calib, f, indent=2)
+      f.write("\n")
+    print(f"\n  {CALIB} の zero を 2048 に戻しました")
+  print("\n  完了。電源を切っても残ります。")
   return 0
 
 
@@ -340,9 +422,7 @@ def cmd_calibrate(args) -> int:
         bus.torque(sid, False)
       time.sleep(0.1)
       for j in range(8):
-        bus.write_middle(mapping[j])
-        time.sleep(0.06)
-        after = bus.read_pos(mapping[j])
+        after = bus.set_zero(mapping[j])
         print(f"  {names[j]:<10} -> {after} {'ok' if abs(after - 2048) < 40 else '!! 2048 でない'}")
       calib["zero"] = [2048] * 8
       with open(CALIB, "w") as f:
@@ -839,7 +919,7 @@ def cmd_teleop(args) -> int:
   print("  x       停止して脱力し終了 (Ctrl-C でも同じ)")
   print()
   print("  vy は常に 0 です。外転関節が無いので横移動はできません。")
-  print(f"  ||cmd|| < {GAIT_DEADBAND:.1f} では歩容クロックの入力が 0 になります。"
+  print(f"  ||cmd|| < {pol.phase_threshold:.2f} では歩容クロックの入力が 0 になります。"
         "歩くのは止まりませんが、")
   print("  クロックに同期せず自走周波数 (4.0-4.5 Hz) になります。")
   print(f"  既定の指令範囲は vx {VX_MIN:+.2f} .. {VX_MAX:+.2f} / "
@@ -948,7 +1028,7 @@ def cmd_teleop(args) -> int:
             where = "0度" if hold_name == "zero" else "home"
             state = (f"停止({where}保持)" if hold_k > hold_steps
                      else f"{where}へ移行中 ")
-          elif float(np.linalg.norm(cmd)) >= GAIT_DEADBAND:
+          elif float(np.linalg.norm(cmd)) >= pol.phase_threshold:
             state = "歩行/同期    "
           else:
             state = "歩行/自走    "
@@ -1110,14 +1190,21 @@ def _wifi_scripted(link, args) -> int:
 
 
 def cmd_wifi(args) -> int:
-  """Drive the robot over WiFi, with the policy running on the MCU.
+  """Drive the robot from the keyboard, with the policy running on the MCU.
 
   The key handling is the same as teleop's -- same steps, same limits, same
   stop -- because only where the split falls has changed. Here the host sends
-  a velocity and the robot closes the loop; over USB the host closed it.
+  a velocity and the robot closes the loop; in teleop the host closed it.
+
+  `wifi` sends over UDP to arduino/quad_wifi. `serial` sends `drive` lines
+  over the Arduino's USB cable to the chapter firmware (src/main.cpp), which
+  needs no network and no second sketch.
   """
-  link = RobotLink(args.host, args.udp_port)
-  print(f"  ロボット: {link.host}:{link.port}")
+  if args.mode == "serial":
+    link = SerialLink(args.port)
+  else:
+    link = RobotLink(args.host, args.udp_port)
+  print(f"  ロボット: {link.description}")
   print()
   print(f"  w / s   前進速度 vx  +-{VX_STEP:.2f} m/s "
         f"({args.vx_min:+.2f} .. {args.vx_max:+.2f})")
@@ -1174,7 +1261,7 @@ def cmd_wifi(args) -> int:
           else:
             where = {0: "歩行", 1: "停止(home)", 2: "停止(0度)"}
             tail = "  [REC]" if session.active else ""
-            if link.link_age > 0.5:
+            if link.link_age > link.stale_after:
               tail += "  !! 応答途絶"
             status_line(
               "  vx={:+.2f} wz={:+.2f}  {}  loop={:5d} us (max {:5d})"
@@ -1201,8 +1288,8 @@ def main() -> int:
   ap = argparse.ArgumentParser(description=__doc__,
                                formatter_class=argparse.RawDescriptionHelpFormatter)
   ap.add_argument("mode",
-                  choices=["scan", "calibrate", "stand", "run", "stepid",
-                           "teleop", "wifi"])
+                  choices=["scan", "zero", "calibrate", "stand", "run", "stepid",
+                           "teleop", "wifi", "serial"])
   ap.add_argument("--port", default=None,
                   help="/dev/tty.usbserial-XXXX (Windows は COM3 のような名前)")
   ap.add_argument("--baud", type=int, default=1000000)
@@ -1252,7 +1339,7 @@ def main() -> int:
   ap.add_argument("--swing-s", type=float, default=4.0,
                   help="stepid: 自由振動の記録時間 [s]")
   ap.add_argument("--yes", action="store_true",
-                  help="run / wifi: 対話プロンプトを飛ばし、--vx --wz --seconds で一定指令を流す")
+                  help="run / wifi / serial: 対話プロンプトを飛ばし、--vx --wz --seconds で一定指令を流す")
   ap.add_argument("--write-middle", action="store_true",
                   help="calibrate 時にゼロ点を EEPROM に書く")
   args = ap.parse_args()
@@ -1260,18 +1347,19 @@ def main() -> int:
     for index, name in list_cameras():
       print(f"  [{index}] {name}")
     return 0
-  if args.video and args.mode not in ("run", "wifi", "teleop"):
-    ap.error("--video は run / wifi / teleop でのみ使えます")
+  if args.video and args.mode not in ("run", "wifi", "serial", "teleop"):
+    ap.error("--video は run / wifi / serial / teleop でのみ使えます")
   if args.mode == "stepid" and not args.log:
     ap.error("stepid には --log <out.csv> が必要です")
   if args.mode == "calibrate" and not args.port:
     ap.error("calibrate は --port を明示してください "
              "(書き出す calib.json に記録されます)")
-  return {"scan": cmd_scan, "calibrate": cmd_calibrate,
+  return {"scan": cmd_scan, "zero": cmd_zero, "calibrate": cmd_calibrate,
           "stand": cmd_stand, "run": cmd_run,
           "stepid": cmd_stepid,
           "teleop": cmd_teleop,
-          "wifi": cmd_wifi}[args.mode](args)
+          "wifi": cmd_wifi,
+          "serial": cmd_wifi}[args.mode](args)
 
 
 if __name__ == "__main__":
