@@ -22,3 +22,13 @@ bool  servo_bus_read(float *q_rad);
 
 // 8 個ぶんの目標角を 1 パケットで送る (sync write)。返事は無い。
 void  servo_bus_write(const float *q_rad);
+
+#ifdef QUAD_SERVO_RCB4
+// RCB-4 mini 版 (servo_bus_rcb4.cpp) だけにある。RCB-4 は書き込みにも ACK を
+// 返すので、返らなかった回数を数えられる。apply_limits は書くものが無いので 0。
+unsigned long servo_bus_write_fail(void);
+
+// 関節ごとの ID・RCB-4 のサーボ番号・パルス・角度を出す (コマンド raw)。
+// quad_calib_rcb4.h のゼロ点と向きはこれで測る。
+void servo_bus_print_raw(void);
+#endif

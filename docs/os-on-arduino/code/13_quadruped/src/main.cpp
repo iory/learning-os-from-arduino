@@ -10,6 +10,7 @@
 //   stop          ポリシーを切り離して home 姿勢を保持
 //   zero          全関節を 0 度 (脚をまっすぐ) へ移して保持。吊るして使う
 //   free          トルクを切る
+//   raw           (RCB-4 版だけ) 関節ごとのサーボ番号とパルスを出す。校正に使う
 //
 // 安全: サーボの電源はバッテリから取ること。最初の trot と rl は必ず機体を
 // 吊るすか支えた状態で。
@@ -140,6 +141,10 @@ static void shell(char c)
             Serial.print(F("cmd vx=")); Serial.print(g_cmd[0], 2);
             Serial.print(F(" wz=")); Serial.println(g_cmd[2], 2);
         }
+#ifdef QUAD_SERVO_RCB4
+    } else if (!strcmp(buf, "raw")) {
+        servo_bus_print_raw();
+#endif
     } else if (!strcmp(buf, "free")) {
         g_drive_armed = false;
         servo_bus_torque(false);
@@ -159,12 +164,18 @@ void setup()
     Serial.print(F("サーボ応答: ")); Serial.print(found);
     Serial.print(F(" / ")); Serial.println(NJ);
 
+#ifdef QUAD_SERVO_RCB4
+    // RCB-4 には速度上限のレジスタが無い。速度は書き込みごとの補間フレーム数で決まる。
+    servo_bus_apply_limits();
+    Serial.println(F("速度設定: RCB-4 には無い (補間 1 フレームで送る)"));
+#else
     // 速度レジスタは SRAM にあるので電源のたびに出荷値へ戻る。何も報告されず、
     // ロボットが遅くなるだけなので、開いたら必ず書く (補遺 13.9.1)。
     int limits = servo_bus_apply_limits();
     Serial.print(F("速度設定: ")); Serial.print(limits);
     Serial.print(F(" / ")); Serial.print(NJ * 2);
     Serial.println(limits == NJ * 2 ? F(" 適用") : F(" !! 一部失敗 (遅く歩きます)"));
+#endif
 
     if (!servo_bus_read(g_q)) Serial.println(F("!! 起動時の関節読み取りに失敗"));
     for (int i = 0; i < NJ; ++i) {
@@ -246,7 +257,11 @@ void loop()
         Serial.print(F(" us  late ")); Serial.print(late_n);
         Serial.print('/'); Serial.print(loop_n);
         Serial.print(F("  skipped ")); Serial.print(g_skipped);
-        Serial.print(F("  read_fail ")); Serial.println(g_read_fail);
+        Serial.print(F("  read_fail ")); Serial.print(g_read_fail);
+#ifdef QUAD_SERVO_RCB4
+        Serial.print(F("  write_fail ")); Serial.print(servo_bus_write_fail());
+#endif
+        Serial.println();
         loop_sum = loop_n = loop_max = late_n = 0;
     }
 

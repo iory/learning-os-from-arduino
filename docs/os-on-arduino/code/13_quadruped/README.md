@@ -74,6 +74,60 @@ loop avg 5770 us  max 5797 us  late 0/51  skipped 0  read_fail 0
 5. 吊るしたまま `rl 0.06 0`。`late` と `skipped` を見る
 6. 床に下ろす
 
+## 近藤の ICS サーボで組む (RCB-4 mini 版)
+
+サーボを近藤の ICS サーボにし、RCB-4 mini を挟んで動かす版。`servo_bus.h` の
+関数だけを差し替えるので、`main.cpp`・ポリシー・シリアルのコマンドは同じものが走る。
+
+```
+pio run -d 13_quadruped -e uno_r4_wifi_rcb4 -t upload
+```
+
+| | |
+|---|---|
+| 配線 | RCB-4 の COM コネクタ (GND 側から GND - Rx - Tx) に UNO の D9 → Rx、D8 ← Tx、GND を共通に。アダプタは要らない。D0/D1 (Serial1) は使わない |
+| 通信 | 反転 UART 1.25 Mbps 8E1。UNO R4 の Serial1 は反転できないので、`src/rcb4_link.cpp` が GPT と DMA で D8/D9 を直接扱う |
+| ID | Feetech 版と同じ振り方 (`QUAD_SERVO_ID`)。RCB-4 のサーボ番号は右の SIO ポートなら ID × 2、左なら ID × 2 + 1 で、どちらに挿したかは起動時に両方を調べて見つける |
+| 割り当て | RCB-4 は HTH4 のプロジェクトで割り当てた番号のサーボとしか話さない。割り当てが無ければ起動時に RAM へ書いて足す (目標位置を脱力にしてから)。ROM のプロジェクトは書き換えない |
+| 校正 | **`include/quad_calib_rcb4.h` を埋めるまでは読むだけで、目標角は送らない。** 吊るして脚をまっすぐにし、`raw` で出たパルスをゼロ点に書く。向きも `raw` で確かめてから `QUAD_RCB4_CALIBRATED` を 1 にする |
+
+毎秒の行の最後に `write_fail` が付く。RCB-4 は書き込みにも ACK を返すので、
+返らなかった回数を数えている。RCB-4 には Feetech の速度上限レジスタに当たる
+ものが無いので、起動時の「速度設定」は書かない。
+
+8 個をつないだ実機 (未校正なので読むだけ) で、1 周期は平均 5.4〜5.7 ms・
+最大 11.5 ms (`late 0`、`read_fail 0`)。RCB-4 の返事は 1 往復に約 0.6 ms
+かかるので、関節ごとに 2 バイトずつ読んでいる。RCB-4 は自分のサーボ周期の
+最中だと答えないことがあり、1 関節 2 回の試行では `read_fail` が毎秒 1〜4 出た
+ので 4 回にしてある。
+
+校正したあと吊るして `rl 0.06 0` を送ると足踏みし、1 周期は平均 8.8 ms・
+最大 10.7 ms (`late 0`、`read_fail 0`、`write_fail 0`)。`quad_host.py serial` の
+キーボード操作でも動いた。床に下ろしての歩行はまだ確かめていない。
+
+電源は 2S LiFe (6.6 V) 1 本で足りる。RCB-4mini の SIO ポートの Vcc は電源電圧
+そのままなので、空いている SIO ポートの Vcc と GND を UNO の VIN と GND へ
+つなぐ (信号線はつながない)。UNO の VIN は 6〜24 V。
+
+## WiFi で動かす
+
+USB ケーブルの代わりに WiFi (UDP) で速度を送る版。`src/main.cpp` の代わりに
+`src/main_wifi.cpp` が走る。ポリシーと 50 Hz のループはどちらもマイコンの上で、
+PC は速度を送るだけ。Feetech 版と RCB-4 版のどちらでも使える。
+
+```
+cp include/arduino_secrets.example.h include/arduino_secrets.h   # 接続先を埋める
+pio run -d 13_quadruped -e uno_r4_wifi_udp -t upload        # Feetech
+pio run -d 13_quadruped -e uno_r4_wifi_rcb4_udp -t upload   # RCB-4
+cd host && uv run python quad_host.py wifi
+```
+
+`arduino_secrets.h` は `.gitignore` に入っている。WiFi を見に行くのは 5 周期に 1 回で、
+そのたびに 18〜105 ms かかる (UNO R4 WiFi の RA4M1 と ESP32-S3 の間が 115200 baud
+固定のため)。歩行中の 1 割ほどの周期は 20 ms を超える。RCB-4 版で吊るして
+vx=0.06 を 6 秒送ったときは 29 / 300 周期が超え、`write_fail` が 1 回出た
+(止めた瞬間、WiFi の処理に 151 ms かかった周期のあたり。原因はまだ見ていない)。
+
 ## ホスト側 (`host/`)
 
 マイコンに焼かずに、ノート PC から USB でサーボを直接叩く経路。立ち上げと校正は
@@ -107,6 +161,11 @@ uv run python quad_host.py serial        # キーボードで walk (Arduino が�
 | `include/quad_control.h` | 観測の組み立てと行動の復号。**チェックポイントから生成** |
 | `include/arduino_quad_policy.h` | 重みと観測レイアウト。**生成物、手で編集しない** |
 | `include/quad_calib.h` | ID / sign / zero。本書の通りに組み、`quad_host.py zero` でゼロ点をサーボに書けば変えなくてよい |
+| `src/main_wifi.cpp` | WiFi 版の 50 Hz ループ。速度を UDP で受け取る (`-e uno_r4_wifi_udp` / `uno_r4_wifi_rcb4_udp`) |
+| `include/arduino_secrets.example.h` | WiFi の接続先の雛形。`arduino_secrets.h` に写して埋める |
+| `src/servo_bus_rcb4.cpp` | `servo_bus.h` の RCB-4 mini 版 (`-e uno_r4_wifi_rcb4`) |
+| `src/rcb4_link.cpp` | RCB-4 の COM ポート (反転 UART 1.25 Mbps) を GPT + DMA で叩く |
+| `include/quad_calib_rcb4.h` | RCB-4 版のサーボ番号 / sign / zero。埋めるまでサーボに何も送らない |
 | `host/export_quad_policy.py` | 学習結果から上の 2 つを書き出す |
 | `arduino_quad_policy.json` / `.npz` | ホスト側が読む同じポリシー。C ヘッダと同じ重み |
 | `rl/` | 方策の学習コード（mjlab に被せる overlay と、GPU なしで回す `rl/cpu/`） |
