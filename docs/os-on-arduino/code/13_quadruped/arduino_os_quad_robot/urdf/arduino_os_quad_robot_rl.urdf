@@ -428,4 +428,23 @@
     <axis xyz="0 -1 0" />
     <limit lower="-2" upper="2" effort="2.942" velocity="4.717" />
   </joint>
+  <link name="sensor_board">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://arduino_os_quad_robot/meshes/sensor_board.glb" />
+      </geometry>
+    </visual>
+  </link>
+  <link name="imu_link" />
+  <joint name="sensor_board_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="sensor_board" />
+    <origin xyz="0.106 0 0.009" rpy="-2.35619449 0 -1.570796327" />
+  </joint>
+  <joint name="imu_joint" type="fixed">
+    <parent link="sensor_board" />
+    <child link="imu_link" />
+    <origin xyz="0 -4.65257908e-05 -0.000545500014" rpy="3.141592654 0 0" />
+  </joint>
 </robot>

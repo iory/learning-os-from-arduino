@@ -22,7 +22,13 @@
 #include <math.h>
 #include <string.h>
 
+// The *_imu PlatformIO envs define QUAD_POLICY_IMU and get the policy that also
+// reads the body IMU. Both headers are generated and define the same names.
+#ifdef QUAD_POLICY_IMU
+#include "arduino_quad_policy_imu.h"
+#else
 #include "arduino_quad_policy.h"
+#endif
 
 #define QUAD_NJ QUAD_ACT_DIM
 

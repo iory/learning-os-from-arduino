@@ -33,6 +33,7 @@ randomized wide, together with a 5-20 ms command delay, foot friction from
 CAD export does not contain.
 """
 
+import dataclasses
 import math
 import os
 
@@ -50,6 +51,7 @@ from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
 import src.tasks.velocity.mdp as vmdp
 from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
 
+from . import imu_model
 from . import rewards as local_mdp
 from . import slow_robot
 from .robot_cfg import (
@@ -240,6 +242,31 @@ def arduino_quad_flat_env_cfg(play: bool = False,
     del cfg.observations["actor"].terms["base_ang_vel"]
   if _IMU in ("none", "gyro"):
     del cfg.observations["actor"].terms["projected_gravity"]
+  # What a real IMU adds on top (see imu_model.py). All three default to 0, the
+  # exact sensor the policies above were trained with.
+  #   $ARDUINO_QUAD_IMU_TILT_DEG   mount tilt, up to this many degrees
+  #   $ARDUINO_QUAD_IMU_GYRO_BIAS  gyro zero offset, up to this many rad/s per axis
+  #   $ARDUINO_QUAD_IMU_DELAY_MAX  IMU terms arrive 0..N control steps (20 ms) late
+  if _IMU != "none":
+    _tilt = float(os.environ.get("ARDUINO_QUAD_IMU_TILT_DEG", "0"))
+    _bias = float(os.environ.get("ARDUINO_QUAD_IMU_GYRO_BIAS", "0"))
+    _delay = int(os.environ.get("ARDUINO_QUAD_IMU_DELAY_MAX", "0"))
+    actor_terms = cfg.observations["actor"].terms
+    imu_terms = [t for t in ("base_ang_vel", "projected_gravity") if t in actor_terms]
+    # The actor and critic dicts hold the SAME term objects; replace the actor's
+    # with copies so the critic keeps the exact sensor.
+    for t in imu_terms:
+      actor_terms[t] = dataclasses.replace(actor_terms[t], delay_max_lag=_delay)
+    if _tilt > 0 or _bias > 0:
+      cfg.events["imu_error"] = EventTermCfg(
+        mode="reset", func=imu_model.randomize_imu,
+        params={"tilt_deg": _tilt, "gyro_bias": _bias},
+      )
+      funcs = {"base_ang_vel": imu_model.imu_ang_vel,
+               "projected_gravity": imu_model.imu_projected_gravity}
+      for t in imu_terms:
+        actor_terms[t].func = funcs[t]
+        actor_terms[t].params = {}
   # A short history lets the policy infer contact and body motion from the
   # joint traces alone -- with no IMU it has nothing else to work with.
   cfg.observations["actor"].history_length = 3
@@ -316,9 +343,16 @@ def arduino_quad_flat_env_cfg(play: bool = False,
   _ENC_BIAS = float(os.environ.get("ARDUINO_QUAD_ENCODER_BIAS", "0.03"))
   cfg.events["encoder_bias"].params["bias_range"] = (-_ENC_BIAS, _ENC_BIAS)
   # Smaller pushes than the upstream humanoid/Go2 numbers: this robot weighs 1 kg.
+  # $ARDUINO_QUAD_PUSH_SCALE multiplies every range. At 1 the pushes only jostle
+  # the gait; recovering from a real shove (a 6 N, 0.1 s push is ~0.65 m/s) is
+  # never practised, so with or without an IMU no policy learns to step out of
+  # one. A push fine-tune at 3 is what makes the IMU's information matter.
+  _PUSH = float(os.environ.get("ARDUINO_QUAD_PUSH_SCALE", "1"))
   cfg.events["push_robot"].params["velocity_range"] = {
-    "x": (-0.25, 0.25), "y": (-0.25, 0.25), "z": (-0.1, 0.1),
-    "roll": (-0.4, 0.4), "pitch": (-0.4, 0.4), "yaw": (-0.5, 0.5),
+    k: (_PUSH * lo, _PUSH * hi) for k, (lo, hi) in {
+      "x": (-0.25, 0.25), "y": (-0.25, 0.25), "z": (-0.1, 0.1),
+      "roll": (-0.4, 0.4), "pitch": (-0.4, 0.4), "yaw": (-0.5, 0.5),
+    }.items()
   }
   # The servo's internal position loop: gains unknown, so scale them wide.
   cfg.events["servo_gains"] = EventTermCfg(

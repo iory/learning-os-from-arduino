@@ -1173,9 +1173,10 @@ def _wifi_scripted(link, args) -> int:
   except KeyboardInterrupt:
     pass
   finally:
-    # Stop first, then let the caller close: a dropped link would take 300 ms
-    # to be noticed by the watchdog, and this is the same stop, immediately.
-    for _ in range(5):
+    # Stop first, then let the caller close. Over WiFi the robot keeps the last
+    # velocity for 5 s before its watchdog stops it, and packets can drop for
+    # a few hundred ms at a time, so repeat the stop for a full second.
+    for _ in range(20):
       link.send(0.0, 0.0, MODE_HOLD_HOME)
       if rec is not None:
         rec.log(cmd_vx=0.0, cmd_wz=0.0, mode=MODE_HOLD_HOME,
@@ -1214,7 +1215,10 @@ def cmd_wifi(args) -> int:
   print("  r       録画の開始 / 停止 (もう一度押すと止まります)")
   print("  x       停止して終了 (Ctrl-C でも同じ)")
   print()
-  print("  指令が 300 ms 途切れるとロボット側が自動で home 保持に入ります。")
+  if args.mode == "serial":
+    print("  指令が 300 ms 途切れるとロボット側が自動で home 保持に入ります。")
+  else:
+    print("  指令が 5 秒途切れるとロボット側が自動で止まります。それまでは最後の速度で歩き続けます。")
   if args.yes:
     return _wifi_scripted(link, args)
   input("  Enter で開始 > ")

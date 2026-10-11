@@ -14,7 +14,11 @@ extern int attachIrq2Link(uint32_t pin, PinStatus mode);
 #define TX_PIN          9           // D9 (P303)       -> RCB-4 Rx
 #define BAUD            1250000UL
 #define BITS_PER_FRAME  11          // スタート + データ 8 + 偶数パリティ + ストップ
-#define TX_MAX_BYTES    96
+// 送る中でいちばん長いのは 8 関節ぶんの位置指令 (9 + 2 * 8 = 25 バイト)。
+// 1 ビットに 4 バイト使うので、1 バイト増やすと RAM を 44 バイト使う。
+// IMU を使う方策 (Wire1 が 2.2 KB 使う) と WiFi を同時に載せても RAM に
+// 収まるよう、余裕を残して 32 にしている。
+#define TX_MAX_BYTES    32
 #define DMA_CH_RX       0           // 番号の小さいチャンネルほど優先度が高い
 #define DMA_CH_TX       1
 

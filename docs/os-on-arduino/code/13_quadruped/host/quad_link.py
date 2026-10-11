@@ -367,7 +367,8 @@ class SerialLink:
         self._hold_mode = MODE_WALK
       elif text.startswith("mode=zero"):
         self._hold_mode = MODE_HOLD_ZERO
-      elif text.startswith("mode=hold"):
+      elif text.startswith("mode=hold") or text.startswith("mode=balance"):
+        # balance: IMU 版のファームが stop を速度 0 の方策で受けたとき
         self._hold_mode = MODE_HOLD_HOME
       match = _LOOP_LINE.search(text)
       if match:

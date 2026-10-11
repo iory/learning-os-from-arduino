@@ -101,6 +101,57 @@ JOINT_FOR_CHILD = {
 }
 
 
+# Sensor board (QMI8658A IMU + VL53L0X + VCNL4040, 18x18 mm) bolted into the
+# 45 deg seat behind the body's front cut-out.  Not part of the SolidWorks
+# export, so it is attached here.
+#
+# Seat, measured on body_1.glb: the face is the plane n.p = 68.59 mm with
+# n = (+0.7071, 0, -0.7071) (facing forward-down), carrying four 1.95 mm
+# pilot holes at y = +-7.00 mm and 12.0 mm apart along the slope -- the
+# board's (+-7, +-6) mm hole pattern.  The pattern is symmetric, so the
+# board can go on two ways round; it is fitted with the 4-pin I2C connector
+# (SM04B-SRSS-TB, opening toward board +Y) pointing DOWN the slope.  That
+# fixes the frame:
+#   board +Z (ToF side, out of the seat)  = body (+0.7071, 0, -0.7071)
+#   board +Y (I2C connector opening)      = body (-0.7071, 0, -0.7071)
+#   board +X                              = body (0, -1, 0)
+# Board frame origin = outline centre on the PCB back face = hole-pattern
+# centre on the seat.
+SENSOR_BOARD_XYZ = (0.106, 0.0, 0.009)                 # m, in base_link
+SENSOR_BOARD_RPY = (-0.75 * np.pi, 0.0, -0.5 * np.pi)
+# QMI8658A raw accel/gyro axes in the board frame, from the board's own
+# export (elec host/export_urdf.py, layout "default").
+IMU_XYZ = (0.0, -4.65257908e-05, -0.000545500014)       # m, in sensor_board
+IMU_RPY = (np.pi, 0.0, 0.0)
+
+
+def attach_sensor_board(root):
+    """Add ``sensor_board`` (visual only) and ``imu_link`` under base_link.
+
+    No <inertial>: the board is about a gram against a 1.04 kg robot, and
+    leaving it massless keeps the dynamics identical to the model the shipped
+    policy was trained on.
+    """
+    def fixed(name, parent, child, xyz, rpy):
+        j = ET.SubElement(root, "joint", {"name": name, "type": "fixed"})
+        ET.SubElement(j, "parent", {"link": parent})
+        ET.SubElement(j, "child", {"link": child})
+        ET.SubElement(j, "origin", {
+            "xyz": "{:.10g} {:.10g} {:.10g}".format(*xyz),
+            "rpy": "{:.10g} {:.10g} {:.10g}".format(*rpy)})
+
+    board = ET.SubElement(root, "link", {"name": "sensor_board"})
+    visual = ET.SubElement(board, "visual")
+    ET.SubElement(visual, "origin", {"xyz": "0 0 0", "rpy": "0 0 0"})
+    geometry = ET.SubElement(visual, "geometry")
+    ET.SubElement(geometry, "mesh", {
+        "filename": "package://arduino_os_quad_robot/meshes/sensor_board.glb"})
+    ET.SubElement(root, "link", {"name": "imu_link"})
+    fixed("sensor_board_mount", "base_link", "sensor_board",
+          SENSOR_BOARD_XYZ, SENSOR_BOARD_RPY)
+    fixed("imu_joint", "sensor_board", "imu_link", IMU_XYZ, IMU_RPY)
+
+
 def rpy_to_mat(r, p, y):
     cr, sr, cp, sp, cy, sy = (
         np.cos(r), np.sin(r), np.cos(p), np.sin(p), np.cos(y), np.sin(y))
@@ -242,6 +293,11 @@ def main():
         j.find("parent").set("link", parent)
         leg, suffix = child.split("_", 1)
         j.set("name", "{}_{}".format(leg, JOINT_FOR_CHILD[suffix]))
+
+    # The seat was measured on the 2026-08-22 body only, so the board is not
+    # attached to the pre-2026-08 export.
+    if os.environ.get("QUAD_YAW_FLIP", "0") != "1":
+        attach_sensor_board(root)
 
     ET.indent(tree, space="  ")
     with open(DST, "w") as f:

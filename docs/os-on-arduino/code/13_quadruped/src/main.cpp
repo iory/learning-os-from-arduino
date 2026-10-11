@@ -7,10 +7,12 @@
 //   drive <vx> <wz>
 //                 rl と同じだが、300 ms 途切れると home 保持に戻る。
 //                 PC のキーボード操作 (host/quad_host.py serial) が送り続ける
-//   stop          ポリシーを切り離して home 姿勢を保持
+//   stop          ポリシーを切り離して home 姿勢を保持。IMU を使う方策では
+//                 ポリシーを速度 0 で回し続け、押されても IMU を見て踏ん張る
 //   zero          全関節を 0 度 (脚をまっすぐ) へ移して保持。吊るして使う
 //   free          トルクを切る
 //   raw           (RCB-4 版だけ) 関節ごとのサーボ番号とパルスを出す。校正に使う
+//   imu           (IMU を使う方策だけ) 胴体座標の角速度と重力の向き、関節の目標角を出す
 //
 // 安全: サーボの電源はバッテリから取ること。最初の trot と rl は必ず機体を
 // 吊るすか支えた状態で。
@@ -23,6 +25,7 @@
 #include "servo_bus.h"
 #include "quad_calib.h"
 #include "quad_control.h"
+#include "quad_imu.h"
 
 #define NJ           QUAD_NUM_JOINTS
 #define CONTROL_US   ((unsigned long)(QUAD_CONTROL_DT * 1e6f))
@@ -38,6 +41,14 @@ static float         g_q[NJ], g_q_prev[NJ], g_qd[NJ], g_target[NJ];
 static float         g_cmd[3] = {0.0f, 0.0f, 0.0f};
 static unsigned long g_step = 0, g_skipped = 0, g_read_fail = 0;
 static unsigned long g_last_read_us = 0;
+#if QUAD_USES_IMU
+// 方策が IMU を観測に使うときだけ読む。IMU が無い (起動時に見つからない・校正に
+// 失敗した) ときと読めなかった周期は、水平に止まっている値を渡して歩かせる。
+// そのときは傾いても方策には伝わらないので、毎秒の行に imu=level と出す。
+static quad_imu_t    g_imu;
+static bool          g_imu_ok = false;
+static unsigned long g_imu_fail = 0;
+#endif
 static float         g_hold_from[NJ];
 static const float  *g_hold_goal = QUAD_DEFAULT_JOINT_POS;
 static int           g_hold_k = 0;
@@ -111,6 +122,21 @@ static void shell(char c)
 
     if (!strcmp(buf, "iktest")) {
         test_ik_roundtrip();
+#if QUAD_USES_IMU
+    } else if (!strcmp(buf, "stop") && g_imu_ok) {
+        // 歩いた後の停止も IMU のフィードバックを切らない。速度 0 の指令は
+        // 位相のしきい値 (QUAD_PHASE_CMD_MIN) を下回るので、ポリシーは足踏みを
+        // やめて立つ。歩行中なら内部状態はそのままで、指令だけを 0 にする。
+        // 見張りは外すので、PC が送るのをやめても立ったまま踏ん張り続ける。
+        g_drive_armed = false;
+        g_cmd[0] = g_cmd[1] = g_cmd[2] = 0.0f;
+        if (g_mode != MODE_RL) {
+            servo_bus_torque(true);
+            quad_init(&g_policy);
+            g_mode = MODE_RL;
+        }
+        Serial.println(F("mode=balance (IMU で姿勢を保つ。固定するなら stand)"));
+#endif
     } else if (!strcmp(buf, "stand") || !strcmp(buf, "stop")) {
         g_drive_armed = false;
         servo_bus_torque(true);
@@ -141,6 +167,18 @@ static void shell(char c)
             Serial.print(F("cmd vx=")); Serial.print(g_cmd[0], 2);
             Serial.print(F(" wz=")); Serial.println(g_cmd[2], 2);
         }
+#if QUAD_USES_IMU
+    } else if (!strcmp(buf, "imu")) {
+        if (!g_imu_ok) Serial.print(F("(IMU 無し。水平の値を渡している) "));
+        quad_imu_print(&g_imu);
+        // IMU が方策に届いているかは、balance 中に傾けてこの値が変わるかで見る。
+        Serial.print(F("target rad:"));
+        for (int i = 0; i < NJ; ++i) {
+            Serial.print(' ');
+            Serial.print(g_target[i], 3);
+        }
+        Serial.println();
+#endif
 #ifdef QUAD_SERVO_RCB4
     } else if (!strcmp(buf, "raw")) {
         servo_bus_print_raw();
@@ -177,6 +215,25 @@ void setup()
     Serial.println(limits == NJ * 2 ? F(" 適用") : F(" !! 一部失敗 (遅く歩きます)"));
 #endif
 
+#if QUAD_USES_IMU
+    // ジャイロのゼロ点を取るので、トルクを入れる (脚が動く) 前に、静止した状態で。
+    Serial.println(F("IMU: 起動中。約 10 秒、ロボットを動かさないこと"));
+    quad_imu_level(&g_imu);
+    if (!quad_imu_begin()) {
+        Serial.println(F("!! IMU (QMI8658, 0x6B) が見つかりません。Qwiic の配線を確認"));
+    } else if (!quad_imu_calibrate(1000)) {
+        Serial.println(F("!! IMU の校正に失敗 (動いていた?)。静止させて再起動"));
+    } else {
+        g_imu_ok = true;
+        quad_imu_update(QUAD_CONTROL_DT, &g_imu);
+        Serial.print(F("IMU: "));
+        quad_imu_print(&g_imu);
+    }
+    if (!g_imu_ok)
+        Serial.println(F("!! IMU 無しで動かす: 方策には水平に止まっている値を渡す。"
+                         "傾いても押されても方策には伝わらない"));
+#endif
+
     if (!servo_bus_read(g_q)) Serial.println(F("!! 起動時の関節読み取りに失敗"));
     for (int i = 0; i < NJ; ++i) {
         g_q_prev[i] = g_q[i];
@@ -196,6 +253,9 @@ void setup()
     }
     Serial.println();
     Serial.println(F("commands: iktest / stand / trot / rl <vx> <wz> / drive <vx> <wz> / stop / zero / free"));
+#if QUAD_USES_IMU
+    Serial.println(F("          imu"));
+#endif
 }
 
 void loop()
@@ -236,11 +296,21 @@ void loop()
             g_qd[i] = 0.6f * g_qd[i] + 0.4f * ((g_q[i] - g_q_prev[i]) / dt);
             g_q_prev[i] = g_q[i];
         }
+#if QUAD_USES_IMU
+        // 重力の向きのフィルタは止めずに回し続ける (歩き出した瞬間に古い値を使わない)。
+        if (g_imu_ok && !quad_imu_update(dt, &g_imu)) {
+            g_imu_fail++;
+            quad_imu_level(&g_imu);
+        }
+        const quad_imu_t *imu = &g_imu;
+#else
+        const quad_imu_t *imu = NULL;
+#endif
 
         if (g_mode == MODE_HOLD)      hold_target(g_target);
         else if (g_mode == MODE_TROT) gait_step(QUAD_CONTROL_DT, g_target);
         else                          quad_step(&g_policy, g_q, g_qd, g_cmd,
-                                                NULL, (long)g_step, g_target, NULL);
+                                                imu, (long)g_step, g_target, NULL);
         servo_bus_write(g_target);
     }
     g_step++;
@@ -258,6 +328,10 @@ void loop()
         Serial.print('/'); Serial.print(loop_n);
         Serial.print(F("  skipped ")); Serial.print(g_skipped);
         Serial.print(F("  read_fail ")); Serial.print(g_read_fail);
+#if QUAD_USES_IMU
+        Serial.print(F("  imu_fail ")); Serial.print(g_imu_fail);
+        if (!g_imu_ok) Serial.print(F("  imu=level"));
+#endif
 #ifdef QUAD_SERVO_RCB4
         Serial.print(F("  write_fail ")); Serial.print(servo_bus_write_fail());
 #endif

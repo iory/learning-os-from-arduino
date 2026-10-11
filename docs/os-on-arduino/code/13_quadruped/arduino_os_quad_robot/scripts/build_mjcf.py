@@ -177,6 +177,22 @@ def add_rl_sites_and_geoms(mjcf_path):
             "size": "0.005", "group": "4", "rgba": "0 1 0 1",
         })
 
+    # The real QMI8658A frame (normalize_urdf.py: attach_sensor_board), for
+    # reference only -- the sensors below stay on imu_in_body, the base frame
+    # the policy observes; firmware rotates the chip's raw axes into it.
+    # The board's visual geoms would otherwise get a density-derived mass,
+    # so they are zeroed to keep the dynamics of the trained model.
+    if "sensor_board" in bodies:
+        for g in bodies["sensor_board"].findall("geom"):
+            g.set("mass", "0")
+    if "imu_link" in bodies:
+        imu = bodies["imu_link"]
+        if not any(s.get("name") == "imu" for s in imu.findall("site")):
+            ET.SubElement(imu, "site", {
+                "name": "imu", "pos": "0 0 0",
+                "size": "0.003", "group": "4", "rgba": "0 0 1 1",
+            })
+
     # The task's critic reads these by name; the actor does not (this robot has
     # no IMU -- see mjlab_overlay/arduino_os_quad_robot/env_cfgs.py).
     if root.find("sensor") is None:
