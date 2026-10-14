@@ -1,0 +1,2523 @@
+<?xml version="1.0"?>
+<robot name="krs_quad_robot">
+  <link name="M2x4_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_10">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_11">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_12">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_13">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_14">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_15">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_16">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_3">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_4">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_5">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_6">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_7">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_8">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="M2x4_lowhead_9">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/M2x4_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0002764761392 -3.431139713e-07" rpy="0 0 0" />
+      <mass value="1.87636e-05" />
+      <inertia ixx="4.79082e-11" ixy="3.70001e-29" ixz="2.23986e-28" iyy="1.64263e-11" iyz="4.9368e-27" izz="4.79082e-11" />
+    </inertial>
+  </link>
+  <link name="lid_krs_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/lid_krs_2.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/lid_krs_2.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.0006866548708 -1.730423723e-06 0.0001205340001" rpy="0 0 0" />
+      <mass value="0.0323023" />
+      <inertia ixx="5.11718e-05" ixy="-6.89771e-10" ixz="-6.12335e-06" iyy="0.000104372" iyz="6.06946e-10" izz="0.000150025" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_17">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_18">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_19">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_20">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_21">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_22">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_23">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__M2x8_lowhead_24">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__M2x8_lowhead_17.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0004519904951 0" rpy="0 0 0" />
+      <mass value="3.13299e-05" />
+      <inertia ixx="2.39198e-10" ixy="6.37743e-28" ixz="3.71897e-28" iyy="2.27094e-11" iyz="-1.35718e-26" izz="2.39198e-10" />
+    </inertial>
+  </link>
+  <link name="base_link">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__body_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/body_servo_krs__body_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.001171117953 -0.0003221509545 0.01974436428" rpy="0 0 0" />
+      <mass value="0.182841" />
+      <inertia ixx="0.00033581" ixy="-2.49993e-06" ixz="-3.83509e-06" iyy="0.000704946" iyz="1.27679e-06" izz="0.000942551" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__M2x20_case_tapping_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__M2x20_case_tapping_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__M2x6_lowhead_5">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__M2x6_lowhead_6">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__leg_link1_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="6.607671435e-05 -0.000724057447 -2.715350885e-06" rpy="0 0 0" />
+      <mass value="0.0343093" />
+      <inertia ixx="7.5963e-06" ixy="-3.84592e-06" ixz="-4.68936e-10" iyy="1.90069e-05" iyz="-3.76957e-10" izz="2.30288e-05" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__M2x20_case_tapping_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__M2x20_case_tapping_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__M2x6_lowhead_5">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__M2x6_lowhead_6">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__leg_link1_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="6.607671435e-05 -0.000724057447 -2.715350885e-06" rpy="0 0 0" />
+      <mass value="0.0343093" />
+      <inertia ixx="7.5963e-06" ixy="-3.84592e-06" ixz="-4.68936e-10" iyy="1.90069e-05" iyz="-3.76957e-10" izz="2.30288e-05" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__M2x20_case_tapping_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__M2x20_case_tapping_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__M2x6_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__M2x6_lowhead_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__leg_link1_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="6.607671435e-05 -0.000724057447 -2.715350885e-06" rpy="0 0 0" />
+      <mass value="0.0343093" />
+      <inertia ixx="7.5963e-06" ixy="-3.84592e-06" ixz="-4.68936e-10" iyy="1.90069e-05" iyz="-3.76957e-10" izz="2.30288e-05" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__M2x20_case_tapping_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__M2x20_case_tapping_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x20_case_tapping_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0006602300085 0" rpy="0 0 0" />
+      <mass value="6.9029e-05" />
+      <inertia ixx="2.71827e-09" ixy="4.69528e-27" ixz="9.88169e-28" iyy="4.1559e-11" iyz="1.47836e-26" izz="2.71827e-09" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__M2x6_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__M2x6_lowhead_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__leg_link1_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__leg_link1_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="6.607671435e-05 -0.000724057447 -2.715350885e-06" rpy="0 0 0" />
+      <mass value="0.0343093" />
+      <inertia ixx="7.5963e-06" ixy="-3.84592e-06" ixz="-4.68936e-10" iyy="1.90069e-05" iyz="-3.76957e-10" izz="2.30288e-05" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_1__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_1__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_1__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.40349615e-06 -0.02113100047 3.478167739e-18" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70812e-09" ixy="5.63762e-13" ixz="3.22288e-25" iyy="1.2737e-08" iyz="-5.99061e-25" izz="6.70502e-09" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_2__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_2__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_2__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_2.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_2.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.40349615e-06 0.02113100047 -2.379537038e-18" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70812e-09" ixy="-5.63762e-13" ixz="-3.22357e-25" iyy="1.2737e-08" iyz="1.39649e-25" izz="6.70502e-09" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_3__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_3__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_3__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.40349615e-06 -0.02113100047 3.478167739e-18" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70812e-09" ixy="5.63762e-13" ixz="3.22288e-25" iyy="1.2737e-08" iyz="-5.99061e-25" izz="6.70502e-09" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_4__KRS3300_scale_1">
+    <!-- sw2robot material="ABS" density="1613.81" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__KRS3300_scale_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008767687427 0.0005667829026 0.0009204592949" rpy="0 0 0" />
+      <mass value="0.0335" />
+      <inertia ixx="3.64784e-06" ixy="-5.04186e-09" ixz="-3.33117e-08" iyy="4.7406e-06" iyz="-1.84746e-08" izz="4.48708e-06" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_4__M3x6_horn_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M3x6_horn_lowhead_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.000421833194 0" rpy="0 0 0" />
+      <mass value="6.45138e-05" />
+      <inertia ixx="3.73792e-10" ixy="-5.17332e-28" ixz="-3.95971e-28" iyy="1.36451e-10" iyz="-2.82788e-26" izz="3.73792e-10" />
+    </inertial>
+  </link>
+  <link name="body_servo_krs_1__KRS3300_4__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_2.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_2.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-2.40349615e-06 0.02113100047 -2.379537038e-18" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70812e-09" ixy="-5.63762e-13" ixz="-3.22357e-25" iyy="1.2737e-08" iyz="1.39649e-25" izz="6.70502e-09" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_3">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_4">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008648826301 0.0002660533599 1.774759965e-07" rpy="0 0 0" />
+      <mass value="0.0194937" />
+      <inertia ixx="1.87996e-06" ixy="4.53199e-06" ixz="5.26452e-14" iyy="2.36744e-05" iyz="3.46162e-14" izz="2.51979e-05" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_1__foot_left_krs_1__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_3.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_3.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="4.414049007e-18 0.006767000469 2.40349615e-06" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70502e-09" ixy="3.47793e-24" ixz="3.94413e-24" iyy="1.2737e-08" iyz="5.63762e-13" izz="6.70812e-09" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_3">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_4">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008648826301 0.0002660533599 1.774759965e-07" rpy="0 0 0" />
+      <mass value="0.0194937" />
+      <inertia ixx="1.87996e-06" ixy="4.53199e-06" ixz="5.26452e-14" iyy="2.36744e-05" iyz="3.46162e-14" izz="2.51979e-05" />
+    </inertial>
+  </link>
+  <link name="leg_left_krs_2__foot_left_krs_1__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_3.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_3.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="4.41094578e-18 0.006767000469 2.40349615e-06" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70502e-09" ixy="3.47739e-24" ixz="3.94e-24" iyy="1.2737e-08" iyz="5.63762e-13" izz="6.70812e-09" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_3">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_4">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008648826301 0.0002660533599 1.774759965e-07" rpy="0 0 0" />
+      <mass value="0.0194937" />
+      <inertia ixx="1.87996e-06" ixy="4.53199e-06" ixz="5.26452e-14" iyy="2.36744e-05" iyz="3.46162e-14" izz="2.51979e-05" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_1__foot_right_krs_1__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_4.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_4.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="1.224477991e-17 -0.006767000469 2.40349615e-06" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70502e-09" ixy="-5.27208e-24" ixz="3.27485e-24" iyy="1.2737e-08" iyz="-5.63762e-13" izz="6.70812e-09" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_1">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_2">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_3">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_4">
+    <!-- sw2robot density="1000" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/leg_left_krs__M2x6_lowhead_5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.0003787921328 -5.749948927e-10" rpy="0 0 0" />
+      <mass value="2.50467e-05" />
+      <inertia ixx="1.18549e-10" ixy="8.91934e-29" ixz="3.10241e-28" iyy="1.95679e-11" iyz="-2.76579e-27" izz="1.18549e-10" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/foot_left_krs__bracket_outline_krs_1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0008648826301 0.0002660533599 1.774759965e-07" rpy="0 0 0" />
+      <mass value="0.0194937" />
+      <inertia ixx="1.87996e-06" ixy="4.53199e-06" ixz="5.26452e-14" iyy="2.36744e-05" iyz="3.46162e-14" izz="2.51979e-05" />
+    </inertial>
+  </link>
+  <link name="leg_right_krs_2__foot_right_krs_1__small_diameter_hornB_1">
+    <!-- sw2robot material="ABS" density="1020" inertia="solidworks" -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_4.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://krs_quad_robot/meshes/KRS3300__small_diameter_hornB_1_4.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="8.260456538e-18 -0.006767000469 2.40349615e-06" rpy="0 0 0" />
+      <mass value="0.000417425" />
+      <inertia ixx="6.70502e-09" ixy="-2.59215e-24" ixz="3.27529e-24" iyy="1.2737e-08" iyz="-5.63762e-13" izz="6.70812e-09" />
+    </inertial>
+  </link>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_17" type="fixed">
+    <origin xyz="0.045 -0.0493100361 0.00593" rpy="3.141592654 1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_17" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_18" type="fixed">
+    <origin xyz="0.045 -0.0493100361 0.02693" rpy="3.141592654 1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_18" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_19" type="fixed">
+    <origin xyz="-0.045 0.0493100361 0.00593" rpy="4.102069795e-10 -1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_19" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_20" type="fixed">
+    <origin xyz="-0.045 0.0493100361 0.02693" rpy="4.102069795e-10 -1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_20" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_21" type="fixed">
+    <origin xyz="0.045 0.0493100361 0.00593" rpy="-4.102067346e-10 -1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_21" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_22" type="fixed">
+    <origin xyz="0.045 0.0493100361 0.02693" rpy="-4.102067346e-10 -1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_22" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_23" type="fixed">
+    <origin xyz="-0.045 -0.0493100361 0.00593" rpy="3.141592654 1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_23" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__M2x8_lowhead_24" type="fixed">
+    <origin xyz="-0.045 -0.0493100361 0.02693" rpy="3.141592654 1.570796327 3.141592654" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__M2x8_lowhead_24" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__KRS3300_1__KRS3300_scale_1" type="fixed">
+    <origin xyz="0.05782752981 0.03450674608 0.01690044773" rpy="-1.570796327 0 0" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__KRS3300_1__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__KRS3300_2__KRS3300_scale_1" type="fixed">
+    <origin xyz="0.05782752981 -0.03450674608 0.01595955227" rpy="1.570796327 0 0" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__KRS3300_2__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__KRS3300_3__KRS3300_scale_1" type="fixed">
+    <origin xyz="-0.0578275298 0.03450674608 0.01595955227" rpy="1.570796327 0 -3.141592653" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__KRS3300_3__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__body_servo_krs_1__KRS3300_4__KRS3300_scale_1" type="fixed">
+    <origin xyz="-0.05782752981 -0.03450674607 0.01690044773" rpy="-1.570796327 0 -3.141592653" />
+    <parent link="base_link" />
+    <child link="body_servo_krs_1__KRS3300_4__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_servo_krs_1__body_krs_1__lid_krs_2" type="fixed">
+    <origin xyz="-0.01015580149 1.39207409e-06 0.06347069215" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lid_krs_2" />
+    <axis xyz="0 0 1" />
+    <!-- mates: COINCIDENT, DISTANCE, DISTANCE, COINCIDENT, DISTANCE, DISTANCE -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_1__KRS3300_scale_1__body_servo_krs_1__KRS3300_1__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 -0.003866746077" rpy="-1.570796327 0 -3.141592653" />
+    <parent link="body_servo_krs_1__KRS3300_1__KRS3300_scale_1" />
+    <child link="body_servo_krs_1__KRS3300_1__small_diameter_hornB_1" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_1__small_diameter_hornB_1__body_servo_krs_1__KRS3300_1__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 -0.02177579226 0" rpy="3.141592654 1.570796327 3.141592654" />
+    <parent link="body_servo_krs_1__KRS3300_1__small_diameter_hornB_1" />
+    <child link="body_servo_krs_1__KRS3300_1__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_1__small_diameter_hornB_1__leg_right_krs_1__leg_link1_krs_1" type="fixed">
+    <origin xyz="1.831151927e-06 -0.04195974103 -0.03325987706" rpy="0.0003535505898 1.570796327 0.0003535505898" />
+    <parent link="body_servo_krs_1__KRS3300_1__small_diameter_hornB_1" />
+    <child link="leg_right_krs_1__leg_link1_krs_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__leg_right_krs_1__KRS3300_scale_1" type="fixed">
+    <origin xyz="0.04694765275 -0.004407005044 -0.0004722788809" rpy="1.570796327 0 0" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="leg_right_krs_1__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__leg_right_krs_1__M2x20_case_tapping_1" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 0.01049816885" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="leg_right_krs_1__M2x20_case_tapping_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__leg_right_krs_1__M2x20_case_tapping_2" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 -0.01050183115" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="leg_right_krs_1__M2x20_case_tapping_2" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__leg_right_krs_1__M2x6_lowhead_1" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 0.01049816885" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="leg_right_krs_1__M2x6_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__leg_right_krs_1__M2x6_lowhead_2" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 -0.01050183115" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="leg_right_krs_1__M2x6_lowhead_2" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__M2x4_lowhead_5" type="fixed">
+    <origin xyz="-0.02725987706 0.01875112299 -1.488040885e-06" rpy="0 -1.161071239e-12 0" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_5" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__M2x4_lowhead_6" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 0.005998511959" rpy="0 -1.161071239e-12 0" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_6" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__M2x4_lowhead_7" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 -0.006001488037" rpy="0 -1.161071239e-12 0" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_7" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__leg_link1_krs_1__M2x4_lowhead_8" type="fixed">
+    <origin xyz="-0.03925987706 0.01875112299 -1.488040885e-06" rpy="0 -1.161071239e-12 0" />
+    <parent link="leg_right_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_8" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_2__KRS3300_scale_1__body_servo_krs_1__KRS3300_2__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 -0.003866746077" rpy="1.570796327 0 -3.141592653" />
+    <parent link="body_servo_krs_1__KRS3300_2__KRS3300_scale_1" />
+    <child link="body_servo_krs_1__KRS3300_2__small_diameter_hornB_1" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_2__small_diameter_hornB_1__body_servo_krs_1__KRS3300_2__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 0.02177579226 0" rpy="-4.102067346e-10 -1.570796327 3.141592654" />
+    <parent link="body_servo_krs_1__KRS3300_2__small_diameter_hornB_1" />
+    <child link="body_servo_krs_1__KRS3300_2__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_2__small_diameter_hornB_1__leg_left_krs_2__leg_link1_krs_1" type="fixed">
+    <origin xyz="-1.831149181e-06 0.04195974103 -0.03325987706" rpy="3.140312583 1.570796327 -0.00128007059" />
+    <parent link="body_servo_krs_1__KRS3300_2__small_diameter_hornB_1" />
+    <child link="leg_left_krs_2__leg_link1_krs_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__leg_left_krs_2__KRS3300_scale_1" type="fixed">
+    <origin xyz="0.04694765275 -0.004407005044 -0.0004722788809" rpy="1.570796327 0 0" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="leg_left_krs_2__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__leg_left_krs_2__M2x20_case_tapping_1" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 0.01049816885" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="leg_left_krs_2__M2x20_case_tapping_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__leg_left_krs_2__M2x20_case_tapping_2" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 -0.01050183115" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="leg_left_krs_2__M2x20_case_tapping_2" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__leg_left_krs_2__M2x6_lowhead_5" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 0.01049816885" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="leg_left_krs_2__M2x6_lowhead_5" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__leg_left_krs_2__M2x6_lowhead_6" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 -0.01050183115" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="leg_left_krs_2__M2x6_lowhead_6" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__M2x4_lowhead_1" type="fixed">
+    <origin xyz="-0.02725987706 0.01875112299 -2.174260885e-06" rpy="3.141592653 -1.167954622e-12 3.141592653" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__M2x4_lowhead_2" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 0.005997825739" rpy="3.141592653 -1.167954622e-12 3.141592653" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_2" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__M2x4_lowhead_3" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 -0.006002174265" rpy="3.141592653 -1.167954622e-12 3.141592653" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_3" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__leg_link1_krs_1__M2x4_lowhead_4" type="fixed">
+    <origin xyz="-0.03925987706 0.01875112299 -2.174260885e-06" rpy="3.141592653 -1.167954622e-12 3.141592653" />
+    <parent link="leg_left_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_4" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_3__KRS3300_scale_1__body_servo_krs_1__KRS3300_3__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 -0.003866746077" rpy="-1.570796327 0 0" />
+    <parent link="body_servo_krs_1__KRS3300_3__KRS3300_scale_1" />
+    <child link="body_servo_krs_1__KRS3300_3__small_diameter_hornB_1" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_3__small_diameter_hornB_1__body_servo_krs_1__KRS3300_3__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 -0.02177579226 0" rpy="3.141592654 1.570796327 3.141592654" />
+    <parent link="body_servo_krs_1__KRS3300_3__small_diameter_hornB_1" />
+    <child link="body_servo_krs_1__KRS3300_3__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_3__small_diameter_hornB_1__leg_right_krs_2__leg_link1_krs_1" type="fixed">
+    <origin xyz="1.831151927e-06 -0.04195974103 -0.03325987706" rpy="0.0004910405898 1.570796327 0.0004910405898" />
+    <parent link="body_servo_krs_1__KRS3300_3__small_diameter_hornB_1" />
+    <child link="leg_right_krs_2__leg_link1_krs_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__leg_right_krs_2__KRS3300_scale_1" type="fixed">
+    <origin xyz="0.04694765275 -0.004407005044 -0.0004722788809" rpy="1.570796327 0 0" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="leg_right_krs_2__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__leg_right_krs_2__M2x20_case_tapping_1" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 0.01049816885" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="leg_right_krs_2__M2x20_case_tapping_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__leg_right_krs_2__M2x20_case_tapping_2" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 -0.01050183115" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="leg_right_krs_2__M2x20_case_tapping_2" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__leg_right_krs_2__M2x6_lowhead_1" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 0.01049816885" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="leg_right_krs_2__M2x6_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__leg_right_krs_2__M2x6_lowhead_2" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 -0.01050183115" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="leg_right_krs_2__M2x6_lowhead_2" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__M2x4_lowhead_10" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 0.005998511959" rpy="0 -1.161005697e-12 0" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_10" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__M2x4_lowhead_11" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 -0.006001488037" rpy="0 -1.161005697e-12 0" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_11" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__M2x4_lowhead_12" type="fixed">
+    <origin xyz="-0.03925987706 0.01875112299 -1.488040885e-06" rpy="0 -1.161005697e-12 0" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_12" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__leg_link1_krs_1__M2x4_lowhead_9" type="fixed">
+    <origin xyz="-0.02725987706 0.01875112299 -1.488040885e-06" rpy="0 -1.161005697e-12 0" />
+    <parent link="leg_right_krs_2__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_9" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_4__KRS3300_scale_1__body_servo_krs_1__KRS3300_4__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 -0.003866746077" rpy="1.570796327 0 0" />
+    <parent link="body_servo_krs_1__KRS3300_4__KRS3300_scale_1" />
+    <child link="body_servo_krs_1__KRS3300_4__small_diameter_hornB_1" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_4__small_diameter_hornB_1__body_servo_krs_1__KRS3300_4__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 0.02177579226 0" rpy="4.102069795e-10 -1.570796327 3.141592654" />
+    <parent link="body_servo_krs_1__KRS3300_4__small_diameter_hornB_1" />
+    <child link="body_servo_krs_1__KRS3300_4__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="body_servo_krs_1__KRS3300_4__small_diameter_hornB_1__leg_left_krs_1__leg_link1_krs_1" type="fixed">
+    <origin xyz="-1.831152021e-06 0.04195974104 -0.03325987706" rpy="3.140503284 1.570796327 -0.00108936959" />
+    <parent link="body_servo_krs_1__KRS3300_4__small_diameter_hornB_1" />
+    <child link="leg_left_krs_1__leg_link1_krs_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__leg_left_krs_1__KRS3300_scale_1" type="fixed">
+    <origin xyz="0.04694765275 -0.004407005044 -0.0004722788809" rpy="1.570796327 0 0" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="leg_left_krs_1__KRS3300_scale_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__leg_left_krs_1__M2x20_case_tapping_1" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 0.01049816885" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="leg_left_krs_1__M2x20_case_tapping_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__leg_left_krs_1__M2x20_case_tapping_2" type="fixed">
+    <origin xyz="0.03412012294 0.002588068008 -0.01050183115" rpy="3.141592653 -1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="leg_left_krs_1__M2x20_case_tapping_2" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__leg_left_krs_1__M2x6_lowhead_5" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 0.01049816885" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="leg_left_krs_1__M2x6_lowhead_5" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__leg_left_krs_1__M2x6_lowhead_6" type="fixed">
+    <origin xyz="0.03412012351 -0.01860491969 -0.01050183115" rpy="4.10206857e-10 1.570796327 4.10206857e-10" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="leg_left_krs_1__M2x6_lowhead_6" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__M2x4_lowhead_13" type="fixed">
+    <origin xyz="-0.02725987706 0.01875112299 -2.174260885e-06" rpy="3.141592653 -1.16928689e-12 3.141592653" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_13" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__M2x4_lowhead_14" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 0.005997825739" rpy="3.141592653 -1.16928689e-12 3.141592653" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_14" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__M2x4_lowhead_15" type="fixed">
+    <origin xyz="-0.03325987706 0.01875112299 -0.006002174265" rpy="3.141592653 -1.16928689e-12 3.141592653" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_15" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__leg_link1_krs_1__M2x4_lowhead_16" type="fixed">
+    <origin xyz="-0.03925987706 0.01875112299 -2.174260885e-06" rpy="3.141592653 -1.16928689e-12 3.141592653" />
+    <parent link="leg_left_krs_1__leg_link1_krs_1" />
+    <child link="M2x4_lowhead_16" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__KRS3300_scale_1__leg_left_krs_1__foot_left_krs_1__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 0.01049725392" rpy="1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_1__KRS3300_scale_1" />
+    <child link="leg_left_krs_1__foot_left_krs_1__small_diameter_hornB_1" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="leg_left_krs_1__foot_left_krs_1__small_diameter_hornB_1__leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1" type="fixed">
+    <origin xyz="0.004915968626 0.009795822627 -0.04887587872" rpy="1.570796327 -1.23118148 3.141592653" />
+    <parent link="leg_left_krs_1__foot_left_krs_1__small_diameter_hornB_1" />
+    <child link="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_left_krs_1__foot_left_krs_1__small_diameter_hornB_1__leg_left_krs_1__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 0.007411792257 0" rpy="3.141592653 1.169228037e-12 0" />
+    <parent link="leg_left_krs_1__foot_left_krs_1__small_diameter_hornB_1" />
+    <child link="leg_left_krs_1__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_1" type="fixed">
+    <origin xyz="0.05030885326 0.01706018215 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_2" type="fixed">
+    <origin xyz="0.04230822537 0.0142335316 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_2" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_3" type="fixed">
+    <origin xyz="0.04513487592 0.006232903704 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_3" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_4" type="fixed">
+    <origin xyz="0.05313550381 0.009059554255 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_1__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_1__foot_left_krs_1__M2x6_lowhead_4" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__KRS3300_scale_1__leg_left_krs_2__foot_left_krs_1__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 0.01049725392" rpy="1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_2__KRS3300_scale_1" />
+    <child link="leg_left_krs_2__foot_left_krs_1__small_diameter_hornB_1" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="leg_left_krs_2__foot_left_krs_1__small_diameter_hornB_1__leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1" type="fixed">
+    <origin xyz="0.004915968626 0.009795822627 -0.04887587872" rpy="1.570796327 -1.23118148 3.141592653" />
+    <parent link="leg_left_krs_2__foot_left_krs_1__small_diameter_hornB_1" />
+    <child link="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_left_krs_2__foot_left_krs_1__small_diameter_hornB_1__leg_left_krs_2__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 0.007411792257 0" rpy="3.141592653 1.167809297e-12 0" />
+    <parent link="leg_left_krs_2__foot_left_krs_1__small_diameter_hornB_1" />
+    <child link="leg_left_krs_2__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_1" type="fixed">
+    <origin xyz="0.05030885326 0.01706018215 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_2" type="fixed">
+    <origin xyz="0.04230822537 0.0142335316 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_2" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_3" type="fixed">
+    <origin xyz="0.04513487592 0.006232903704 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_3" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1__leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_4" type="fixed">
+    <origin xyz="0.05313550381 0.009059554255 0.000204838095" rpy="-1.570796327 0 -1.570796327" />
+    <parent link="leg_left_krs_2__foot_left_krs_1__bracket_outline_krs_1" />
+    <child link="leg_left_krs_2__foot_left_krs_1__M2x6_lowhead_4" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__KRS3300_scale_1__leg_right_krs_1__foot_right_krs_1__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 0.01049725392" rpy="-1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_1__KRS3300_scale_1" />
+    <child link="leg_right_krs_1__foot_right_krs_1__small_diameter_hornB_1" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="leg_right_krs_1__foot_right_krs_1__small_diameter_hornB_1__leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1" type="fixed">
+    <origin xyz="0.004915968621 -0.009796177387 -0.04887587872" rpy="1.570796327 -1.23118148 -3.141592653" />
+    <parent link="leg_right_krs_1__foot_right_krs_1__small_diameter_hornB_1" />
+    <child link="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_right_krs_1__foot_right_krs_1__small_diameter_hornB_1__leg_right_krs_1__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 -0.007411792257 0" rpy="3.141592653 -1.161075054e-12 3.141592653" />
+    <parent link="leg_right_krs_1__foot_right_krs_1__small_diameter_hornB_1" />
+    <child link="leg_right_krs_1__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_1" type="fixed">
+    <origin xyz="0.05030885327 0.01706018215 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_2" type="fixed">
+    <origin xyz="0.04230822538 0.0142335316 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_2" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_3" type="fixed">
+    <origin xyz="0.04513487593 0.006232903704 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_3" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_4" type="fixed">
+    <origin xyz="0.05313550382 0.009059554255 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_1__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_1__foot_right_krs_1__M2x6_lowhead_4" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__KRS3300_scale_1__leg_right_krs_2__foot_right_krs_1__small_diameter_hornB_1" type="revolute">
+    <origin xyz="0.008172470192 0.0004704477322 0.01049725392" rpy="-1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_2__KRS3300_scale_1" />
+    <child link="leg_right_krs_2__foot_right_krs_1__small_diameter_hornB_1" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-2.356194" upper="2.356194" effort="0.657" velocity="6.545" />
+    <!-- mates: CONCENTRIC, DISTANCE, CONCENTRIC, DISTANCE -->
+    <!-- sw2robot-note: geo: free rotation about mate axis (1 DOF) -->
+  </joint>
+  <joint name="leg_right_krs_2__foot_right_krs_1__small_diameter_hornB_1__leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1" type="fixed">
+    <origin xyz="0.004915968621 -0.009796177387 -0.04887587872" rpy="1.570796327 -1.23118148 -3.141592653" />
+    <parent link="leg_right_krs_2__foot_right_krs_1__small_diameter_hornB_1" />
+    <child link="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1" />
+    <axis xyz="0 0 1" />
+    <!-- mates: CONCENTRIC, CONCENTRIC, COINCIDENT, CONCENTRIC, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: geo: fully constrained -->
+  </joint>
+  <joint name="leg_right_krs_2__foot_right_krs_1__small_diameter_hornB_1__leg_right_krs_2__M3x6_horn_lowhead_1" type="fixed">
+    <origin xyz="0 -0.007411792257 0" rpy="3.141592653 -1.161249893e-12 3.141592653" />
+    <parent link="leg_right_krs_2__foot_right_krs_1__small_diameter_hornB_1" />
+    <child link="leg_right_krs_2__M3x6_horn_lowhead_1" />
+    <axis xyz="0 -1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_1" type="fixed">
+    <origin xyz="0.05030885327 0.01706018215 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_1" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_2" type="fixed">
+    <origin xyz="0.04230822538 0.0142335316 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_2" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_3" type="fixed">
+    <origin xyz="0.04513487593 0.006232903704 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_3" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+  <joint name="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1__leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_4" type="fixed">
+    <origin xyz="0.05313550382 0.009059554255 -0.000204483341" rpy="1.570796327 0 1.570796327" />
+    <parent link="leg_right_krs_2__foot_right_krs_1__bracket_outline_krs_1" />
+    <child link="leg_right_krs_2__foot_right_krs_1__M2x6_lowhead_4" />
+    <axis xyz="0 1 0" />
+    <!-- mates: CONCENTRIC, COINCIDENT, CONCENTRIC, COINCIDENT -->
+    <!-- sw2robot-note: fastener welded fixed -->
+  </joint>
+</robot>
