@@ -77,6 +77,48 @@ T4 でも書籍と同じ 4,500 iteration が約 1.8 時間です。
 なって `ArduinoQuad-*` も登録されないためです。消えたのはメッシュを読み込む
 だけのヘルパなので、無いときだけ `src/assets/_mjlab_compat.py` として足します。
 
+## KRS 版（KrsQuad-*）
+
+KRS 版（KRS-3302 ICS ×8、RCB-4mini）は、Feetech 版とは別の機体設定・タスク・
+experiment（`krs_quad_velocity`）で学習します。Feetech 版の方策やチェックポイントは使いません。
+
+```bash
+# 1. 機体モデルを作る（CAD の URDF -> 9 リンクの URDF -> MJCF）
+uv run --no-project --with numpy python krs_quad_robot/scripts/normalize_urdf.py
+uv run --no-project --with 'scikit-robot>=0.3.21' --with mujoco \
+    python krs_quad_robot/scripts/build_mjcf.py
+
+# 2. 学習する（RTX 4090、4096 環境で 1 iteration 約 1.9 秒、3000 iteration で約 95 分）
+./rl/scripts/train.sh KrsQuad-Walk --env.scene.num-envs=4096 --agent.max-iterations 3000
+
+# 3. 測る（速度の追従・接地のパターン・胴体の傾き・関節とトルクの余裕。--push-scale 3 で押す）
+source rl/scripts/env.sh && cd "$ARDUINO_QUAD_UPSTREAM"
+python "$ARDUINO_QUAD_ROOT/rl/scripts/krs_eval.py" --ckpt <model_2999.pt>
+
+# 4. 書き出す（include/krs_quad_policy.h、ブラウザ版の policy_krs_imu.json）
+python "$ARDUINO_QUAD_ROOT/host/export_quad_policy.py" <model_2999.pt> <outdir> KrsQuad-Walk \
+    --name krs_quad_policy
+python "$ARDUINO_QUAD_ROOT/host/make_walk_bundle.py" <outdir> \
+    "$ARDUINO_QUAD_ROOT/../../docs/assembly/quadruped/walk/policy_krs_imu.json" --name krs_quad_policy
+python "$ARDUINO_QUAD_ROOT/rl/scripts/krs_web_model.py" \
+    "$ARDUINO_QUAD_ROOT/../../docs/assembly/quadruped/walk/model"
+```
+
+| ファイル | 中身 |
+|---|---|
+| `krs_robot_cfg.py` | KRS-3302 のアクチュエータ（0.657 N·m、6.545 rad/s、±135°）、当たり判定（足先・胴体・膝・前後の脚） |
+| `krs_env_cfgs.py` | 観測（IMU 込み 105 次元）、指令（前進 −0.06〜0.12 m/s、旋回 ±0.5 rad/s）、ランダム化、報酬 |
+| `krs_rewards.py` | 跳ね・すべり・対角のずれ・胴体や膝の接地の罰則 |
+| `krs_rl_cfg.py` | PPO の設定（ネットワークは Feetech 版と同じ [96, 64]） |
+| `scripts/krs_eval.py` | 方策を数値で測る |
+| `scripts/krs_web_model.py` | ブラウザ版の MJCF を mjlab の entity から書き出す |
+
+配布している `include/krs_quad_policy.h` は `KrsQuad-Walk` の seed 3、iteration 2999 です。
+3 本学習して、seed 1 は「すぐ倒れて終わる」局所解に落ちました。seed 2 は胴体の傾きが大きく、
+押されると倒れやすい結果でした。どちらも採っていません。
+押しを 3 倍にした `KrsQuad-Robust` での仕上げも、seed 2・seed 3 の両方で試しました。
+倒れる回数も胴体の傾きも良くならなかったので、採っていません。
+
 ## 構成
 
 ロボット定義・報酬・環境設定・学習設定を、上流に対して差し替えます:

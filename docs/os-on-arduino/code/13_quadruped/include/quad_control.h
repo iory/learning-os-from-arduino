@@ -23,8 +23,12 @@
 #include <string.h>
 
 // The *_imu PlatformIO envs define QUAD_POLICY_IMU and get the policy that also
-// reads the body IMU. Both headers are generated and define the same names.
-#ifdef QUAD_POLICY_IMU
+// reads the body IMU. The *_krs envs define QUAD_POLICY_KRS and get the KRS
+// robot's own policy (KRS-3302 servos, also reads the IMU). All three headers
+// are generated and define the same names.
+#if defined(QUAD_POLICY_KRS)
+#include "krs_quad_policy.h"
+#elif defined(QUAD_POLICY_IMU)
 #include "arduino_quad_policy_imu.h"
 #else
 #include "arduino_quad_policy.h"

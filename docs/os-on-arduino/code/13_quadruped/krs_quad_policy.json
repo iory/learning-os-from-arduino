@@ -1,0 +1,141 @@
+{
+  "export_env_task": "KrsQuad-Walk",
+  "training": {
+    "run_dir": "2026-10-14_23-00-25_seed3",
+    "experiment_name": "krs_quad_velocity",
+    "run_name": "seed3",
+    "load_run": ".*",
+    "load_checkpoint": "model_.*.pt",
+    "seed": "3",
+    "reset_randomization": {
+      "base_roll_pitch": 0.0,
+      "base_z": 0.0,
+      "base_velocity": 0.0,
+      "joint_position": 0.0,
+      "joint_velocity": 0.0
+    },
+    "robustified": false
+  },
+  "checkpoint": "/mnt/workspace/krs-quad-rl-deps/unitree_rl_mjlab/logs/rsl_rl/krs_quad_velocity/2026-10-14_23-00-25_seed3/model_2999.pt",
+  "obs_dim": 105,
+  "act_dim": 8,
+  "hidden_dims": [
+    96,
+    64
+  ],
+  "activation": "elu",
+  "obs_layout": [
+    {
+      "term": "base_ang_vel",
+      "offset": 0,
+      "size": 9,
+      "history": 3,
+      "size_per_step": 3,
+      "order": "oldest_to_newest"
+    },
+    {
+      "term": "projected_gravity",
+      "offset": 9,
+      "size": 9,
+      "history": 3,
+      "size_per_step": 3,
+      "order": "oldest_to_newest"
+    },
+    {
+      "term": "command",
+      "offset": 18,
+      "size": 9,
+      "history": 3,
+      "size_per_step": 3,
+      "order": "oldest_to_newest"
+    },
+    {
+      "term": "phase",
+      "offset": 27,
+      "size": 6,
+      "history": 3,
+      "size_per_step": 2,
+      "order": "oldest_to_newest"
+    },
+    {
+      "term": "joint_pos",
+      "offset": 33,
+      "size": 24,
+      "history": 3,
+      "size_per_step": 8,
+      "order": "oldest_to_newest"
+    },
+    {
+      "term": "joint_vel",
+      "offset": 57,
+      "size": 24,
+      "history": 3,
+      "size_per_step": 8,
+      "order": "oldest_to_newest"
+    },
+    {
+      "term": "actions",
+      "offset": 81,
+      "size": 24,
+      "history": 3,
+      "size_per_step": 8,
+      "order": "oldest_to_newest"
+    }
+  ],
+  "action_joint_order": [
+    "FL_hip_joint",
+    "FL_knee_joint",
+    "RL_hip_joint",
+    "RL_knee_joint",
+    "RR_hip_joint",
+    "RR_knee_joint",
+    "FR_hip_joint",
+    "FR_knee_joint"
+  ],
+  "action_scale": [
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+  ],
+  "action_offset_default_joint_pos": [
+    0.9406082630157471,
+    -1.5579423904418945,
+    0.9406082630157471,
+    -1.5579423904418945,
+    0.9406082630157471,
+    -1.5579423904418945,
+    0.9406082630157471,
+    -1.5579423904418945
+  ],
+  "all_joint_order": [
+    "FL_hip_joint",
+    "FL_knee_joint",
+    "RL_hip_joint",
+    "RL_knee_joint",
+    "RR_hip_joint",
+    "RR_knee_joint",
+    "FR_hip_joint",
+    "FR_knee_joint"
+  ],
+  "default_joint_pos": [
+    0.9406082630157471,
+    -1.5579423904418945,
+    0.9406082630157471,
+    -1.5579423904418945,
+    0.9406082630157471,
+    -1.5579423904418945,
+    0.9406082630157471,
+    -1.5579423904418945
+  ],
+  "clip_actions": null,
+  "control_dt": 0.02,
+  "gait_period_s": 0.32,
+  "phase_command_threshold": 0.03,
+  "obs_normalizer_eps": 0.01,
+  "verify_max_abs_err": 3.4570693969726562e-06
+}

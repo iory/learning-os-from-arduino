@@ -1,0 +1,393 @@
+<mujoco model="krs_quad_robot">
+  <compiler angle="radian" autolimits="true" meshdir="assets" />
+  <option gravity="0 0 -9.81" />
+  <default>
+    <joint armature="0.0007" damping="0.100381971" />
+    <geom contype="2" conaffinity="1" />
+  </default>
+  <asset>
+    <mesh name="lid_krs_2_0" file="lid_krs_2_0.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_1" file="body_servo_krs__M2x8_lowhead_17_1.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_2" file="body_servo_krs__M2x8_lowhead_17_2.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_3" file="body_servo_krs__M2x8_lowhead_17_3.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_4" file="body_servo_krs__M2x8_lowhead_17_4.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_5" file="body_servo_krs__M2x8_lowhead_17_5.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_6" file="body_servo_krs__M2x8_lowhead_17_6.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_7" file="body_servo_krs__M2x8_lowhead_17_7.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_8" file="body_servo_krs__M2x8_lowhead_17_8.stl" />
+    <mesh name="body_servo_krs__body_krs_1_9" file="body_servo_krs__body_krs_1_9.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_10" file="leg_left_krs__KRS3300_scale_1_10.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_11" file="leg_left_krs__KRS3300_scale_1_11.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_12" file="leg_left_krs__KRS3300_scale_1_12.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_13" file="leg_left_krs__KRS3300_scale_1_13.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_14" file="leg_left_krs__KRS3300_scale_1_14.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_15" file="leg_left_krs__KRS3300_scale_1_15.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_16" file="leg_left_krs__KRS3300_scale_1_16.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_17" file="leg_left_krs__KRS3300_scale_1_17.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_18" file="leg_left_krs__KRS3300_scale_1_18.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_19" file="leg_left_krs__KRS3300_scale_1_19.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_20" file="leg_left_krs__KRS3300_scale_1_20.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_21" file="leg_left_krs__KRS3300_scale_1_21.stl" />
+    <mesh name="lid_krs_2_22" file="lid_krs_2_22.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_23" file="body_servo_krs__M2x8_lowhead_17_23.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_24" file="body_servo_krs__M2x8_lowhead_17_24.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_25" file="body_servo_krs__M2x8_lowhead_17_25.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_26" file="body_servo_krs__M2x8_lowhead_17_26.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_27" file="body_servo_krs__M2x8_lowhead_17_27.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_28" file="body_servo_krs__M2x8_lowhead_17_28.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_29" file="body_servo_krs__M2x8_lowhead_17_29.stl" />
+    <mesh name="body_servo_krs__M2x8_lowhead_17_30" file="body_servo_krs__M2x8_lowhead_17_30.stl" />
+    <mesh name="body_servo_krs__body_krs_1_31" file="body_servo_krs__body_krs_1_31.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_32" file="leg_left_krs__KRS3300_scale_1_32.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_33" file="leg_left_krs__KRS3300_scale_1_33.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_34" file="leg_left_krs__KRS3300_scale_1_34.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_35" file="leg_left_krs__KRS3300_scale_1_35.stl" />
+    <mesh name="M2x4_lowhead_1_36" file="M2x4_lowhead_1_36.stl" />
+    <mesh name="M2x4_lowhead_1_37" file="M2x4_lowhead_1_37.stl" />
+    <mesh name="M2x4_lowhead_1_38" file="M2x4_lowhead_1_38.stl" />
+    <mesh name="M2x4_lowhead_1_39" file="M2x4_lowhead_1_39.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_40" file="leg_left_krs__KRS3300_scale_1_40.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_41" file="leg_left_krs__KRS3300_scale_1_41.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_42" file="leg_left_krs__KRS3300_scale_1_42.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_43" file="leg_left_krs__M2x20_case_tapping_1_43.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_44" file="leg_left_krs__M2x20_case_tapping_1_44.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_45" file="leg_left_krs__M2x6_lowhead_5_45.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_46" file="leg_left_krs__M2x6_lowhead_5_46.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_47" file="leg_left_krs__leg_link1_krs_1_47.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_48" file="leg_left_krs__M3x6_horn_lowhead_1_48.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_2_49" file="KRS3300__small_diameter_hornB_1_2_49.stl" />
+    <mesh name="M2x4_lowhead_1_50" file="M2x4_lowhead_1_50.stl" />
+    <mesh name="M2x4_lowhead_1_51" file="M2x4_lowhead_1_51.stl" />
+    <mesh name="M2x4_lowhead_1_52" file="M2x4_lowhead_1_52.stl" />
+    <mesh name="M2x4_lowhead_1_53" file="M2x4_lowhead_1_53.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_54" file="leg_left_krs__KRS3300_scale_1_54.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_55" file="leg_left_krs__M2x20_case_tapping_1_55.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_56" file="leg_left_krs__M2x20_case_tapping_1_56.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_57" file="leg_left_krs__M2x6_lowhead_5_57.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_58" file="leg_left_krs__M2x6_lowhead_5_58.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_59" file="leg_left_krs__leg_link1_krs_1_59.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_60" file="leg_left_krs__M3x6_horn_lowhead_1_60.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_2_61" file="KRS3300__small_diameter_hornB_1_2_61.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_62" file="leg_left_krs__M3x6_horn_lowhead_1_62.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_63" file="leg_left_krs__M2x6_lowhead_5_63.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_64" file="leg_left_krs__M2x6_lowhead_5_64.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_65" file="leg_left_krs__M2x6_lowhead_5_65.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_66" file="leg_left_krs__M2x6_lowhead_5_66.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_67" file="foot_left_krs__bracket_outline_krs_1_67.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_3_68" file="KRS3300__small_diameter_hornB_1_3_68.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_69" file="leg_left_krs__M3x6_horn_lowhead_1_69.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_70" file="leg_left_krs__M2x6_lowhead_5_70.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_71" file="leg_left_krs__M2x6_lowhead_5_71.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_72" file="leg_left_krs__M2x6_lowhead_5_72.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_73" file="leg_left_krs__M2x6_lowhead_5_73.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_74" file="foot_left_krs__bracket_outline_krs_1_74.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_3_75" file="KRS3300__small_diameter_hornB_1_3_75.stl" />
+    <mesh name="M2x4_lowhead_1_76" file="M2x4_lowhead_1_76.stl" />
+    <mesh name="M2x4_lowhead_1_77" file="M2x4_lowhead_1_77.stl" />
+    <mesh name="M2x4_lowhead_1_78" file="M2x4_lowhead_1_78.stl" />
+    <mesh name="M2x4_lowhead_1_79" file="M2x4_lowhead_1_79.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_80" file="leg_left_krs__KRS3300_scale_1_80.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_81" file="leg_left_krs__KRS3300_scale_1_81.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_82" file="leg_left_krs__KRS3300_scale_1_82.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_83" file="leg_left_krs__M2x20_case_tapping_1_83.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_84" file="leg_left_krs__M2x20_case_tapping_1_84.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_85" file="leg_left_krs__M2x6_lowhead_5_85.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_86" file="leg_left_krs__M2x6_lowhead_5_86.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_87" file="leg_left_krs__leg_link1_krs_1_87.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_88" file="leg_left_krs__M3x6_horn_lowhead_1_88.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_2_89" file="KRS3300__small_diameter_hornB_1_2_89.stl" />
+    <mesh name="M2x4_lowhead_1_90" file="M2x4_lowhead_1_90.stl" />
+    <mesh name="M2x4_lowhead_1_91" file="M2x4_lowhead_1_91.stl" />
+    <mesh name="M2x4_lowhead_1_92" file="M2x4_lowhead_1_92.stl" />
+    <mesh name="M2x4_lowhead_1_93" file="M2x4_lowhead_1_93.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_94" file="leg_left_krs__KRS3300_scale_1_94.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_95" file="leg_left_krs__M2x20_case_tapping_1_95.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_96" file="leg_left_krs__M2x20_case_tapping_1_96.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_97" file="leg_left_krs__M2x6_lowhead_5_97.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_98" file="leg_left_krs__M2x6_lowhead_5_98.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_99" file="leg_left_krs__leg_link1_krs_1_99.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_100" file="leg_left_krs__M3x6_horn_lowhead_1_100.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_2_101" file="KRS3300__small_diameter_hornB_1_2_101.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_102" file="leg_left_krs__M3x6_horn_lowhead_1_102.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_103" file="leg_left_krs__M2x6_lowhead_5_103.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_104" file="leg_left_krs__M2x6_lowhead_5_104.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_105" file="leg_left_krs__M2x6_lowhead_5_105.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_106" file="leg_left_krs__M2x6_lowhead_5_106.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_107" file="foot_left_krs__bracket_outline_krs_1_107.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_3_108" file="KRS3300__small_diameter_hornB_1_3_108.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_109" file="leg_left_krs__M3x6_horn_lowhead_1_109.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_110" file="leg_left_krs__M2x6_lowhead_5_110.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_111" file="leg_left_krs__M2x6_lowhead_5_111.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_112" file="leg_left_krs__M2x6_lowhead_5_112.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_113" file="leg_left_krs__M2x6_lowhead_5_113.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_114" file="foot_left_krs__bracket_outline_krs_1_114.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_3_115" file="KRS3300__small_diameter_hornB_1_3_115.stl" />
+    <mesh name="M2x4_lowhead_1_116" file="M2x4_lowhead_1_116.stl" />
+    <mesh name="M2x4_lowhead_1_117" file="M2x4_lowhead_1_117.stl" />
+    <mesh name="M2x4_lowhead_1_118" file="M2x4_lowhead_1_118.stl" />
+    <mesh name="M2x4_lowhead_1_119" file="M2x4_lowhead_1_119.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_120" file="leg_left_krs__KRS3300_scale_1_120.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_121" file="leg_left_krs__KRS3300_scale_1_121.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_122" file="leg_left_krs__KRS3300_scale_1_122.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_123" file="leg_left_krs__M2x20_case_tapping_1_123.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_124" file="leg_left_krs__M2x20_case_tapping_1_124.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_125" file="leg_left_krs__M2x6_lowhead_5_125.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_126" file="leg_left_krs__M2x6_lowhead_5_126.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_127" file="leg_left_krs__leg_link1_krs_1_127.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_128" file="leg_left_krs__M3x6_horn_lowhead_1_128.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_129" file="KRS3300__small_diameter_hornB_1_129.stl" />
+    <mesh name="M2x4_lowhead_1_130" file="M2x4_lowhead_1_130.stl" />
+    <mesh name="M2x4_lowhead_1_131" file="M2x4_lowhead_1_131.stl" />
+    <mesh name="M2x4_lowhead_1_132" file="M2x4_lowhead_1_132.stl" />
+    <mesh name="M2x4_lowhead_1_133" file="M2x4_lowhead_1_133.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_134" file="leg_left_krs__KRS3300_scale_1_134.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_135" file="leg_left_krs__M2x20_case_tapping_1_135.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_136" file="leg_left_krs__M2x20_case_tapping_1_136.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_137" file="leg_left_krs__M2x6_lowhead_5_137.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_138" file="leg_left_krs__M2x6_lowhead_5_138.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_139" file="leg_left_krs__leg_link1_krs_1_139.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_140" file="leg_left_krs__M3x6_horn_lowhead_1_140.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_141" file="KRS3300__small_diameter_hornB_1_141.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_142" file="leg_left_krs__M3x6_horn_lowhead_1_142.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_143" file="leg_left_krs__M2x6_lowhead_5_143.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_144" file="leg_left_krs__M2x6_lowhead_5_144.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_145" file="leg_left_krs__M2x6_lowhead_5_145.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_146" file="leg_left_krs__M2x6_lowhead_5_146.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_147" file="foot_left_krs__bracket_outline_krs_1_147.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_4_148" file="KRS3300__small_diameter_hornB_1_4_148.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_149" file="leg_left_krs__M3x6_horn_lowhead_1_149.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_150" file="leg_left_krs__M2x6_lowhead_5_150.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_151" file="leg_left_krs__M2x6_lowhead_5_151.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_152" file="leg_left_krs__M2x6_lowhead_5_152.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_153" file="leg_left_krs__M2x6_lowhead_5_153.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_154" file="foot_left_krs__bracket_outline_krs_1_154.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_4_155" file="KRS3300__small_diameter_hornB_1_4_155.stl" />
+    <mesh name="M2x4_lowhead_1_156" file="M2x4_lowhead_1_156.stl" />
+    <mesh name="M2x4_lowhead_1_157" file="M2x4_lowhead_1_157.stl" />
+    <mesh name="M2x4_lowhead_1_158" file="M2x4_lowhead_1_158.stl" />
+    <mesh name="M2x4_lowhead_1_159" file="M2x4_lowhead_1_159.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_160" file="leg_left_krs__KRS3300_scale_1_160.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_161" file="leg_left_krs__KRS3300_scale_1_161.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_162" file="leg_left_krs__KRS3300_scale_1_162.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_163" file="leg_left_krs__M2x20_case_tapping_1_163.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_164" file="leg_left_krs__M2x20_case_tapping_1_164.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_165" file="leg_left_krs__M2x6_lowhead_5_165.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_166" file="leg_left_krs__M2x6_lowhead_5_166.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_167" file="leg_left_krs__leg_link1_krs_1_167.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_168" file="leg_left_krs__M3x6_horn_lowhead_1_168.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_169" file="KRS3300__small_diameter_hornB_1_169.stl" />
+    <mesh name="M2x4_lowhead_1_170" file="M2x4_lowhead_1_170.stl" />
+    <mesh name="M2x4_lowhead_1_171" file="M2x4_lowhead_1_171.stl" />
+    <mesh name="M2x4_lowhead_1_172" file="M2x4_lowhead_1_172.stl" />
+    <mesh name="M2x4_lowhead_1_173" file="M2x4_lowhead_1_173.stl" />
+    <mesh name="leg_left_krs__KRS3300_scale_1_174" file="leg_left_krs__KRS3300_scale_1_174.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_175" file="leg_left_krs__M2x20_case_tapping_1_175.stl" />
+    <mesh name="leg_left_krs__M2x20_case_tapping_1_176" file="leg_left_krs__M2x20_case_tapping_1_176.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_177" file="leg_left_krs__M2x6_lowhead_5_177.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_178" file="leg_left_krs__M2x6_lowhead_5_178.stl" />
+    <mesh name="leg_left_krs__leg_link1_krs_1_179" file="leg_left_krs__leg_link1_krs_1_179.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_180" file="leg_left_krs__M3x6_horn_lowhead_1_180.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_181" file="KRS3300__small_diameter_hornB_1_181.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_182" file="leg_left_krs__M3x6_horn_lowhead_1_182.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_183" file="leg_left_krs__M2x6_lowhead_5_183.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_184" file="leg_left_krs__M2x6_lowhead_5_184.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_185" file="leg_left_krs__M2x6_lowhead_5_185.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_186" file="leg_left_krs__M2x6_lowhead_5_186.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_187" file="foot_left_krs__bracket_outline_krs_1_187.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_4_188" file="KRS3300__small_diameter_hornB_1_4_188.stl" />
+    <mesh name="leg_left_krs__M3x6_horn_lowhead_1_189" file="leg_left_krs__M3x6_horn_lowhead_1_189.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_190" file="leg_left_krs__M2x6_lowhead_5_190.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_191" file="leg_left_krs__M2x6_lowhead_5_191.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_192" file="leg_left_krs__M2x6_lowhead_5_192.stl" />
+    <mesh name="leg_left_krs__M2x6_lowhead_5_193" file="leg_left_krs__M2x6_lowhead_5_193.stl" />
+    <mesh name="foot_left_krs__bracket_outline_krs_1_194" file="foot_left_krs__bracket_outline_krs_1_194.stl" />
+    <mesh name="KRS3300__small_diameter_hornB_1_4_195" file="KRS3300__small_diameter_hornB_1_4_195.stl" />
+  </asset>
+  <worldbody>
+    <light pos="0 0 3" dir="0 0 -1" directional="true" />
+    <geom name="ground" type="plane" size="5 5 0.1" contype="1" conaffinity="1" rgba="0.8 0.8 0.8 1" />
+    <body name="base_link" pos="0 0 0">
+      <freejoint name="floating_base" />
+      <inertial pos="3.32450221e-05 -0.00512104748 0.0237882712" mass="0.383051" diaginertia="0.000582699172 0.00112064706 0.00143987177" quat="0.999830694 0.0168399561 -0.00411037771 0.00617279007" />
+      <geom pos="0.0101558015 -1.39207409e-06 0.0634706921" quat="-2.05103429e-10 0 0 1" group="2" contype="0" conaffinity="0" type="mesh" mesh="lid_krs_2_0" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual0" />
+      <geom pos="-0.045 0.0493100361 0.00593" quat="6.34933695e-11 0.707106781 6.34933696e-11 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_1" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual1" />
+      <geom pos="-0.045 0.0493100361 0.02693" quat="6.34933695e-11 0.707106781 6.34933696e-11 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_2" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual2" />
+      <geom pos="0.045 -0.0493100361 0.00593" quat="0.707106781 4.17046789e-10 -0.707106781 4.17046789e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_3" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual3" />
+      <geom pos="0.045 -0.0493100361 0.02693" quat="0.707106781 4.17046789e-10 -0.707106781 4.17046789e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_4" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual4" />
+      <geom pos="-0.045 -0.0493100361 0.00593" quat="0.707106781 -4.27688632e-20 -0.707106781 4.27688632e-20" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_5" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual5" />
+      <geom pos="-0.045 -0.0493100361 0.02693" quat="0.707106781 -4.27688632e-20 -0.707106781 4.27688632e-20" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_6" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual6" />
+      <geom pos="0.045 0.0493100361 0.00593" quat="6.34933695e-11 0.707106781 6.34933696e-11 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_7" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual7" />
+      <geom pos="0.045 0.0493100361 0.02693" quat="6.34933695e-11 0.707106781 6.34933696e-11 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__M2x8_lowhead_17_8" rgba="0.792156863 0.819607843 0.933333333 1" name="base_link_visual8" />
+      <geom pos="0 0 0" quat="-2.05103429e-10 0 0 1" group="2" contype="0" conaffinity="0" type="mesh" mesh="body_servo_krs__body_krs_1_9" rgba="1 1 1 1" name="base_link_visual9" />
+      <geom pos="-0.0578275298 -0.0345067461 0.0169004477" quat="1.45030025e-10 -1.45030025e-10 0.707106781 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_10" rgba="0.180392157 0.180392157 0.180392157 1" name="base_link_visual10" />
+      <geom pos="-0.0578275298 -0.0345067461 0.0169004477" quat="1.45030025e-10 -1.45030025e-10 0.707106781 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_11" rgba="0.752941176 0.752941176 0 1" name="base_link_visual11" />
+      <geom pos="-0.0578275298 -0.0345067461 0.0169004477" quat="1.45030025e-10 -1.45030025e-10 0.707106781 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_12" rgba="0.898039216 0.917647059 0.929411765 1" name="base_link_visual12" />
+      <geom pos="-0.0578275298 0.0345067461 0.0159595523" quat="-1.45030025e-10 -1.45030025e-10 0.707106781 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_13" rgba="0.180392157 0.180392157 0.180392157 1" name="base_link_visual13" />
+      <geom pos="-0.0578275298 0.0345067461 0.0159595523" quat="-1.45030025e-10 -1.45030025e-10 0.707106781 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_14" rgba="0.752941176 0.752941176 0 1" name="base_link_visual14" />
+      <geom pos="-0.0578275298 0.0345067461 0.0159595523" quat="-1.45030025e-10 -1.45030025e-10 0.707106781 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_15" rgba="0.898039216 0.917647059 0.929411765 1" name="base_link_visual15" />
+      <geom pos="0.0578275298 -0.0345067461 0.0159595523" quat="0.707106781 0.707106781 2.08523395e-10 2.08523395e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_16" rgba="0.180392157 0.180392157 0.180392157 1" name="base_link_visual16" />
+      <geom pos="0.0578275298 -0.0345067461 0.0159595523" quat="0.707106781 0.707106781 2.08523395e-10 2.08523395e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_17" rgba="0.752941176 0.752941176 0 1" name="base_link_visual17" />
+      <geom pos="0.0578275298 -0.0345067461 0.0159595523" quat="0.707106781 0.707106781 2.08523395e-10 2.08523395e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_18" rgba="0.898039216 0.917647059 0.929411765 1" name="base_link_visual18" />
+      <geom pos="0.0578275298 0.0345067461 0.0169004477" quat="0.707106781 -0.707106781 -2.08523395e-10 2.08523395e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_19" rgba="0.180392157 0.180392157 0.180392157 1" name="base_link_visual19" />
+      <geom pos="0.0578275298 0.0345067461 0.0169004477" quat="0.707106781 -0.707106781 -2.08523395e-10 2.08523395e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_20" rgba="0.752941176 0.752941176 0 1" name="base_link_visual20" />
+      <geom pos="0.0578275298 0.0345067461 0.0169004477" quat="0.707106781 -0.707106781 -2.08523395e-10 2.08523395e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_21" rgba="0.898039216 0.917647059 0.929411765 1" name="base_link_visual21" />
+      <body name="FL_thigh" pos="0.066 0.03064 0.01643" quat="1 0 0 0">
+        <joint name="FL_hip_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+        <inertial pos="-5.56291e-05 0.0451083781 -0.0608022727" mass="0.0454451" diaginertia="7.48157002e-06 4.04943769e-05 4.33375031e-05" quat="0.707514183 0.0147151395 -0.706471728 -0.0102393185" />
+        <geom pos="3.43100763e-07 0.0232086181 -0.006" quat="2.13566577e-10 0.707106781 -7.64935078e-11 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_36" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual0" />
+        <geom pos="-0.0059996569 0.0232086181 1.22598459e-12" quat="2.13566577e-10 0.707106781 -7.64935078e-11 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_37" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual1" />
+        <geom pos="0.00600034311 0.0232086181 -1.23525495e-12" quat="2.13566577e-10 0.707106781 -7.64935078e-11 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_38" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual2" />
+        <geom pos="3.43103224e-07 0.0232086181 0.006" quat="2.13566577e-10 0.707106781 -7.64935078e-11 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_39" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual3" />
+        <geom pos="0.000470447692 0.0463667461 -0.0802075298" quat="-0.5 0.5 -0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_40" rgba="0.180392157 0.180392157 0.180392157 1" name="FL_thigh_visual4" />
+        <geom pos="0.000470447692 0.0463667461 -0.0802075298" quat="-0.5 0.5 -0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_41" rgba="0.752941176 0.752941176 0 1" name="FL_thigh_visual5" />
+        <geom pos="0.000470447692 0.0463667461 -0.0802075298" quat="-0.5 0.5 -0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_42" rgba="0.898039216 0.917647059 0.929411765 1" name="FL_thigh_visual6" />
+        <geom pos="-0.0105 0.039371673 -0.06738" quat="-2.05103368e-10 -2.94896613e-10 1 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_43" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual7" />
+        <geom pos="0.0105 0.039371673 -0.06738" quat="-2.05103368e-10 -2.94896613e-10 1 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_44" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual8" />
+        <geom pos="-0.0105 0.0605646607 -0.0673800006" quat="2.05103429e-10 1 2.9479334e-10 6.09108552e-17" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_45" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual9" />
+        <geom pos="0.0105 0.0605646607 -0.0673800006" quat="2.05103429e-10 1 2.9479334e-10 6.09108552e-17" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_46" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual10" />
+        <geom pos="-1.83117677e-06 0.041959741 -0.0332598771" quat="3.5370544e-10 0.707106781 3.53547449e-10 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__leg_link1_krs_1_47" rgba="1 1 1 1" name="FL_thigh_visual11" />
+        <geom pos="-1.28432126e-11 0.0217757923 0" quat="-5.62076815e-10 0.707106781 5.62076815e-10 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_48" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_thigh_visual12" />
+        <geom pos="0 0 0" quat="1 0 0 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_2_49" rgba="0.294117647 0.294117647 0.294117647 1" name="FL_thigh_visual13" />
+        <body name="FL_foot" pos="-4.60082111e-11 0.056864 -0.08838" quat="1 0 0 0">
+          <joint name="FL_knee_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+          <inertial pos="0.00463136968 0.00966859738 -0.0455395868" mass="0.0114821" diaginertia="7.6982053e-07 1.4829507e-05 1.53925725e-05" quat="0.593400989 0.623161583 0.353092604 -0.36724722" />
+          <geom pos="-2.84970658e-12 0.00741179226 1.52183821e-12" quat="2.94896613e-10 1 1.92241626e-10 -5.84553111e-13" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_62" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_foot_visual0" />
+          <geom pos="0.00424264047 0.0100006607 0.00424264122" quat="-2.31761375e-10 -0.168992545 -2.07343366e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_63" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_foot_visual1" />
+          <geom pos="0.00424264048 0.0100006607 -0.00424264015" quat="-2.31761375e-10 -0.168992545 -2.07343366e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_64" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_foot_visual2" />
+          <geom pos="-0.0042426409 0.0100006607 -0.00424264016" quat="-2.31761375e-10 -0.168992545 -2.07343366e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_65" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_foot_visual3" />
+          <geom pos="-0.0042426409 0.0100006607 0.00424264122" quat="-2.31761375e-10 -0.168992545 -2.07343366e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_66" rgba="0.792156863 0.819607843 0.933333333 1" name="FL_foot_visual4" />
+          <geom pos="0.00491596862 0.00979582264 -0.0488758787" quat="-0.408312392 0.408312392 0.577304937 0.577304937" group="2" contype="0" conaffinity="0" type="mesh" mesh="foot_left_krs__bracket_outline_krs_1_67" rgba="1 1 1 1" name="FL_foot_visual5" />
+          <geom pos="0 0 0" quat="1 1.02663431e-10 -6.0830633e-17 1.92241626e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_3_68" rgba="0.294117647 0.294117647 0.294117647 1" name="FL_foot_visual6" />
+          <geom name="FL_toe" type="sphere" size="0.006" pos="0.00708299 0.009796 -0.113374" rgba="0.1 0.1 0.1 1" />
+          <site name="FL" pos="0.00708299 0.009796 -0.119374" size="0.004" group="4" rgba="1 0 0 1" />
+          <geom name="FL_knee_ball" type="sphere" size="0.012" pos="0 -0.012 0" group="3" rgba="0.8 0.2 0.2 0.3" />
+          <geom name="FL_shank_cap" type="capsule" size="0.008" fromto="0 0.0095 0 0.00708299 0.0095 -0.113374" group="3" rgba="0.2 0.8 0.2 0.3" />
+        </body>
+        <geom name="FL_thigh_cap" type="capsule" size="0.013" fromto="0 0.041 0 -4.60082e-11 0.041 -0.08838" group="3" rgba="0.2 0.8 0.2 0.3" />
+      </body>
+      <body name="RL_thigh" pos="-0.066 0.03064 0.01643" quat="1 0 0 0">
+        <joint name="RL_hip_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+        <inertial pos="-5.56291064e-05 0.0451083781 -0.0608022727" mass="0.0454451" diaginertia="7.48157002e-06 4.04943769e-05 4.33375031e-05" quat="0.707514184 0.014715139 -0.706471727 -0.0102393189" />
+        <geom pos="3.43113753e-07 0.023208618 -0.006" quat="4.00424701e-10 0.707106781 -3.13899295e-10 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_76" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual0" />
+        <geom pos="-0.00599965688 0.023208618 4.76381434e-12" quat="4.00424701e-10 0.707106781 -3.13899295e-10 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_77" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual1" />
+        <geom pos="0.00600034312 0.023208618 -4.77494433e-12" quat="4.00424701e-10 0.707106781 -3.13899295e-10 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_78" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual2" />
+        <geom pos="3.43123291e-07 0.023208618 0.006" quat="4.00424701e-10 0.707106781 -3.13899295e-10 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_79" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual3" />
+        <geom pos="0.000470447675 0.0463667461 -0.0802075298" quat="-0.5 0.5 -0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_80" rgba="0.180392157 0.180392157 0.180392157 1" name="RL_thigh_visual4" />
+        <geom pos="0.000470447675 0.0463667461 -0.0802075298" quat="-0.5 0.5 -0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_81" rgba="0.752941176 0.752941176 0 1" name="RL_thigh_visual5" />
+        <geom pos="0.000470447675 0.0463667461 -0.0802075298" quat="-0.5 0.5 -0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_82" rgba="0.898039216 0.917647059 0.929411765 1" name="RL_thigh_visual6" />
+        <geom pos="-0.0105 0.039371673 -0.06738" quat="-4.99999957e-10 -2.05103428e-10 1 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_83" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual7" />
+        <geom pos="0.0104999999 0.039371673 -0.06738" quat="-4.99999957e-10 -2.05103428e-10 1 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_84" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual8" />
+        <geom pos="-0.0105 0.0605646607 -0.0673800006" quat="2.05103429e-10 1 -1.03403778e-13 -2.94896529e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_85" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual9" />
+        <geom pos="0.0104999999 0.0605646607 -0.0673800006" quat="2.05103429e-10 1 -1.03403778e-13 -2.94896529e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_86" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual10" />
+        <geom pos="-1.8311688e-06 0.041959741 -0.0332598771" quat="-1.94897853e-11 0.707106781 -1.95376873e-11 -0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__leg_link1_krs_1_87" rgba="1 1 1 1" name="RL_thigh_visual11" />
+        <geom pos="0 0.0217757923 0" quat="1.71101982e-10 0.707106781 -1.71101982e-10 0.707106781" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_88" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_thigh_visual12" />
+        <geom pos="0 0 0" quat="1 1.78366171e-29 2.94896613e-10 -6.04843063e-20" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_2_89" rgba="0.294117647 0.294117647 0.294117647 1" name="RL_thigh_visual13" />
+        <body name="RL_foot" pos="-6.17561419e-11 0.056864 -0.08838" quat="1 0 0 0">
+          <joint name="RL_knee_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+          <inertial pos="0.00463136966 0.00966859738 -0.0455395868" mass="0.0114821" diaginertia="7.6982053e-07 1.4829507e-05 1.53925725e-05" quat="0.593400989 0.623161583 0.353092604 -0.36724722" />
+          <geom pos="1.52171331e-12 0.00741179226 1.52212965e-12" quat="2.94896613e-10 1 -1.02655118e-10 -2.95480434e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_102" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_foot_visual0" />
+          <geom pos="0.00424264048 0.0100006607 0.00424264122" quat="2.61043826e-10 -0.168992545 -1.22867529e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_103" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_foot_visual1" />
+          <geom pos="0.00424264048 0.0100006607 -0.00424264015" quat="2.61043826e-10 -0.168992545 -1.22867529e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_104" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_foot_visual2" />
+          <geom pos="-0.0042426409 0.0100006607 -0.00424264015" quat="2.61043826e-10 -0.168992545 -1.22867529e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_105" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_foot_visual3" />
+          <geom pos="-0.00424264089 0.0100006607 0.00424264122" quat="2.61043826e-10 -0.168992545 -1.22867529e-10 0.985617329" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_106" rgba="0.792156863 0.819607843 0.933333333 1" name="RL_foot_visual4" />
+          <geom pos="0.0049159686 0.00979582264 -0.0488758787" quat="-0.408312392 0.408312393 0.577304937 0.577304937" group="2" contype="0" conaffinity="0" type="mesh" mesh="foot_left_krs__bracket_outline_krs_1_107" rgba="1 1 1 1" name="RL_foot_visual5" />
+          <geom pos="0 0 0" quat="1 1.02682988e-10 2.94896529e-10 -1.02655118e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_3_108" rgba="0.294117647 0.294117647 0.294117647 1" name="RL_foot_visual6" />
+          <geom name="RL_toe" type="sphere" size="0.006" pos="0.00708299 0.009796 -0.113374" rgba="0.1 0.1 0.1 1" />
+          <site name="RL" pos="0.00708299 0.009796 -0.119374" size="0.004" group="4" rgba="1 0 0 1" />
+          <geom name="RL_knee_ball" type="sphere" size="0.012" pos="0 -0.012 0" group="3" rgba="0.8 0.2 0.2 0.3" />
+          <geom name="RL_shank_cap" type="capsule" size="0.008" fromto="0 0.0095 0 0.00708299 0.0095 -0.113374" group="3" rgba="0.2 0.8 0.2 0.3" />
+        </body>
+        <geom name="RL_thigh_cap" type="capsule" size="0.013" fromto="0 0.041 0 -6.17561e-11 0.041 -0.08838" group="3" rgba="0.2 0.8 0.2 0.3" />
+      </body>
+      <body name="RR_thigh" pos="-0.066 -0.03064 0.01643" quat="1 0 0 0">
+        <joint name="RR_hip_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+        <inertial pos="5.55849442e-05 -0.0451083781 -0.0608022727" mass="0.0454451" diaginertia="7.48156963e-06 4.04943763e-05 4.33375041e-05" quat="0.0147207603 0.707515284 -0.0102337164 -0.706470589" />
+        <geom pos="3.43120172e-07 -0.023208618 -0.006" quat="0.707106781 1.36280289e-14 0.707106781 1.36280289e-14" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_116" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual0" />
+        <geom pos="0.00600034312 -0.023208618 2.30728631e-12" quat="0.707106781 1.36280289e-14 0.707106781 1.36280289e-14" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_117" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual1" />
+        <geom pos="-0.00599965688 -0.023208618 -2.30898633e-12" quat="0.707106781 1.36280289e-14 0.707106781 1.36280289e-14" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_118" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual2" />
+        <geom pos="3.43115556e-07 -0.023208618 0.006" quat="0.707106781 1.36280289e-14 0.707106781 1.36280289e-14" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_119" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual3" />
+        <geom pos="-0.000470447691 -0.0463667461 -0.0802075298" quat="-0.5 -0.5 -0.5 0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_120" rgba="0.180392157 0.180392157 0.180392157 1" name="RR_thigh_visual4" />
+        <geom pos="-0.000470447691 -0.0463667461 -0.0802075298" quat="-0.5 -0.5 -0.5 0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_121" rgba="0.752941176 0.752941176 0 1" name="RR_thigh_visual5" />
+        <geom pos="-0.000470447691 -0.0463667461 -0.0802075298" quat="-0.5 -0.5 -0.5 0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_122" rgba="0.898039216 0.917647059 0.929411765 1" name="RR_thigh_visual6" />
+        <geom pos="0.0105 -0.039371673 -0.06738" quat="2.94896613e-10 1 -1.84384393e-19 2.94896619e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_123" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual7" />
+        <geom pos="-0.0105 -0.039371673 -0.06738" quat="2.94896613e-10 1 -1.84384393e-19 2.94896619e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_124" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual8" />
+        <geom pos="0.0105 -0.0605646607 -0.0673800006" quat="8.97931907e-11 -2.05103429e-10 1 2.05103429e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_125" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual9" />
+        <geom pos="-0.0105 -0.0605646607 -0.0673800006" quat="8.97931907e-11 -2.05103429e-10 1 2.05103429e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_126" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual10" />
+        <geom pos="1.83117154e-06 -0.041959741 -0.0332598771" quat="0.707106781 1.36691564e-14 0.707106781 1.36691564e-14" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__leg_link1_krs_1_127" rgba="1 1 1 1" name="RR_thigh_visual11" />
+        <geom pos="0 -0.0217757923 0" quat="0.707106781 2.7680078e-20 0.707106781 -4.30305979e-20" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_128" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_thigh_visual12" />
+        <geom pos="0 0 0" quat="1 -1.78366171e-29 -2.94896613e-10 -6.04843063e-20" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_129" rgba="0.294117647 0.294117647 0.294117647 1" name="RR_thigh_visual13" />
+        <body name="RR_foot" pos="4.18945712e-11 -0.056864 -0.08838" quat="1 0 0 0">
+          <joint name="RR_knee_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+          <inertial pos="0.0046313697 -0.00966859719 -0.0455395867" mass="0.0114821" diaginertia="7.69820531e-07 1.4829507e-05 1.53925725e-05" quat="0.623161548 0.593401026 0.367247201 -0.353092624" />
+          <geom pos="-1.52018675e-12 -0.00741179226 1.52072799e-12" quat="2.94316082e-10 2.94896613e-10 1 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_142" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_foot_visual0" />
+          <geom pos="0.00424264047 -0.0100006607 0.00424264123" quat="0.985617329 1.51386429e-11 -0.168992546 3.2532229e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_143" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_foot_visual1" />
+          <geom pos="0.00424264047 -0.0100006607 -0.00424264014" quat="0.985617329 1.51386429e-11 -0.168992546 3.2532229e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_144" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_foot_visual2" />
+          <geom pos="-0.00424264091 -0.0100006607 -0.00424264015" quat="0.985617329 1.51386429e-11 -0.168992546 3.2532229e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_145" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_foot_visual3" />
+          <geom pos="-0.00424264091 -0.0100006607 0.00424264122" quat="0.985617329 1.51386429e-11 -0.168992546 3.2532229e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_146" rgba="0.792156863 0.819607843 0.933333333 1" name="RR_foot_visual4" />
+          <geom pos="0.00491596865 -0.0097961774 -0.0488758787" quat="-0.408312392 0.408312392 0.577304938 0.577304937" group="2" contype="0" conaffinity="0" type="mesh" mesh="foot_left_krs__bracket_outline_krs_1_147" rgba="1 1 1 1" name="RR_foot_visual5" />
+          <geom pos="0 0 0" quat="1 -1.02587971e-10 -2.94896619e-10 -1.02551714e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_4_148" rgba="0.294117647 0.294117647 0.294117647 1" name="RR_foot_visual6" />
+          <geom name="RR_toe" type="sphere" size="0.006" pos="0.00708299 -0.009796 -0.113374" rgba="0.1 0.1 0.1 1" />
+          <site name="RR" pos="0.00708299 -0.009796 -0.119374" size="0.004" group="4" rgba="1 0 0 1" />
+          <geom name="RR_knee_ball" type="sphere" size="0.012" pos="0 0.012 0" group="3" rgba="0.8 0.2 0.2 0.3" />
+          <geom name="RR_shank_cap" type="capsule" size="0.008" fromto="0 -0.0095 0 0.00708299 -0.0095 -0.113374" group="3" rgba="0.2 0.8 0.2 0.3" />
+        </body>
+        <geom name="RR_thigh_cap" type="capsule" size="0.013" fromto="0 -0.041 0 4.18946e-11 -0.041 -0.08838" group="3" rgba="0.2 0.8 0.2 0.3" />
+      </body>
+      <body name="FR_thigh" pos="0.066 -0.03064 0.01643" quat="1 0 0 0">
+        <joint name="FR_hip_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+        <inertial pos="5.5584935e-05 -0.0451083781 -0.0608022727" mass="0.0454451" diaginertia="7.48156963e-06 4.04943763e-05 4.33375041e-05" quat="0.0147207603 0.707515284 -0.0102337164 -0.706470589" />
+        <geom pos="0.00600034313 -0.023208618 -1.23220184e-12" quat="0.707106781 -3.53517609e-10 0.707106781 3.5358923e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_156" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual0" />
+        <geom pos="-0.00599965687 -0.023208618 1.2290377e-12" quat="0.707106781 -3.53517609e-10 0.707106781 3.5358923e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_157" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual1" />
+        <geom pos="3.43132783e-07 -0.023208618 0.006" quat="0.707106781 -3.53517609e-10 0.707106781 3.5358923e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_158" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual2" />
+        <geom pos="3.43130321e-07 -0.023208618 -0.006" quat="0.707106781 -3.53517609e-10 0.707106781 3.5358923e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="M2x4_lowhead_1_159" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual3" />
+        <geom pos="-0.000470447711 -0.0463667461 -0.0802075298" quat="0.5 0.5 0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_160" rgba="0.180392157 0.180392157 0.180392157 1" name="FR_thigh_visual4" />
+        <geom pos="-0.000470447711 -0.0463667461 -0.0802075298" quat="0.5 0.5 0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_161" rgba="0.752941176 0.752941176 0 1" name="FR_thigh_visual5" />
+        <geom pos="-0.000470447711 -0.0463667461 -0.0802075298" quat="0.5 0.5 0.5 -0.5" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__KRS3300_scale_1_162" rgba="0.898039216 0.917647059 0.929411765 1" name="FR_thigh_visual6" />
+        <geom pos="0.0105 -0.039371673 -0.06738" quat="2.94896613e-10 1 2.94896613e-10 1.24506426e-17" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_163" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual7" />
+        <geom pos="-0.0105 -0.039371673 -0.06738" quat="2.94896613e-10 1 2.94896613e-10 1.24506426e-17" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x20_case_tapping_1_164" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual8" />
+        <geom pos="0.0105 -0.0605646607 -0.0673800006" quat="-2.05103416e-10 -2.94896613e-10 1 2.05103428e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_165" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual9" />
+        <geom pos="-0.0105 -0.0605646607 -0.0673800006" quat="-2.05103416e-10 -2.94896613e-10 1 2.05103428e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_166" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual10" />
+        <geom pos="1.83117667e-06 -0.041959741 -0.0332598771" quat="0.707106781 -3.53517812e-10 0.707106781 3.53589028e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__leg_link1_krs_1_167" rgba="1 1 1 1" name="FR_thigh_visual11" />
+        <geom pos="1.28432126e-11 -0.0217757923 0" quat="0.707106781 -2.08523395e-10 0.707106781 2.08523395e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_168" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_thigh_visual12" />
+        <geom pos="0 0 0" quat="1 0 0 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_169" rgba="0.294117647 0.294117647 0.294117647 1" name="FR_thigh_visual13" />
+        <body name="FR_foot" pos="2.33066483e-11 -0.056864 -0.08838" quat="1 0 0 0">
+          <joint name="FR_knee_joint" pos="0 0 0" axis="0 1 0" type="hinge" range="-2.35619 2.35619" />
+          <inertial pos="0.00463136968 -0.00966859719 -0.0455395868" mass="0.0114821" diaginertia="7.69820531e-07 1.4829507e-05 1.53925725e-05" quat="0.623161553 0.593401021 0.367247204 -0.353092621" />
+          <geom pos="2.85124702e-12 -0.00741179226 1.52093616e-12" quat="-5.80612436e-13 2.94896613e-10 1 2.94896613e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M3x6_horn_lowhead_1_182" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_foot_visual0" />
+          <geom pos="0.00424264047 -0.0100006607 0.00424264123" quat="0.985617329 6.49600752e-11 -0.168992545 6.15979884e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_183" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_foot_visual1" />
+          <geom pos="0.00424264048 -0.0100006607 -0.00424264014" quat="0.985617329 6.49600752e-11 -0.168992545 6.15979884e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_184" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_foot_visual2" />
+          <geom pos="-0.0042426409 -0.0100006607 -0.00424264015" quat="0.985617329 6.49600752e-11 -0.168992545 6.15979884e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_185" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_foot_visual3" />
+          <geom pos="-0.0042426409 -0.0100006607 0.00424264123" quat="0.985617329 6.49600752e-11 -0.168992545 6.15979884e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="leg_left_krs__M2x6_lowhead_5_186" rgba="0.792156863 0.819607843 0.933333333 1" name="FR_foot_visual4" />
+          <geom pos="0.00491596863 -0.00979617739 -0.0488758787" quat="-0.408312392 0.408312391 0.577304938 0.577304937" group="2" contype="0" conaffinity="0" type="mesh" mesh="foot_left_krs__bracket_outline_krs_1_187" rgba="1 1 1 1" name="FR_foot_visual5" />
+          <geom pos="0 0 0" quat="1 -1.02602071e-10 -1.23834239e-17 1.92344899e-10" group="2" contype="0" conaffinity="0" type="mesh" mesh="KRS3300__small_diameter_hornB_1_4_188" rgba="0.294117647 0.294117647 0.294117647 1" name="FR_foot_visual6" />
+          <geom name="FR_toe" type="sphere" size="0.006" pos="0.00708299 -0.009796 -0.113374" rgba="0.1 0.1 0.1 1" />
+          <site name="FR" pos="0.00708299 -0.009796 -0.119374" size="0.004" group="4" rgba="1 0 0 1" />
+          <geom name="FR_knee_ball" type="sphere" size="0.012" pos="0 0.012 0" group="3" rgba="0.8 0.2 0.2 0.3" />
+          <geom name="FR_shank_cap" type="capsule" size="0.008" fromto="0 -0.0095 0 0.00708299 -0.0095 -0.113374" group="3" rgba="0.2 0.8 0.2 0.3" />
+        </body>
+        <geom name="FR_thigh_cap" type="capsule" size="0.013" fromto="0 -0.041 0 2.33066e-11 -0.041 -0.08838" group="3" rgba="0.2 0.8 0.2 0.3" />
+      </body>
+      <geom name="base_box" type="box" size="0.088 0.055 0.039" pos="0 0 0.039" group="3" rgba="0.2 0.2 0.8 0.3" />
+      <site name="imu_in_body" pos="0 0 0" size="0.005" group="4" rgba="0 1 0 1" />
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="FL_hip_joint_act" joint="FL_hip_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+    <position name="FL_knee_joint_act" joint="FL_knee_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+    <position name="RL_hip_joint_act" joint="RL_hip_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+    <position name="RL_knee_joint_act" joint="RL_knee_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+    <position name="RR_hip_joint_act" joint="RR_hip_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+    <position name="RR_knee_joint_act" joint="RR_knee_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+    <position name="FR_hip_joint_act" joint="FR_hip_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+    <position name="FR_knee_joint_act" joint="FR_knee_joint" kp="5.5" ctrlrange="-2.35619 2.35619" forcerange="-0.657 0.657" />
+  </actuator>
+  <sensor>
+    <gyro name="imu_ang_vel" site="imu_in_body" />
+    <velocimeter name="imu_lin_vel" site="imu_in_body" />
+    <accelerometer name="imu_lin_acc" site="imu_in_body" />
+    <subtreeangmom name="root_angmom" body="base_link" />
+  </sensor>
+  <keyframe>
+    <key name="home" qpos="0 0 0.13 1 0 0 0 0.94060824 -1.5579424 0.94060824 -1.5579424 0.94060824 -1.5579424 0.94060824 -1.5579424" ctrl="0.94060824 -1.5579424 0.94060824 -1.5579424 0.94060824 -1.5579424 0.94060824 -1.5579424" />
+  </keyframe>
+</mujoco>

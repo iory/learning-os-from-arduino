@@ -341,8 +341,13 @@ def main() -> int:
   ap.add_argument("task", nargs="?", default="ArduinoQuad-Walk")
   ap.add_argument("--backend", choices=("mjlab", "cpu"), default="mjlab",
                   help="which trainer's env to read the layout from")
+  ap.add_argument("--name", default="arduino_quad_policy",
+                  help="output file stem: <name>.h / .json / .npz. The KRS robot "
+                       "uses krs_quad_policy so it can never be mistaken for the "
+                       "Feetech robot's arduino_quad_policy.h")
   args = ap.parse_args()
   CKPT, OUTDIR, TASK = args.ckpt, args.outdir, args.task
+  name = args.name
   DEV = "cuda:0" if args.backend == "mjlab" else "cpu"
   runner, live = (_read_env_mjlab if args.backend == "mjlab" else _read_env_cpu)()
   if args.backend == "cpu":
@@ -438,7 +443,7 @@ def main() -> int:
                                meta["gait_period_s"])
 
   os.makedirs(OUTDIR, exist_ok=True)
-  with open(os.path.join(OUTDIR, "arduino_quad_policy.json"), "w") as f:
+  with open(os.path.join(OUTDIR, name + ".json"), "w") as f:
     json.dump(meta, f, indent=2)
 
   # Same weights again as .npz, for the host-side Python controller. A laptop
@@ -452,8 +457,8 @@ def main() -> int:
     npz["w%d" % li] = w
     npz["b%d" % li] = b
   npz["n_layers"] = np.int32(len(layers))
-  np.savez(os.path.join(OUTDIR, "arduino_quad_policy.npz"), **npz)
-  print("wrote {}".format(os.path.join(OUTDIR, "arduino_quad_policy.npz")))
+  np.savez(os.path.join(OUTDIR, name + ".npz"), **npz)
+  print("wrote {}".format(os.path.join(OUTDIR, name + ".npz")))
 
   def cfloat(v):
     # "%.9g" of 0.0 is "0", and "0f" is not a valid C float literal -- force a
@@ -529,19 +534,20 @@ def main() -> int:
       h.append("  for (int o = 0; o < {}; ++o) a[o] = b[o];\n".format(nout))
   h.append("}\n")
 
-  path = os.path.join(OUTDIR, "arduino_quad_policy.h")
+  path = os.path.join(OUTDIR, name + ".h")
   with open(path, "w") as f:
     f.writelines(h)
   nparam = sum(w.size + b.size for w, b in layers)
   print("wrote {} ({} parameters, {:.1f} KB as float32)".format(
     path, nparam, nparam * 4 / 1024))
-  _check_generated_c(OUTDIR, obs_dim, act_dim, forward_np)
-  print("wrote {}".format(os.path.join(OUTDIR, "arduino_quad_policy.json")))
+  _check_generated_c(OUTDIR, obs_dim, act_dim, forward_np, name)
+  print("wrote {}".format(os.path.join(OUTDIR, name + ".json")))
   print("action joint order:", act_joint_names)
   return 0
 
 
-def _check_generated_c(outdir, obs_dim, act_dim, forward_np) -> None:
+def _check_generated_c(outdir, obs_dim, act_dim, forward_np,
+                       name="arduino_quad_policy") -> None:
   """Compile the generated header with the host cc and compare against numpy.
 
   The weights are verified against PyTorch above, but the C forward pass is
@@ -559,7 +565,7 @@ def _check_generated_c(outdir, obs_dim, act_dim, forward_np) -> None:
 
   main_c = """
 #include <stdio.h>
-#include "arduino_quad_policy.h"
+#include "NAME.h"
 int main(void) {
   float obs[QUAD_OBS_DIM], act[QUAD_ACT_DIM];
   int n; if (scanf("%d", &n) != 1) return 1;
@@ -571,7 +577,7 @@ int main(void) {
   }
   return 0;
 }
-"""
+""".replace("NAME", name)
   with tempfile.TemporaryDirectory() as td:
     src = os.path.join(td, "check.c")
     exe = os.path.join(td, "check")

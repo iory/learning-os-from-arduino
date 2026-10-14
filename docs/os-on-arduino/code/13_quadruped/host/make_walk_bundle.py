@@ -41,22 +41,25 @@ def log_relative(checkpoint: str, training: dict) -> str:
         os.path.basename(checkpoint))
 
 
-def build(export_dir: str) -> dict:
+def build(export_dir: str, name: str = "arduino_quad_policy") -> dict:
     """Read an export directory and return the browser bundle.
 
     Parameters
     ----------
     export_dir : str
-        Directory holding ``arduino_quad_policy.json`` and ``.npz``.
+        Directory holding ``<name>.json`` and ``<name>.npz``.
+    name : str
+        File stem the exporter wrote (``--name``); ``krs_quad_policy`` for the
+        KRS robot.
 
     Returns
     -------
     dict
         ``{"meta": ..., "n_layers": ..., "w0": ..., "b0": ..., ...}``.
     """
-    meta = json.load(open(os.path.join(export_dir, "arduino_quad_policy.json")))
+    meta = json.load(open(os.path.join(export_dir, name + ".json")))
     meta["checkpoint"] = log_relative(meta["checkpoint"], meta["training"])
-    weights = np.load(os.path.join(export_dir, "arduino_quad_policy.npz"))
+    weights = np.load(os.path.join(export_dir, name + ".npz"))
     n_layers = int(weights["n_layers"])
     bundle = {"meta": meta, "n_layers": n_layers}
     for key in ARRAY_KEYS:
@@ -71,8 +74,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("export_dir", help="export_quad_policy.py の出力先")
     parser.add_argument("out", help="書き出す policy.json")
+    parser.add_argument("--name", default="arduino_quad_policy",
+                        help="書き出し物のファイル名（KRS 版は krs_quad_policy）")
     args = parser.parse_args()
-    bundle = build(args.export_dir)
+    bundle = build(args.export_dir, args.name)
     with open(args.out, "w") as handle:
         json.dump(bundle, handle)
     print("wrote {} (checkpoint={}, phase_command_threshold={})".format(

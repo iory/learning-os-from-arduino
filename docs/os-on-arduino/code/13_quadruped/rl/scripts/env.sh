@@ -9,6 +9,8 @@ _here="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 # rl/scripts -> rl -> 13_quadruped
 export ARDUINO_QUAD_ROOT="$(cd "$_here/../.." && pwd)"
 export ARDUINO_QUAD_XML="$ARDUINO_QUAD_ROOT/arduino_os_quad_robot/mjcf/arduino_os_quad_robot.xml"
+# KRS 版（KrsQuad-*）の MJCF。krs_quad_robot/scripts/build_mjcf.py が作る
+export KRS_QUAD_XML="$ARDUINO_QUAD_ROOT/krs_quad_robot/mjcf/krs_quad_robot.xml"
 
 # 上流（unitree_rl_mjlab）のチェックアウト先
 export ARDUINO_QUAD_UPSTREAM="${ARDUINO_QUAD_UPSTREAM:-$ARDUINO_QUAD_ROOT/.upstream/unitree_rl_mjlab}"
