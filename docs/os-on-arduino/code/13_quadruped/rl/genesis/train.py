@@ -1,6 +1,6 @@
 """Train ArduinoQuad-Walk with PPO on Genesis (GPU).
 
-    uv run train.py                                    # Walk, 4096 envs, cuda
+    uv run train.py                                    # Walk, 4096 envs, GPU (CUDA, or Metal on a Mac)
     uv run train.py --num-envs 1024 --iterations 300   # a short check
     uv run train.py --task robust --resume logs/rsl_rl/arduino_quad_velocity/<run>/model_2299.pt
 
@@ -41,7 +41,8 @@ def main() -> int:
     p.add_argument("--task", choices=("walk", "robust"), default="walk")
     p.add_argument("--num-envs", type=int, default=4096)
     p.add_argument("--iterations", type=int, default=2300)
-    p.add_argument("--device", default="cuda", help="Genesis and the PPO update: cuda or cpu")
+    p.add_argument("--device", default="gpu",
+                   help="Genesis and the PPO update: gpu (CUDA, or Metal/MPS on a Mac) or cpu")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--run-name", default="genesis")
     p.add_argument("--resume", default=None, help="checkpoint to continue from (any of the three trainers)")

@@ -150,7 +150,7 @@ def main() -> int:
     p.add_argument("--envs", type=int, default=64)
     p.add_argument("--seconds", type=float, default=20.0)
     p.add_argument("--dr", action="store_true", help="keep the startup domain randomization")
-    p.add_argument("--device", default="cuda", help="Genesis device")
+    p.add_argument("--device", default="gpu", help="Genesis device: gpu (CUDA, or Metal on a Mac) or cpu")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 

@@ -17,7 +17,7 @@ export ARDUINO_QUAD_HOME_HEIGHT=0.11 ARDUINO_QUAD_GAIT_PERIOD=0.32
 uv run train.py --num-envs 4096 --iterations 2300 --seed 1
 uv run sim2sim.py --checkpoint logs/rsl_rl/arduino_quad_velocity/<run>/model_2299.pt
 uv run sim2sim.py --npz ../../arduino_quad_policy.npz --commands "0.12,0"   # MuJoCo の方策を Genesis で
-MUJOCO_GL=egl uv run render.py --checkpoint logs/rsl_rl/arduino_quad_velocity/<run>/model_2299.pt --out walk.mp4
+uv run render.py --checkpoint logs/rsl_rl/arduino_quad_velocity/<run>/model_2299.pt --out walk.mp4
 
 uv run python ../../host/export_quad_policy.py \
     logs/rsl_rl/arduino_quad_velocity/<run>/model_2299.pt 出力先 --backend genesis
@@ -28,6 +28,12 @@ uv run python ../../host/make_walk_bundle.py 出力先 \
 `uv run python` の `python` は省かないでください。省くと uv がスクリプトの置き場所の
 `host/` を別プロジェクトとして扱い、torch の無い環境で動かして失敗します。
 
+Mac（Apple シリコン）でも同じコマンドで動きます。`--device` の既定の `gpu` は、Linux では
+CUDA、Mac では Genesis が Metal、PPO の更新が MPS になります（M4 Max で 4096 環境の
+1 iteration が約 1.4 秒。5 iteration だけ回して測った値）。`uv sync` で torch の wheel が
+無いと言われたら x86_64 の Python が選ばれているので、
+`uv sync --python cpython-3.12-macos-aarch64` で arm64 の Python を指定してください。
+
 ## ファイル
 
 | ファイル | 中身 |
@@ -35,7 +41,7 @@ uv run python ../../host/make_walk_bundle.py 出力先 \
 | `gs_env.py` | ベクトル化した環境（rsl_rl の `VecEnv`）。1 ステップの中身は `../cpu/quad_env.py` と同じ順序で、すべて torch |
 | `train.py` | 学習の入口。ログは `logs/rsl_rl/arduino_quad_velocity/<日時>_<名前>/`、`params/env.yaml` に `trainer: genesis` |
 | `sim2sim.py` | `--sim genesis` / `mujoco` / `both`（既定）で、前進・旋回の速さ、ロール・ピッチ、転倒、歩容を出す |
-| `render.py` | 1 台を歩かせて mp4 に書き出す。歩かせるのは `--sim mujoco`（既定）か `genesis`、描画はどちらも MuJoCo（画面の無い機械では `MUJOCO_GL=egl`）。指令は `--seconds` ごとにリセットせずに切り替わる |
+| `render.py` | 1 台を歩かせて mp4 に書き出す。歩かせるのは `--sim mujoco`（既定）か `genesis`、描画はどちらも MuJoCo（画面の無い Linux では `render.py` が `MUJOCO_GL=egl` にする）。指令は `--seconds` ごとにリセットせずに切り替わる |
 
 ## 実測
 

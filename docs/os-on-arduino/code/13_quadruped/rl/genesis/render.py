@@ -7,19 +7,27 @@ The walk is simulated by ``--sim mujoco`` (default; the CPU trainer's env, the
 same physics as the browser simulator) or ``--sim genesis``. Either way the
 frames are drawn by MuJoCo from the full MJCF, meshes included, with a camera
 that follows the base. The commands change in place, without a reset, every
-``--seconds``. Headless machines (Colab) need ``MUJOCO_GL=egl``.
+``--seconds``. On Linux with no display (Colab, a server over ssh)
+``MUJOCO_GL`` is set to ``egl``; elsewhere, a Mac included, MuJoCo keeps its default.
+A ``MUJOCO_GL`` already set is left alone.
 """
 
 import argparse
+import os
 import shutil
 import subprocess
 import sys
 
-import mujoco
-import numpy as np
-import torch
+# MuJoCo picks its OpenGL when it is imported. A Linux machine with no display
+# has only EGL; a desktop or a Mac (which has no EGL) is right with the default.
+if sys.platform.startswith("linux") and not (os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")):
+    os.environ.setdefault("MUJOCO_GL", "egl")
 
-from sim2sim import GenesisView, MujocoView, T, npz_policy
+import mujoco  # noqa: E402
+import numpy as np  # noqa: E402
+import torch  # noqa: E402
+
+from sim2sim import GenesisView, MujocoView, T, npz_policy  # noqa: E402
 
 
 def qpos_of(view, sim: str) -> np.ndarray:
@@ -67,7 +75,7 @@ def main() -> int:
     p.add_argument("--height", type=int, default=360)
     p.add_argument("--fps", type=int, default=25)
     p.add_argument("--dr", action="store_true", help="keep the startup domain randomization")
-    p.add_argument("--device", default="cuda", help="Genesis device")
+    p.add_argument("--device", default="gpu", help="Genesis device: gpu (CUDA, or Metal on a Mac) or cpu")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 

@@ -145,13 +145,13 @@ class GenesisQuadEnv(VecEnv):
     domain_rand : bool
         Apply the startup domain randomization of task.py.
     device : str
-        ``"cuda"`` (Genesis on the GPU) or ``"cpu"``.
+        ``"gpu"`` (CUDA, or Metal on a Mac, with torch on MPS) or ``"cpu"``.
     seed : int
         Seed for everything this env samples.
     """
 
     def __init__(self, num_envs: int, robust: bool = False, play: bool = False,
-                 domain_rand: bool = True, device: str = "cuda", seed: int = 0) -> None:
+                 domain_rand: bool = True, device: str = "gpu", seed: int = 0) -> None:
         if T.TERRAIN != "plane":
             raise NotImplementedError("the Genesis trainer only has the flat floor (ARDUINO_QUAD_TERRAIN=plane)")
         if T.ERFI:
