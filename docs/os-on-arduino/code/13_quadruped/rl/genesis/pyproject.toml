@@ -1,0 +1,19 @@
+[project]
+name = "arduino-quad-genesis-trainer"
+version = "0.1.0"
+description = "ArduinoQuad-Walk on Genesis: the task of rl/cpu with the physics on the GPU, for the sim2sim check in MuJoCo"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "genesis-world==1.4.4",
+    # The same PPO as the mjlab and CPU trainers, so the checkpoint goes
+    # through the same exporter (host/export_quad_policy.py).
+    "rsl-rl-lib==5.0.1",
+    # The MuJoCo the other two trainers pin; sim2sim.py replays the policy in it.
+    "mujoco==3.7.0",
+    "torch>=2.2",
+    "numpy>=1.26",
+    "tensorboard>=2.14",
+]
+
+[tool.uv]
+package = false

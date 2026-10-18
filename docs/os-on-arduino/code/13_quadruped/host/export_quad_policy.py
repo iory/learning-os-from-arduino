@@ -19,6 +19,11 @@ and for one from the plain-MuJoCo trainer (rl/cpu; no GPU, no mjlab):
 
     cd rl/cpu && uv run ../../host/export_quad_policy.py <ckpt.pt> [outdir] --backend cpu
 
+and for one from the Genesis trainer (rl/genesis; the layout is read from the
+plain-MuJoCo env, which has the same task, so no GPU is needed either):
+
+    cd rl/genesis && uv run ../../host/export_quad_policy.py <ckpt.pt> [outdir] --backend genesis
+
 Both read the same constants -- the CPU trainer's env is checked against mjlab
 by rl/cpu/parity_check.py -- so both produce the same header for the same
 weights.
@@ -102,6 +107,9 @@ def _training_provenance(ckpt):
         prov[k] = m.group(1).strip()
   if os.path.exists(env_p):
     e = open(env_p).read()
+    m = re.search(r"^trainer:\s*(.+)$", e, re.M)
+    if m:
+      prov["trainer"] = m.group(1).strip()
     def span(blk):
       vals = [abs(float(v)) for v in re.findall(
         r"^\s*-\s*(-?\d[\d.eE+-]*)\s*$", blk, re.M)]
@@ -339,7 +347,7 @@ def main() -> int:
   ap.add_argument("ckpt")
   ap.add_argument("outdir", nargs="?", default="deploy/arduino_quad")
   ap.add_argument("task", nargs="?", default="ArduinoQuad-Walk")
-  ap.add_argument("--backend", choices=("mjlab", "cpu"), default="mjlab",
+  ap.add_argument("--backend", choices=("mjlab", "cpu", "genesis"), default="mjlab",
                   help="which trainer's env to read the layout from")
   ap.add_argument("--name", default="arduino_quad_policy",
                   help="output file stem: <name>.h / .json / .npz. The KRS robot "
@@ -351,6 +359,10 @@ def main() -> int:
   DEV = "cuda:0" if args.backend == "mjlab" else "cpu"
   runner, live = (_read_env_mjlab if args.backend == "mjlab" else _read_env_cpu)()
   if args.backend == "cpu":
+    TASK = TASK + " (plain MuJoCo)"
+  elif args.backend == "genesis":
+    # The layout still comes from the plain-MuJoCo env; `training.trainer`
+    # records that the weights came from Genesis.
     TASK = TASK + " (plain MuJoCo)"
   joint_names = live["joint_names"]
   act_joint_names = live["act_joint_names"]

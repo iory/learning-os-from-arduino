@@ -35,6 +35,13 @@ RTX 4090 で回すのと同じくらいの速さが出ます。チェックポ�
 cd rl/cpu && uv sync && uv run train.py   # 詳しくは cpu/README.md
 ```
 
+**物理シミュレータ Genesis（GPU）で学習する版が [`genesis/`](genesis/) にあります。**
+同じタスクで、学習した方策を MuJoCo で歩かせる sim2sim の確認用です。
+
+```bash
+cd rl/genesis && uv sync && uv run train.py   # 詳しくは genesis/README.md
+```
+
 Google Colab（無料枠の T4）でも通せます。`colab/arduino_quad_colab.ipynb` が、
 環境構築から Arduino 用ヘッダの書き出しまでのノートブックです。
 
@@ -132,6 +139,7 @@ python "$ARDUINO_QUAD_ROOT/rl/scripts/krs_web_model.py" \
 | `runner.py` | 学習・再生・エクスポートの入り口 |
 | `_compat.py` | mjlab のバージョン差の吸収 |
 | `cpu/` | 同じタスクを mjlab なしで学習する CPU 版（`task.py` に数値を一か所にまとめてある。mjlab 版との一致は `cpu/parity_check.py` で検査） |
+| `genesis/` | 同じタスクを Genesis（GPU）で学習する版。`sim2sim.py` で Genesis と MuJoCo の両方で歩かせて比べる |
 
 ロボット記述一式（URDF・MJCF・メッシュ・RViz 設定・MJCF を SolidWorks
 エクスポートから再現するスクリプト）は
