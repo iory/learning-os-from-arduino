@@ -64,9 +64,9 @@ class MujocoView:
 class GenesisView:
     """The same readings from the Genesis env."""
 
-    def __init__(self, n: int, dr: bool, seed: int, device: str) -> None:
+    def __init__(self, n: int, dr: bool, seed: int, device: str, **env_kw) -> None:
         from gs_env import GenesisQuadEnv
-        self.env = GenesisQuadEnv(n, play=True, domain_rand=dr, device=device, seed=seed)
+        self.env = GenesisQuadEnv(n, play=True, domain_rand=dr, device=device, seed=seed, **env_kw)
         self.device = self.env.device
 
     def pose(self):
@@ -154,19 +154,29 @@ def main() -> int:
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 
+    two = None
+    if args.checkpoint:
+        import twostage
+        two = twostage.from_checkpoint(args.checkpoint)
+    if two:                      # 4-frame history, no servo delay: only the Genesis env has it
+        if args.sim == "mujoco":
+            sys.exit("a two-stage / baseline checkpoint needs --sim genesis")
+        if args.sim == "both":
+            print("two-stage / baseline checkpoint: Genesis only (the MuJoCo side has no 4-frame history)")
+        args.sim = "genesis"
     sims = ("genesis", "mujoco") if args.sim == "both" else (args.sim,)
     print("{} ({} envs x {:.0f} s, {} robot)".format(
         args.npz or args.checkpoint, args.envs, args.seconds, "randomized" if args.dr else "nominal"))
     print("{:>7} {:>6} {:>6} | {:>7} {:>7} | {:>5} {:>5} | {:>5} | {:>9} {:>5} {:>5} {:>5}".format(
         "sim", "cmd_vx", "cmd_wz", "vx", "wz", "roll", "pitch", "falls", "duty", "diag", "lift", "slip"))
     for sim in sims:
-        view = (GenesisView(args.envs, args.dr, args.seed, args.device) if sim == "genesis"
+        view = (GenesisView(args.envs, args.dr, args.seed, args.device, **(two[1] if two else {})) if sim == "genesis"
                 else MujocoView(args.envs, args.dr, args.seed))
         if args.npz:
             policy = npz_policy(args.npz, view.device)
         else:
             from rsl_rl.runners import OnPolicyRunner
-            runner = OnPolicyRunner(view.env, T.ppo_runner_cfg(), None, str(view.device))
+            runner = OnPolicyRunner(view.env, two[0] if two else T.ppo_runner_cfg(), None, str(view.device))
             runner.load(args.checkpoint)
             policy = runner.get_inference_policy(device=str(view.device))
         for pair in args.commands.split(";"):

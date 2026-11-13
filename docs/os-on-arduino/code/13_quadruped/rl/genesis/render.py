@@ -86,13 +86,19 @@ def main() -> int:
         sys.exit("{} commands x {} s is longer than one episode ({} s)".format(
             len(pairs), args.seconds, T.EPISODE_LENGTH_S))
 
-    view = (GenesisView(1, args.dr, args.seed, args.device) if args.sim == "genesis"
+    two = None
+    if args.checkpoint:
+        import twostage
+        two = twostage.from_checkpoint(args.checkpoint)
+        if two and args.sim != "genesis":
+            sys.exit("a two-stage checkpoint needs --sim genesis (4-frame history, no servo delay)")
+    view = (GenesisView(1, args.dr, args.seed, args.device, **(two[1] if two else {})) if args.sim == "genesis"
             else MujocoView(1, args.dr, args.seed))
     if args.npz:
         policy = npz_policy(args.npz, view.device)
     else:
         from rsl_rl.runners import OnPolicyRunner
-        runner = OnPolicyRunner(view.env, T.ppo_runner_cfg(), None, str(view.device))
+        runner = OnPolicyRunner(view.env, two[0] if two else T.ppo_runner_cfg(), None, str(view.device))
         runner.load(args.checkpoint)
         policy = runner.get_inference_policy(device=str(view.device))
 

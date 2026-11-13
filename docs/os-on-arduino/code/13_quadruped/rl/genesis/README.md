@@ -42,6 +42,18 @@ CUDA、Mac では Genesis が Metal、PPO の更新が MPS になります（M4 
 | `train.py` | 学習の入口。ログは `logs/rsl_rl/arduino_quad_velocity/<日時>_<名前>/`、`params/env.yaml` に `trainer: genesis` |
 | `sim2sim.py` | `--sim genesis` / `mujoco` / `both`（既定）で、前進・旋回の速さ、ロール・ピッチ、転倒、歩容を出す |
 | `render.py` | 1 台を歩かせて mp4 に書き出す。歩かせるのは `--sim mujoco`（既定）か `genesis`、描画はどちらも MuJoCo（画面の無い Linux では `render.py` が `MUJOCO_GL=egl` にする）。指令は `--seconds` ごとにリセットせずに切り替わる |
+| `twostage.py` | 2 段の方策（既存の MLP ＋ 関節ごとの残差）。`train.py --mode frozen` / `joint` / `baseline` で使う。sim 専用で、実機へのエクスポートには対応しない |
+| `run_queue.sh`、`run_extend.sh`、`compare_two_stage.sh` | 2 段の方策の比較実験を回す。学習してから `sim2sim.py` で評価し、`results/` に書く |
+| `plot_two_stage_curves.py` | 比較実験の報酬曲線を `two_stage_reward_curves.png` に描く |
+
+## 2 段の方策（実験）
+
+`train.py --mode` を付けなければ、これまでと同じ 1 段の方策を学習します。2 段の方策は
+sim の中だけの実験で、実機には載せません。
+
+- [TWO_STAGE.md](TWO_STAGE.md): 実装と学習モード
+- [TWO_STAGE_RESULTS.md](TWO_STAGE_RESULTS.md): 段 B の有無を比べた結果（各 3 seed、4600 iteration）
+- [CONTROL_FLOW.md](CONTROL_FLOW.md): 学習から実機までの制御の流れと、遅れの扱い
 
 ## 実測
 

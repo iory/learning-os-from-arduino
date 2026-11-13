@@ -151,7 +151,9 @@ class GenesisQuadEnv(VecEnv):
     """
 
     def __init__(self, num_envs: int, robust: bool = False, play: bool = False,
-                 domain_rand: bool = True, device: str = "gpu", seed: int = 0) -> None:
+                 domain_rand: bool = True, device: str = "gpu", seed: int = 0,
+                 actor_history: int = T.ACTOR_HISTORY,
+                 delay_min_lag: int = T.DELAY_MIN_LAG, delay_max_lag: int = T.DELAY_MAX_LAG) -> None:
         if T.TERRAIN != "plane":
             raise NotImplementedError("the Genesis trainer only has the flat floor (ARDUINO_QUAD_TERRAIN=plane)")
         if T.ERFI:
@@ -162,12 +164,16 @@ class GenesisQuadEnv(VecEnv):
         self.device = gs.device
         self.robust = robust
         self.play = play
+        self.actor_history = actor_history      # 4 for the two-stage actor (twostage.py)
+        self.delay_min_lag, self.delay_max_lag = delay_min_lag, delay_max_lag
+        assert 0 <= delay_min_lag <= delay_max_lag
         self.gen = torch.Generator(device=self.device)
         self.gen.manual_seed(seed)
         self.max_episode_length = (
             2 ** 62 if play else int(math.ceil(T.EPISODE_LENGTH_S / T.STEP_DT)))
         self.cfg = {"task": "ArduinoQuad-Robust" if robust else "ArduinoQuad-Walk",
                     "num_envs": num_envs, "play": play, "domain_rand": domain_rand,
+                    "actor_history": actor_history, "delay_lag": [delay_min_lag, delay_max_lag],
                     "trainer": "genesis"}
 
         self._build_scene()
@@ -190,7 +196,7 @@ class GenesisQuadEnv(VecEnv):
 
         self.action = torch.zeros(N, nj, device=dev)
         self.prev_action = torch.zeros(N, nj, device=dev)
-        L = T.DELAY_MAX_LAG + 1
+        L = self.delay_max_lag + 1
         self._delay_hist = torch.zeros(N, L, nj, device=dev)
         self._delay_len = torch.zeros(N, dtype=torch.long, device=dev)
         self._delay_ptr = 0
@@ -216,7 +222,7 @@ class GenesisQuadEnv(VecEnv):
 
         self._build_obs_layout()
         self._need_backfill = torch.ones(N, dtype=torch.bool, device=dev)
-        self._actor_hist = torch.zeros(N, T.ACTOR_HISTORY, self._actor_step_dim, device=dev)
+        self._actor_hist = torch.zeros(N, self.actor_history, self._actor_step_dim, device=dev)
         self.extras: dict = {"log": {}}
         all_ids = torch.arange(N, device=dev)
         self._reset(all_ids)
@@ -300,11 +306,11 @@ class GenesisQuadEnv(VecEnv):
     # ------------------------------------------------------------------ physics
 
     def _physics(self, target: torch.Tensor) -> None:
-        N, L = self.num_envs, T.DELAY_MAX_LAG + 1
+        N, L = self.num_envs, self.delay_max_lag + 1
         rows = torch.arange(N, device=self.device)
         for _ in range(T.DECIMATION):
             self._delay_append(target)
-            lag = torch.randint(T.DELAY_MIN_LAG, T.DELAY_MAX_LAG + 1, (N,), generator=self.gen, device=self.device)
+            lag = torch.randint(self.delay_min_lag, self.delay_max_lag + 1, (N,), generator=self.gen, device=self.device)
             lag = torch.minimum(lag, self._delay_len - 1)
             ctrl = self._delay_hist[rows, (self._delay_ptr - lag) % L]
             self.robot.control_dofs_position(ctrl, self.dofs)
@@ -327,7 +333,7 @@ class GenesisQuadEnv(VecEnv):
     def _delay_append(self, values: torch.Tensor) -> None:
         """One push into every env's delay line; a row emptied by a reset is
         backfilled with its first value (mjlab CircularBuffer)."""
-        L = T.DELAY_MAX_LAG + 1
+        L = self.delay_max_lag + 1
         self._delay_ptr = (self._delay_ptr + 1) % L
         self._delay_hist[:, self._delay_ptr] = values
         fresh = self._delay_len == 0
@@ -411,6 +417,14 @@ class GenesisQuadEnv(VecEnv):
         v[:, :3] += dv[:, :3]
         v[:, 3:6] += torch.einsum("nji,nj->ni", R, dv[:, 3:])   # world -> body
         self.robot.set_dofs_velocity(v, self.base_dofs, envs_idx=ids)
+
+    def restore_curriculum(self, common_steps: int) -> None:
+        """After --resume: the env counter restarts at 0, so put it (and the command
+        ranges it selects) back to where the checkpoint's iteration was."""
+        self.common_step_counter = common_steps
+        for step, lin_x, ang_z in T.CMD_CURRICULUM:
+            if common_steps > step:
+                self.cmd_lin_x, self.cmd_ang_z = lin_x, ang_z
 
     def _reset(self, ids: torch.Tensor) -> None:
         n = len(ids)
@@ -546,11 +560,11 @@ class GenesisQuadEnv(VecEnv):
         # Each term's history contiguous, oldest first (mjlab's flattened CircularBuffer).
         order, off = [], 0
         for t in T.ACTOR_TERMS:
-            for h in range(T.ACTOR_HISTORY):
+            for h in range(self.actor_history):
                 order.extend(h * self._actor_step_dim + off + np.arange(dims[t]))
             off += dims[t]
         self._actor_perm = torch.tensor(order, device=self.device)
-        self.actor_dim = self._actor_step_dim * T.ACTOR_HISTORY
+        self.actor_dim = self._actor_step_dim * self.actor_history
         self.critic_dim = sum(dims[t] for t in T.CRITIC_TERMS)
 
     def _observe(self) -> None:
