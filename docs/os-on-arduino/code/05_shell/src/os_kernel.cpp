@@ -190,7 +190,6 @@ uint32_t os_get_cpu_ticks(int id) {
 }
 uint32_t os_get_stack_used(int id) {
     if (id < 0 || id >= g_task_count) return 0;
-    uint32_t *base = g_tasks[id].stack_base - (g_tasks[id].stack_size / 4);
     uint32_t *sp = g_tasks[id].sp;
     return (g_tasks[id].stack_base - sp) * 4;
 }
