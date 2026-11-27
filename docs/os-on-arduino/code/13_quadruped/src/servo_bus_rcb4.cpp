@@ -49,6 +49,9 @@ static const uint32_t OTHER_BAUDS[] = {115200UL, 625000UL};
 // RAM で切り替えたあと、ROM の起動プログラムが設定を書き戻さないか見張る時間。
 // HeartToHeart4 のプロジェクトや rcb4-rom の点滅プログラムは、起動の最初の約 2 秒の
 // うちに設定を丸ごと書くことがある。書き戻されたら切り替え直す。
+// RCB-4 は答えはじめてから 40〜120 ms ほど、ROM の設定に関係なく 1.25 Mbps で
+// 答え、そのあと ROM の速度に変わる (rcb4-rom set-baud で 115200 / 625000 にした
+// ボードで実測)。起動中の RCB-4 と 1.25 Mbps で話せても、同じように見張る。
 #define SWITCH_WATCH_MS     3000
 #define SWITCH_POLL_MS      250
 // 電源を入れてから RCB-4 が答えるまで約 0.7 秒 (rcb4 の rcb4interface.py、実測)。
@@ -259,41 +262,61 @@ static uint32_t find_and_switch(void)
     return 0;
 }
 
+static void report_switched(uint32_t baud)
+{
+    Serial.print(F("!! RCB-4 の COM が ")); Serial.print(baud);
+    Serial.println(F(" bps だったので、RAM 上で 1250000 bps に切り替えた。"
+                     "電源を切ると戻る。HeartToHeart4 で COM 通信速度を 1250000 にして"
+                     " ROM に保存すること"));
+}
+
 // RCB-4 と RCB4_BAUD で話せるようにする。ROM の COM の速度が違うボードは、
 // RAM の設定を書き換えてこちらに合わせる (電源を切ると ROM の速度に戻る)。
 static bool connect_com(void)
 {
     // 同じ電源で Arduino と同時に立ち上がると、RCB-4 がまだ答えないことがある
     uint32_t found = 0;
+    bool answered = false;
+    bool booting = false;   // 最初の 1 回で答えなかった = RCB-4 は起動中だった
     unsigned long t0 = millis();
     for (;;) {
-        if (ack_at(RCB4_BAUD, REPLY_TIMEOUT_US)) return true;
+        if (ack_at(RCB4_BAUD, REPLY_TIMEOUT_US)) {
+            answered = true;
+            break;
+        }
+        booting = true;
         found = find_and_switch();
         if (found != 0 || millis() - t0 > CONNECT_WAIT_MS) break;
         delay(CONNECT_RETRY_MS);
     }
-    if (found == 0) {
+    if (!answered && found == 0) {
         rcb4_link_set_baud(RCB4_BAUD);
         Serial.println(F("!! RCB-4 が返事をしない (1250000 / 115200 / 625000 bps)。"
                          "COM の配線 (Rx -> D9、Tx -> D8、GND) と RCB-4 の電源を確かめる"));
         return false;
     }
-    Serial.print(F("!! RCB-4 の COM が ")); Serial.print(found);
-    Serial.println(F(" bps だったので、RAM 上で 1250000 bps に切り替えた。"
-                     "電源を切ると戻る。HeartToHeart4 で COM 通信速度を 1250000 にして"
-                     " ROM に保存すること"));
+    if (found != 0) report_switched(found);
+    // 起動を待たずに答えた RCB-4 は、ROM の設定まで済んでいる。ただし答えはじめた
+    // 直後だった場合に備えて、1 回だけ確かめ直す。
+    unsigned long watch_ms = booting ? SWITCH_WATCH_MS : SWITCH_POLL_MS;
 
-    // ROM の起動プログラムが設定を書き戻したら、切り替え直す
+    // ROM の速度に変わったり、起動プログラムが設定を書き戻したりしたら、切り替え直す
     t0 = millis();
-    while (millis() - t0 < SWITCH_WATCH_MS) {
+    while (millis() - t0 < watch_ms) {
         delay(SWITCH_POLL_MS);
         if (ack_at(RCB4_BAUD, REPLY_TIMEOUT_US)) continue;
-        if (find_and_switch() == 0) {
+        uint32_t baud = find_and_switch();
+        if (baud == 0) {
             rcb4_link_set_baud(RCB4_BAUD);
-            Serial.println(F("!! 切り替えたあとで RCB-4 が返事をしなくなった"));
+            Serial.println(F("!! 1250000 bps で答えたあとで RCB-4 が返事をしなくなった"));
             return false;
         }
-        Serial.println(F("RCB-4 の起動プログラムが速度を戻したので、切り替え直した"));
+        if (found == 0) {
+            found = baud;
+            report_switched(baud);
+        } else {
+            Serial.println(F("RCB-4 の起動プログラムが速度を戻したので、切り替え直した"));
+        }
     }
     return true;
 }
