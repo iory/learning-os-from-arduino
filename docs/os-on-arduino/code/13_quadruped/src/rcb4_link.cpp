@@ -1,4 +1,4 @@
-// RCB-4 mini の COM ポート (反転 UART 1.25 Mbps 8E1) を GPT + DMA で叩く。
+// RCB-4 mini の COM ポート (反転 UART 8E1、ふだんは 1.25 Mbps) を GPT + DMA で叩く。
 // 仕組みは rcb4_link.h の冒頭。
 #include <Arduino.h>
 #include "FspTimer.h"
@@ -12,7 +12,6 @@ extern int attachIrq2Link(uint32_t pin, PinStatus mode);
 // 受信は ELC で GPT を起動するので、外部割り込み (IRQ) を持つピンに限られる。
 #define RX_PIN          8           // D8 (P304, IRQ9) <- RCB-4 Tx
 #define TX_PIN          9           // D9 (P303)       -> RCB-4 Rx
-#define BAUD            1250000UL
 #define BITS_PER_FRAME  11          // スタート + データ 8 + 偶数パリティ + ストップ
 // 送る中でいちばん長いのは 8 関節ぶんの位置指令 (9 + 2 * 8 = 25 バイト)。
 // 1 ビットに 4 バイト使うので、1 バイト増やすと RAM を 44 バイト使う。
@@ -62,6 +61,7 @@ static const volatile uint16_t *g_rx_port;   // 受信ピンのポートの PIDR
 static uint32_t g_tx_mask;
 static uint16_t g_rx_mask;
 static uint32_t g_bit_q8;                    // 1 ビットの長さ [GPT カウント] の 256 倍
+static uint32_t g_baud;
 static const char *g_error = "not started";
 
 static R_PORT0_Type *port_of(bsp_io_port_pin_t pin)
@@ -211,6 +211,12 @@ static size_t decode(size_t got, uint8_t *out, size_t out_max, int *errors)
     return n;
 }
 
+static uint32_t bit_q8_of(uint32_t baud)
+{
+    uint32_t pclkd = R_FSP_SystemClockHzGet(FSP_PRIV_CLOCK_PCLKD);
+    return (uint32_t)(((uint64_t)pclkd << 8) / baud);
+}
+
 bool rcb4_link_begin(void)
 {
     bsp_io_port_pin_t tx_pin = g_pin_cfg[TX_PIN].pin;
@@ -221,8 +227,8 @@ bool rcb4_link_begin(void)
     // 16 bit で読む PIDR は +0x06 にある。+0x04 は EIDR で、読むと 0 が続く。
     g_rx_port = &port_of(rx_pin)->PIDR;
 
-    uint32_t pclkd = R_FSP_SystemClockHzGet(FSP_PRIV_CLOCK_PCLKD);
-    g_bit_q8 = (uint32_t)(((uint64_t)pclkd << 8) / BAUD);
+    g_baud = RCB4_BAUD;
+    g_bit_q8 = bit_q8_of(g_baud);
     uint32_t tx_period = (g_bit_q8 + 128) >> 8;
 
     // ほかの何よりも先に、送信ピンを待機レベル (LOW) にしておく
@@ -259,6 +265,26 @@ bool rcb4_link_begin(void)
 }
 
 const char *rcb4_link_error(void) { return g_error; }
+
+bool rcb4_link_set_baud(uint32_t baud)
+{
+    if (g_error != NULL || baud == 0) return false;
+    uint32_t bit_q8 = bit_q8_of(baud);
+    uint32_t tx_period = (bit_q8 + 128) >> 8;
+    // 受信は RX_PERIOD_COUNTS ごとに 1 回読むので、1 ビットに 2 回は読めないと解読できない
+    if (tx_period < 2 * RX_PERIOD_COUNTS) return false;
+    // 止まっている GPT の周期はすぐに変わる (FspTimer の周期バッファは既定で有効で、
+    // R_GPT_PeriodSet を通る)。変わったかは読み戻して確かめる。
+    g_tx_tim.stop();
+    if (!g_tx_tim.set_period(tx_period) || g_tx_tim.get_period_raw() != tx_period) {
+        return false;
+    }
+    g_bit_q8 = bit_q8;
+    g_baud = baud;
+    return true;
+}
+
+uint32_t rcb4_link_baud(void) { return g_baud; }
 
 int rcb4_transact(const uint8_t *cmd, size_t len, uint8_t *reply,
                   size_t reply_max, uint32_t timeout_us)

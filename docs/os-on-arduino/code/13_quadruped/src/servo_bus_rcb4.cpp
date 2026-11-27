@@ -32,6 +32,35 @@
 // 1 フレームは約 16 ms。
 #define ASSIGN_SETTLE_MS    100
 
+// RCB-4 の設定 (RAM の $0000、2 バイト)。6〜7 ビットが COM の速度で、0 が 115200、
+// 1 が 625000、2 が 1.25 Mbps。起動時に ROM の設定から読み込まれる。RAM に書くと、
+// RCB-4 は前の速度で ACK を返してから新しい速度に変わる (rcb4 の
+// rcb4/protocol/references.md、実測)。
+#define CONFIG_ADDRESS      0x0000
+#define COM_BAUD_MASK       0x00C0
+#define COM_BAUD_SHIFT      6
+#define COM_BAUD_CODE_1M25  2
+// RCB4_BAUD で返事が無いときに試す速度。115200 は HeartToHeart4 の取扱説明書が
+// 「分からなければ試す」とする速度で、プロジェクトの無いボードはこれで起動する。
+// 625000 は rcb4 (Python) が RAM 上で切り替えたまま、電源を切っていないとき。
+static const uint32_t OTHER_BAUDS[] = {115200UL, 625000UL};
+// 遅い速度では 1 往復が長い (115200 bps で 9 バイト送って 4 バイト返るのに約 1.3 ms)
+#define SLOW_REPLY_TIMEOUT_US 20000
+// RAM で切り替えたあと、ROM の起動プログラムが設定を書き戻さないか見張る時間。
+// HeartToHeart4 のプロジェクトや rcb4-rom の点滅プログラムは、起動の最初の約 2 秒の
+// うちに設定を丸ごと書くことがある。書き戻されたら切り替え直す。
+#define SWITCH_WATCH_MS     3000
+#define SWITCH_POLL_MS      250
+// 電源を入れてから RCB-4 が答えるまで約 0.7 秒 (rcb4 の rcb4interface.py、実測)。
+// それより長く待ってから「返事をしない」とする。
+#define CONNECT_WAIT_MS     2000
+#define CONNECT_RETRY_MS    100
+// RCB-4 が答えはじめた直後は、まだ現在位置を返さないサーボがある (Arduino と同時に
+// 電源を入れて、3 回に 1 回、8 台中 1 台。実測)。見つからない関節は、この時間まで
+// 探し直す。サーボの無い関節があると、そのぶん起動が遅れる。
+#define DISCOVER_WAIT_MS    2000
+#define DISCOVER_RETRY_MS   200
+
 #define CMD_MOVE            0x00
 #define SUB_RAM_TO_COM      0x20
 #define SUB_COM_TO_RAM      0x02
@@ -177,6 +206,98 @@ static bool send_pulses(const uint16_t *pulse, uint8_t frames)
         && r[2] == ACK;
 }
 
+// baud で ACK を送り、返事が来るか。RCB-4 は自分のサーボ周期の最中だと
+// 答えないことがあるので、READ_ATTEMPTS 回まで試す。
+static bool ack_at(uint32_t baud, uint32_t timeout_us)
+{
+    static const uint8_t ack[4] = {0x04, CMD_ACK, ACK, 0x08};
+    if (!rcb4_link_set_baud(baud)) return false;
+    for (int t = 0; t < READ_ATTEMPTS; ++t) {
+        uint8_t r[8];
+        if (rcb4_transact(ack, sizeof(ack), r, sizeof(r), timeout_us) == 4
+            && r[1] == CMD_ACK && r[2] == ACK) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// いま baud で話している RCB-4 の COM を、RAM の設定を書いて RCB4_BAUD に変える。
+static bool switch_to_link_baud(uint32_t baud)
+{
+    uint8_t cmd[10] = {0x0A, CMD_MOVE, SUB_RAM_TO_COM, 0x00, 0x00, 0x00,
+                       (uint8_t)(CONFIG_ADDRESS & 0xFF), (uint8_t)(CONFIG_ADDRESS >> 8), 2, 0};
+    cmd[9] = sum8(cmd, 9);
+    uint8_t r[8];
+    if (!rcb4_link_set_baud(baud)
+        || rcb4_transact(cmd, sizeof(cmd), r, sizeof(r), SLOW_REPLY_TIMEOUT_US) != 5) {
+        return false;
+    }
+    uint16_t config = (uint16_t)(r[2] | (r[3] << 8));
+    config = (uint16_t)((config & ~COM_BAUD_MASK)
+                        | (COM_BAUD_CODE_1M25 << COM_BAUD_SHIFT));
+    uint8_t w[9] = {0x09, CMD_MOVE, SUB_COM_TO_RAM,
+                    (uint8_t)(CONFIG_ADDRESS & 0xFF), (uint8_t)(CONFIG_ADDRESS >> 8), 0x00,
+                    (uint8_t)(config & 0xFF), (uint8_t)(config >> 8), 0};
+    w[8] = sum8(w, 8);
+    // ACK は前の速度で返る。取りこぼしても切り替わっていることがあるので、
+    // 返事に関係なく RCB4_BAUD で確かめる。
+    rcb4_transact(w, sizeof(w), r, sizeof(r), SLOW_REPLY_TIMEOUT_US);
+    return ack_at(RCB4_BAUD, REPLY_TIMEOUT_US);
+}
+
+// RCB4_BAUD 以外の速度で答える RCB-4 を探して切り替える。切り替えたらその速度を、
+// どの速度でも答えなければ 0 を返す。
+static uint32_t find_and_switch(void)
+{
+    for (unsigned k = 0; k < sizeof(OTHER_BAUDS) / sizeof(OTHER_BAUDS[0]); ++k) {
+        if (ack_at(OTHER_BAUDS[k], SLOW_REPLY_TIMEOUT_US)
+            && switch_to_link_baud(OTHER_BAUDS[k])) {
+            return OTHER_BAUDS[k];
+        }
+    }
+    return 0;
+}
+
+// RCB-4 と RCB4_BAUD で話せるようにする。ROM の COM の速度が違うボードは、
+// RAM の設定を書き換えてこちらに合わせる (電源を切ると ROM の速度に戻る)。
+static bool connect_com(void)
+{
+    // 同じ電源で Arduino と同時に立ち上がると、RCB-4 がまだ答えないことがある
+    uint32_t found = 0;
+    unsigned long t0 = millis();
+    for (;;) {
+        if (ack_at(RCB4_BAUD, REPLY_TIMEOUT_US)) return true;
+        found = find_and_switch();
+        if (found != 0 || millis() - t0 > CONNECT_WAIT_MS) break;
+        delay(CONNECT_RETRY_MS);
+    }
+    if (found == 0) {
+        rcb4_link_set_baud(RCB4_BAUD);
+        Serial.println(F("!! RCB-4 が返事をしない (1250000 / 115200 / 625000 bps)。"
+                         "COM の配線 (Rx -> D9、Tx -> D8、GND) と RCB-4 の電源を確かめる"));
+        return false;
+    }
+    Serial.print(F("!! RCB-4 の COM が ")); Serial.print(found);
+    Serial.println(F(" bps だったので、RAM 上で 1250000 bps に切り替えた。"
+                     "電源を切ると戻る。HeartToHeart4 で COM 通信速度を 1250000 にして"
+                     " ROM に保存すること"));
+
+    // ROM の起動プログラムが設定を書き戻したら、切り替え直す
+    t0 = millis();
+    while (millis() - t0 < SWITCH_WATCH_MS) {
+        delay(SWITCH_POLL_MS);
+        if (ack_at(RCB4_BAUD, REPLY_TIMEOUT_US)) continue;
+        if (find_and_switch() == 0) {
+            rcb4_link_set_baud(RCB4_BAUD);
+            Serial.println(F("!! 切り替えたあとで RCB-4 が返事をしなくなった"));
+            return false;
+        }
+        Serial.println(F("RCB-4 の起動プログラムが速度を戻したので、切り替え直した"));
+    }
+    return true;
+}
+
 static bool may_drive(void)
 {
     // 未校正のうちは読むだけ。向きもゼロ点も分からないまま目標角を送らない。
@@ -197,6 +318,7 @@ void servo_bus_init(void)
         Serial.println(rcb4_link_error());
         return;
     }
+    if (!connect_com()) return;
     g_link = true;
 
     // 右の SIO ポートなら ID * 2、左なら ID * 2 + 1。両方を調べ、サーボが
@@ -204,21 +326,50 @@ void servo_bus_init(void)
     // 登録しているとは限らないので (実機では 8 個中 2 個だった)、どちらにも
     // 答えがなければ、割り当てのない番号を割り当てて試す。両方にいたら、
     // どちらを動かすべきか決められないので使わない。
+    bool both[NJ];
     for (int i = 0; i < NJ; ++i) {
-        uint8_t right = (uint8_t)(QUAD_SERVO_ID[i] * 2);
-        bool r = slot_alive(right);
-        bool l = slot_alive(right + 1);
-        if (!r && !l) {
-            r = try_assign(right);
-            if (!r) l = try_assign(right + 1);
+        g_slot[i] = NO_SLOT;
+        both[i] = false;
+    }
+    unsigned long t0 = millis();
+    for (;;) {
+        int searching = 0;
+        for (int i = 0; i < NJ; ++i) {
+            if (g_slot[i] != NO_SLOT || both[i]) continue;
+            uint8_t right = (uint8_t)(QUAD_SERVO_ID[i] * 2);
+            bool r = slot_alive(right);
+            bool l = slot_alive(right + 1);
+            if (!r && !l) {
+                r = try_assign(right);
+                if (!r) l = try_assign(right + 1);
+            }
+            if (r && l)  both[i] = true;
+            else if (r)  g_slot[i] = right;
+            else if (l)  g_slot[i] = (uint8_t)(right + 1);
+            else         searching++;
         }
-        g_slot[i] = (r && !l) ? right : (l && !r) ? (uint8_t)(right + 1) : NO_SLOT;
+        if (searching == 0 || millis() - t0 > DISCOVER_WAIT_MS) break;
+        delay(DISCOVER_RETRY_MS);
+    }
+    int missing = 0;
+    for (int i = 0; i < NJ; ++i) {
+        if (g_slot[i] == NO_SLOT) missing++;
+    }
+
+    for (int i = 0; i < NJ; ++i) {
         Serial.print(JOINT_NAME[i]);
         Serial.print(F(" id ")); Serial.print(QUAD_SERVO_ID[i]);
-        if (r && l)      Serial.println(F(": !! 右と左の両方にいる。使わない"));
-        else if (r)      { Serial.print(F(" -> 右 #")); Serial.println(right); }
-        else if (l)      { Serial.print(F(" -> 左 #")); Serial.println(right + 1); }
-        else             Serial.println(F(": 見つからない"));
+        uint8_t right = (uint8_t)(QUAD_SERVO_ID[i] * 2);
+        if (both[i])                  Serial.println(F(": !! 右と左の両方にいる。使わない"));
+        else if (g_slot[i] == right)  { Serial.print(F(" -> 右 #")); Serial.println(right); }
+        else if (g_slot[i] != NO_SLOT){ Serial.print(F(" -> 左 #")); Serial.println(g_slot[i]); }
+        else                          Serial.println(F(": 見つからない"));
+    }
+    if (missing > 0) {
+        Serial.print(F("!! ")); Serial.print(missing);
+        Serial.println(F(" 関節のサーボが使えない。1 つでもあると関節角の読み取りが"
+                         "毎回失敗する (read_fail が増える)。サーボの ID、SIO の配線、"
+                         "ICS 通信速度を確かめる"));
     }
     if (!QUAD_RCB4_CALIBRATED) {
         Serial.println(F("!! quad_calib_rcb4.h が未校正 (QUAD_RCB4_CALIBRATED 0)。"
